@@ -14,6 +14,15 @@ Mỗi thư mục là một skill (SKILL.md). Phase 1 đã dựng các skill cont
 | `/content-month` | Điều phối cả tháng theo Content Plan + cổng duyệt |
 | `/learn` | Ghi bài học từ feedback khách/SEN vào brand pack |
 
+## Analytics & vận hành (bổ sung)
+| Lệnh | Việc |
+| --- | --- |
+| `/gtm-plan` | Phân tích site + container JSON → tìm tracking thiếu (Booking/Form Submit...) |
+| `/gtm-build` | Dựng container JSON merge thêm tag thiếu (để người import, không tự publish) |
+| `/gtm-verify` | Checklist Preview/DebugView xác minh event bắn đúng |
+| `/task-plan` | Audit KPI → đề xuất Task tuần/tháng → đẩy Asana (section Proposed, chờ duyệt) |
+| `/context-sync` | Tổng hợp Slack + Gmail + Calendar → `project/context.md` cho bàn giao |
+
 ## Subagent (.claude/agents)
 `serp-researcher` · `competitor-analyst` · `content-reviewer` · `tech-auditor`
 
@@ -21,8 +30,8 @@ Mỗi thư mục là một skill (SKILL.md). Phase 1 đã dựng các skill cont
 - P02: `/p02-access` — P03: `/p03-foundation`, `/p03-market` — P04: `/p04a-patterns`,
   `/p04b-tracking`, `/p04c-content-plan`, `/p04d-tech-baseline`, `/p04e-offsite`, `/forecast`,
   `/p04e-review`, `/p04-to-masterfile`
-- P05: `/onpage`, `/tech-audit`, `/tech-fix`, `/html`, `/gbp-posts`, `/offpage-plan`, `/gtm-plan`,
-  `/gtm-build`, `/gtm-verify`, `/llms-txt`, `/site-inventory`, `/uiux-audit`
+- P05: `/onpage`, `/tech-audit`, `/tech-fix`, `/html`, `/gbp-posts`, `/offpage-plan`, `/llms-txt`,
+  `/site-inventory`, `/uiux-audit`  (gtm-plan/build/verify đã có ở mục trên)
 - P06–P07: `/analytics`, `/health-check`, `/report`, `/diagnose`, `/geo-visibility`, `/geo-gap`,
   `/geo-fix-mentions`, `/cro-audit`, `/geo-expand`, `/meeting-prep`, `/handover`
 

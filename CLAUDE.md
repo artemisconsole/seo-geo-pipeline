@@ -156,10 +156,20 @@ Cấu hình ở `.claude/settings.json`.
 | Đọc/ghi Content Doc | Google Docs (connector) |
 | Tạo/đọc file & folder dự án | Google Drive (connector) |
 | UI/UX, đọc thiết kế | Figma (connector) |
+| Lập & đẩy Task tuần/tháng | Asana (connector) |
+| Đọc tin nhắn nhóm dự án (`/context-sync`) | Slack (connector) |
+| Đọc email trao đổi khách (`/context-sync`) | Gmail (connector) |
+| Lịch content/deadline/event | Google Calendar (connector) |
 | Crawl JS-render, chụp preview, PageSpeed/Lighthouse | Chromium + Playwright có sẵn |
 
 Không có connector cho **Google Tag Manager**: Claude sinh file container JSON để người import
-(Admin › Import Container › Merge). Claude không tự publish container.
+(Admin › Import Container › Merge). Claude không tự publish container. Quy trình:
+`/gtm-plan` (phân tích site + container, tìm event thiếu) → `/gtm-build` (dựng JSON merge thêm
+Booking Success / Form Submit Success...) → `/gtm-verify` (checklist Preview/DebugView). Danh sách
+event chuẩn: `core/checklists/gtm-tracking.md`.
+
+**SERP API nhiều key:** dùng luân phiên theo credit còn lại (`core/rules/serp-rotation.md`,
+`scripts/serp_key.py`); key để trong `.credentials/` (git-ignored), không commit, không in ra.
 
 **Lưu ý Drive:** hiện tài khoản chạy Claude chỉ có quyền **xem** trên folder dự án. Vì vậy
 `/new-project` hiện chỉ *tìm và map* file dự án có sẵn vào `config.yaml`, chưa tự tạo file. Khi được

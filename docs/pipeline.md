@@ -6,6 +6,7 @@ Chi tiết ghi output ở từng skill trong `.claude/skills/`.
 | Bước | Tên | Skill | Người chạy → duyệt | Output chính |
 | --- | --- | --- | --- | --- |
 | Handover | Nhận bàn giao | `/handover` | PIC mới | Brief rủi ro + câu hỏi cho buổi catch-up |
+| Xuyên suốt | Context Sync | `/context-sync` (hằng tuần) | PIC | `project/context.md` từ Slack + Gmail + Calendar |
 | P01 | Onboarding | `/new-project`, `/p01-onboarding` | AM/PM + PIC | `config.yaml`, brand pack, danh sách thiếu |
 | P02 | Access & Tracking | `/p02-access` | PIC → AM/PM+PIC | Tab SEO Assets (TRUE/FALSE), check GA4/GSC/GTM/CMS/GBP/booking |
 | P03 | Research & Strategy | `/p03-foundation`, `/p03-market` | PIC | Tab Foundation + báo cáo thị trường/đối thủ |
@@ -21,6 +22,7 @@ Chi tiết ghi output ở từng skill trong `.claude/skills/`.
 | P05 | Off-page / Local | `/offpage-plan`, `/gbp-posts` | PIC | Prospect list, outreach, tab GBP Posts |
 | P05 | Analytics / GEO | `/gtm-plan`, `/gtm-build`, `/gtm-verify`, `/llms-txt` | PIC → SEN | Tracking Plan, GTM JSON, llms.txt |
 | P06a | Health Check | `/health-check` (scheduled, hằng tuần) | PIC → SEN | Báo cáo tuần + cảnh báo |
+| P06a | Task Planning | `/task-plan weekly / monthly` | PIC → SEN | Task tuần/tháng → Asana (section Proposed) |
 | P06b/c | Reports | `/report monthly`, `/report executive` | PIC → SEN | Báo cáo tháng / executive |
 | P06d | Client Meeting | `/meeting-prep`, `/meeting-notes` | AM/PM + PIC | Agenda, action items |
 | P06 | Diagnosis | `/diagnose <url>` | PIC | Theo cây Path 1/2/3 |

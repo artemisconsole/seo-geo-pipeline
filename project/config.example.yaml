@@ -39,6 +39,16 @@ analytics:
   page_groups: {}                  # { insights: "^/blog/", products: "^/products/" }
   branded_regex: ""                # "capital world|cwg"
 
+asana:                             # /task-plan đẩy Task tuần/tháng vào đây
+  workspace: ""
+  project_id: ""                   # project/board nhận Task
+  section_proposed: "Proposed"     # section chứa Task Claude đề xuất, chờ duyệt
+
+context:                           # /context-sync đọc để tổng hợp project/context.md
+  slack_channel: ""                # kênh Slack của dự án
+  client_emails: []                # ["client@example.com"] — lọc Gmail
+  calendar_id: ""                  # lịch meeting/deadline (nếu có)
+
 competitors: []                    # domain ưu tiên phân tích (lấy từ Foundation)
 
 content:
