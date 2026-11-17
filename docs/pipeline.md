@@ -3,6 +3,70 @@
 Nguồn: sơ đồ "Liam's Pod SEO/GEO Project Pipeline". Mỗi bước gắn với skill + tab/output + cổng duyệt.
 Chi tiết ghi output ở từng skill trong `.claude/skills/`.
 
+## Diagram
+
+Approval gate on every step: **PIC runs → SEN reviews → AM/PM sends to client.** Claude never sends
+to the client. Context Sync and UI/UX are cross-cutting (not a linear step).
+
+```mermaid
+flowchart TD
+    H([Handover<br/>take over a project]) -.-> P01
+    P01[P01 · Onboarding<br/>config + brand pack] --> P02
+    P02[P02 · Access & Tracking<br/>GA4 · GSC · GTM · GBP · CMS] --> P03
+    P03[P03 · Research & Strategy<br/>Foundation · market · competitors] --> PLAN
+
+    subgraph PLAN[P04 · Build the SEO/GEO Plan]
+      direction TB
+      A[P04a Problem Patterns] --> B[P04b Keywords & Prompts]
+      B --> C[P04c Content Plan]
+      C --> D[P04d Technical Baseline]
+      D --> E[P04e Offsite + Forecast<br/>= Complete Plan]
+    end
+
+    PLAN --> QW
+    QW["★ P04f · QUICK WIN & WIN STRATEGY<br/>• Quick wins: cannibalisation · striking-distance keywords · money-page on-page<br/>• Winning strategy: topical coverage · template content · local · backlinks · GEO · CRO<br/>→ rank by ICE, set 30/60/90 order"]:::star --> MF
+    MF[To Masterfile] --> EXEC
+
+    subgraph EXEC[P05 · Execution #40;runs by priority from P04f#41;]
+      direction LR
+      T[Technical SEO]
+      CO[Content SEO]
+      ON[On-page]
+      OF[Off-page / Local]
+      AN[Analytics / GEO · GTM]
+    end
+
+    EXEC --> MON
+
+    subgraph MON[P06 · Monitor & Report]
+      direction LR
+      HC[Health Check]
+      TP[Task Planning → Asana]
+      RP[Reports]
+      DG[Diagnose]
+      GV[GEO visibility]
+    end
+
+    MON --> GROW
+
+    subgraph GROW[P07 · Convert & Grow]
+      direction LR
+      CR[CRO → booking/lead]
+      AC[AI Conversion / GEO expand]
+    end
+
+    MON -. "diagnose → re-prioritise" .-> QW
+
+    CS[[Context Sync · Slack + Gmail + Calendar<br/>always-on handover memory]]:::cross
+    UX[[UI/UX audit · support]]:::cross
+
+    classDef star fill:#fde68a,stroke:#b45309,stroke-width:3px,color:#111,font-weight:bold;
+    classDef cross fill:#e0e7ff,stroke:#4338ca,color:#111;
+```
+
+> **P04f** là bước mới & bản lề: Plan nói *làm gì*, P04f nói *làm gì trước để ra kết quả ngay* và
+> *chiến lược nào để thắng dự án* (đạt KPI, đẩy booking/submit/purchase/revenue). Xem `/quick-win`.
+
 | Bước | Tên | Skill | Người chạy → duyệt | Output chính |
 | --- | --- | --- | --- | --- |
 | Handover | Nhận bàn giao | `/handover` | PIC mới | Brief rủi ro + câu hỏi cho buổi catch-up |
@@ -15,6 +79,7 @@ Chi tiết ghi output ở từng skill trong `.claude/skills/`.
 | P04c | Content Plan | `/p04c-content-plan` | PIC | Tab Content Plan ≥ 6 tháng |
 | P04d | Technical Checklist | `/p04d-tech-baseline` | PIC | Tab Technical Baseline (5 layer) + Sheet Website Audit |
 | P04e | Complete Plan | `/p04e-offsite`, `/forecast`, `/p04e-review` | PIC → **SEN** | Tab Offsite + Measurement; Plan hoàn chỉnh |
+| **P04f** | **Quick Win & Win Strategy** | `/quick-win` | PIC → **SEN** | Quick Win đã xếp hạng (ICE) + trụ chiến lược + experiments; sắp lại Content Plan + lịch 30/60/90 |
 | P04→P05 | To Masterfile | `/p04-to-masterfile` | PIC | Đồng bộ Plan → Masterfile |
 | P05 | Technical SEO | `/tech-audit`, `/tech-fix` | PIC → SEN | Website Audit, Fix List, Schema doc, patch/PR |
 | P05 | Content SEO | `/content-month`, `/research`, `/outline`, `/write`, `/translate`, `/html` | PIC → SEN → khách | Content Doc theo format |

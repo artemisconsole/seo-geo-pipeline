@@ -11,7 +11,11 @@ Thứ tự ưu tiên khi mâu thuẫn: **lệnh trực tiếp của user > `proj
 Claude Code trên claude.ai/code. Mục tiêu: ~80% tác vụ hằng ngày/tuần/tháng do Claude thực hiện,
 người chỉ duyệt. Mỗi khách hàng là một repo private `seo-<slug>` tạo từ template này.
 
-Pipeline 7 bước (P01–P07) + Handover. Sơ đồ đầy đủ ở `docs/pipeline.md`.
+Pipeline 7 bước (P01–P07) + Handover. Sơ đồ đầy đủ (kèm biểu đồ) ở `docs/pipeline.md`.
+
+**Cổng chiến lược (P04f):** sau khi Plan hoàn chỉnh và trước khi triển khai, luôn chạy `/quick-win`
+để chốt **Quick Win** (việc ra kết quả ngay) và **Winning Strategy** (đường đạt KPI + revenue). Thứ
+tự ưu tiên này điều khiển Content Plan và `/task-plan`, không triển khai dàn hàng ngang khi chưa chốt.
 
 **Vai trò** (từ sơ đồ pipeline):
 - **AM/PM** — Account/Project Manager: đối thoại với khách, là người duy nhất gửi bản cho khách.

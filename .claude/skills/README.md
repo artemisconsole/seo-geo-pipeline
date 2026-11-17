@@ -14,9 +14,10 @@ Mỗi thư mục là một skill (SKILL.md). Phase 1 đã dựng các skill cont
 | `/content-month` | Điều phối cả tháng theo Content Plan + cổng duyệt |
 | `/learn` | Ghi bài học từ feedback khách/SEN vào brand pack |
 
-## Analytics & vận hành (bổ sung)
+## Chiến lược & vận hành (bổ sung)
 | Lệnh | Việc |
 | --- | --- |
+| `/quick-win` | Sau Plan (P04f): tìm Quick Win (ăn thịt từ khoá, striking distance, on-page money-page) + Winning Strategy (phủ nội dung, content template, local, backlink, GEO, CRO) → xếp ưu tiên ICE, sắp lại Content Plan |
 | `/gtm-plan` | Phân tích site + container JSON → tìm tracking thiếu (Booking/Form Submit...) |
 | `/gtm-build` | Dựng container JSON merge thêm tag thiếu (để người import, không tự publish) |
 | `/gtm-verify` | Checklist Preview/DebugView xác minh event bắn đúng |
