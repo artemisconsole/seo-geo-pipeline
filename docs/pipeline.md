@@ -5,6 +5,9 @@ Chi tiết ghi output ở từng skill trong `.claude/skills/`.
 
 ## Diagram
 
+Bản chi tiết (card từng stage, gates, lanes, vòng lặp tháng): [`pipeline-board.html`](./pipeline-board.html)
+— mở bằng trình duyệt để xem đầy đủ. Sơ đồ Mermaid dưới đây là bản tóm GitHub tự render.
+
 Approval gate on every step: **PIC runs → SEN reviews → AM/PM sends to client.** Claude never sends
 to the client. Context Sync and UI/UX are cross-cutting (not a linear step).
 
