@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
 <style>
-  /* Layout: a left-to-right pipeline board. Part A plans, Part B executes. Phase = color. */
+  /* Layout: a left-to-right pipeline board. Part A plans, Part B executes. Phase=color, automation=badges. */
   :root{
     --bg:#f3f4f2; --panel:#ffffff; --panel-2:#fafaf8; --ink:#24262b; --ink-2:#565a63; --ink-3:#8a8e97;
     --line:#e3e4e0; --line-2:#d2d4cf;
@@ -15,6 +15,7 @@
     --violet-bg:#efeafe; --violet-ink:#4b2e86; --violet-ln:#8b63d4;
     --coral-bg:#faece7; --coral-ink:#712b13; --coral-ln:#d85a30;
     --gold:#f6c343; --gold-ink:#5a3d00; --gold-edge:#b8860b;
+    --gh:#3a3d44; --gh-ink:#ffffff;
     --radius:12px; --r-sm:8px;
     --sans:"Inter",system-ui,sans-serif; --disp:"Space Grotesk",var(--sans);
   }
@@ -30,6 +31,7 @@
     --violet-bg:#2c2152; --violet-ink:#cbb8f2; --violet-ln:#9b79da;
     --coral-bg:#3a1d12; --coral-ink:#e8a98f; --coral-ln:#d8713f;
     --gold:#caa032; --gold-ink:#ffe9b0; --gold-edge:#e0b84a;
+    --gh:#c8ccd2; --gh-ink:#15171a;
     color-scheme:dark;
   }}
   :root[data-theme="dark"]{
@@ -44,67 +46,81 @@
     --violet-bg:#2c2152; --violet-ink:#cbb8f2; --violet-ln:#9b79da;
     --coral-bg:#3a1d12; --coral-ink:#e8a98f; --coral-ln:#d8713f;
     --gold:#caa032; --gold-ink:#ffe9b0; --gold-edge:#e0b84a;
+    --gh:#c8ccd2; --gh-ink:#15171a;
     color-scheme:dark;
   }
   *{box-sizing:border-box}
   body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;margin:0}
-  .wrap{max-width:1280px;margin:0 auto;padding-block:28px 56px;
+  .wrap{max-width:1300px;margin:0 auto;padding-block:28px 56px;
     padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
   h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,4.4vw,40px);letter-spacing:-.02em;margin:0;text-wrap:balance}
-  .sub{color:var(--ink-2);margin:6px 0 0;max-width:62ch;font-size:14px}
+  .sub{color:var(--ink-2);margin:6px 0 0;max-width:70ch;font-size:14px}
   h2{font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin:0}
   .parthd{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:40px 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-2)}
   .parthd .note{font-size:12.5px;color:var(--ink-3)}
+  .seclabel{margin-top:16px;font-family:var(--disp);font-weight:600;font-size:13px;color:var(--ink-2)}
+  .seclabel span{font-weight:400;color:var(--ink-3)}
+  code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em;background:var(--panel-2);padding:1px 5px;border-radius:5px;border:1px solid var(--line)}
 
-  /* legend */
-  .legend{margin-top:20px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
+  /* legends */
+  .legends{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+  .legend{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
   .legend h3{font-family:var(--disp);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin:0 0 10px}
-  .legend-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:8px 18px}
-  .lg{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-2)}
+  .legend-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px 16px}
+  .lg{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-2)}
   .chip{font-family:var(--disp);font-weight:600;font-size:11px;letter-spacing:.03em;padding:3px 8px;border-radius:999px;white-space:nowrap}
   .c-ampm{background:var(--teal-bg);color:var(--teal-ink)} .c-sen{background:var(--purple-bg);color:var(--purple-ink)}
   .c-jr{background:var(--green-bg);color:var(--green-ink)} .c-int{background:var(--violet-bg);color:var(--violet-ink)}
   .c-l{background:var(--amber-bg);color:var(--amber-ink)} .c-m{background:var(--pink-bg);color:var(--pink-ink)}
-  .c-pic{background:var(--blue-bg);color:var(--blue-ink)}
+  .c-pic{background:var(--blue-bg);color:var(--blue-ink)} .c-design{background:var(--coral-bg);color:var(--coral-ink)}
 
-  /* horizontal pipeline track */
-  .track{display:flex;gap:0;align-items:stretch;overflow-x:auto;padding:16px 2px 8px;scrollbar-width:thin}
+  /* automation badges */
+  .b{width:17px;height:17px;border-radius:50%;display:inline-grid;place-items:center;font-family:var(--disp);font-weight:700;font-size:10px;flex:0 0 auto}
+  .b-s{background:var(--blue-ln);color:#fff} .b-c{background:var(--teal-ln);color:#fff}
+  .b-g{background:var(--gh);color:var(--gh-ink)} .b-h{background:var(--coral-ln);color:#fff} .b-a{background:var(--green-ln);color:#fff}
+  .needs{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin-top:2px}
+  .needs .lb{font-family:var(--disp);font-weight:600;font-size:9px;letter-spacing:.08em;color:var(--ink-3);text-transform:uppercase;margin-right:1px}
+  .ne{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;color:var(--ink-2);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:2px 8px 2px 3px;max-width:100%}
+  .ne code{background:none;border:none;padding:0;font-size:10px;color:var(--ink-2)}
+
+  /* horizontal pipeline track + curved connectors */
+  .track{display:flex;gap:0;align-items:stretch;overflow-x:auto;padding:12px 2px 10px;scrollbar-width:thin}
   .track::-webkit-scrollbar{height:8px}.track::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:4px}
-  .arrow{align-self:center;flex:0 0 auto;color:var(--ink-3);font-size:22px;padding:0 10px;line-height:1}
+  .cv{flex:0 0 auto;align-self:center;width:44px;height:38px;color:var(--ink-3)}
+  .cv.lg{width:60px}
+  .start{flex:0 0 auto;align-self:center;background:var(--panel-2);border:1px dashed var(--line-2);border-radius:999px;padding:12px 16px;font-size:12.5px;color:var(--ink-2);text-align:center;font-weight:500}
+
   /* stage card */
-  .stage{flex:0 0 272px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;min-width:0}
-  .stage.wide{flex-basis:560px}
+  .stage{flex:0 0 288px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+  .stage.wide{flex-basis:580px}
   .stage-hd{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:8px}
   .stage-hd .code{font-family:var(--disp);font-weight:700;font-size:14px}
-  .stage-bd{padding:10px 14px 14px;display:flex;flex-direction:column;gap:9px;font-size:12.5px}
-  .kv{display:grid;grid-template-columns:62px 1fr;gap:4px 10px}
-  .kv .k{font-family:var(--disp);font-weight:600;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);padding-top:1px}
+  .roles{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+  .stage-bd{padding:10px 14px 13px;display:flex;flex-direction:column;gap:9px;font-size:12.5px}
+  .kv{display:grid;grid-template-columns:60px 1fr;gap:4px 10px}
+  .kv .k{font-family:var(--disp);font-weight:600;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);padding-top:1px}
   .kv .v{color:var(--ink-2)}
+  .divline{height:1px;background:var(--line);margin:1px 0}
   .edge-blue{border-top:3px solid var(--blue-ln)} .edge-purple{border-top:3px solid var(--purple-ln)}
   .edge-green{border-top:3px solid var(--green-ln)} .edge-amber{border-top:3px solid var(--amber-ln)}
   .edge-teal{border-top:3px solid var(--teal-ln)} .edge-violet{border-top:3px solid var(--violet-ln)}
-  .edge-pink{border-top:3px solid var(--pink-ln)}
-  .start{flex:0 0 auto;align-self:center;background:var(--panel-2);border:1px dashed var(--line-2);border-radius:999px;padding:12px 16px;font-size:12.5px;color:var(--ink-2);text-align:center;font-weight:500}
+  .edge-pink{border-top:3px solid var(--pink-ln)} .edge-coral{border-top:3px solid var(--coral-ln)}
+
+  /* handover strip */
+  .handover{margin-top:14px;background:var(--teal-bg);border:1px solid var(--teal-ln);border-radius:var(--radius);padding:12px 15px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+  .handover .ttl{font-family:var(--disp);font-weight:600;font-size:13px;color:var(--teal-ink)}
+  .handover .ttl span{display:block;font-family:var(--sans);font-weight:400;font-size:11px;opacity:.85;margin-top:2px}
+  .hsteps{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
 
   /* sub-step chips */
-  .subflow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:4px}
+  .subflow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:2px}
   .sstep{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:6px 9px;font-size:11.5px;min-width:0}
   .sstep b{font-family:var(--disp);font-weight:600;display:block;font-size:11.5px}
   .sstep span{color:var(--ink-3);font-size:10.5px}
   .mini-arrow{color:var(--ink-3);font-size:13px}
 
-  /* gate diamond */
-  .gate{flex:0 0 auto;align-self:center;width:112px;height:112px;display:grid;place-items:center;margin:0 6px}
-  .gate .dia{width:84px;height:84px;background:var(--amber-bg);border:2px solid var(--amber-ln);transform:rotate(45deg);border-radius:10px;grid-area:1/1}
-  .gate .lbl{grid-area:1/1;z-index:1;text-align:center;font-family:var(--disp);font-weight:600;font-size:11px;color:var(--amber-ink);padding:0 6px}
-  .branch{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-  .ybadge,.nbadge{font-size:10.5px;font-weight:600;font-family:var(--disp);padding:2px 7px;border-radius:999px}
-  .ybadge{background:var(--teal-bg);color:var(--teal-ink)} .nbadge{background:var(--coral-bg);color:var(--coral-ink)}
-
   /* highlight band: P04f */
-  .band{margin-top:18px;background:
-      linear-gradient(0deg,var(--panel),var(--panel));
-    border:2px solid var(--gold-edge);border-radius:16px;overflow:hidden;position:relative}
+  .band{margin-top:16px;background:var(--panel);border:2px solid var(--gold-edge);border-radius:16px;overflow:hidden;position:relative}
   .band::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--gold)}
   .band-hd{padding:14px 18px 12px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
   .star{font-family:var(--disp);font-weight:700;font-size:16px;color:var(--ink)}
@@ -120,20 +136,22 @@
   .items li{font-size:12.5px;color:var(--ink-2);padding-left:16px;position:relative}
   .items li::before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:2px;background:var(--gold-edge)}
   .items li b{color:var(--ink);font-weight:600}
-  .band-ft{padding:12px 18px;border-top:1px solid var(--line);background:var(--panel-2);font-size:12px;color:var(--ink-2);display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .band-ft{padding:11px 18px;border-top:1px solid var(--line);background:var(--panel-2);font-size:12px;color:var(--ink-2);display:flex;gap:10px 18px;flex-wrap:wrap;align-items:center}
   .band-ft .ic{font-family:var(--disp);font-weight:600;color:var(--ink)}
 
   /* lanes */
-  .lanes{display:grid;grid-template-columns:1fr;gap:12px;margin-top:16px}
-  .lane{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:center}
+  .lanes{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+  .lane{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;display:grid;grid-template-columns:168px 1fr;gap:12px;align-items:center}
   .lane-hd{font-family:var(--disp);font-weight:600;font-size:13px}
   .lane-hd span{display:block;font-family:var(--sans);font-weight:400;font-size:11px;color:var(--ink-3);margin-top:2px}
+  .lane-hd .roles{justify-content:flex-start;margin-top:6px}
+  .lane-right{min-width:0;display:flex;flex-direction:column;gap:7px}
   .lane-steps{display:flex;flex-wrap:wrap;align-items:center;gap:6px;min-width:0}
 
   /* diagnosis columns */
-  .diag{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:16px}
+  .diag{display:grid;grid-template-columns:repeat(auto-fit,minmax(236px,1fr));gap:12px;margin-top:12px}
   .dcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:13px 15px}
-  .dcard h4{font-family:var(--disp);font-size:13px;margin:0 0 4px;display:flex;align-items:center;gap:8px}
+  .dcard h4{font-family:var(--disp);font-size:13px;margin:0 0 4px;display:flex;align-items:center;gap:8px;justify-content:space-between}
   .dcard .meas{font-size:11px;color:var(--ink-3);margin:0 0 10px}
   .flowline{display:flex;flex-direction:column;gap:6px}
   .fnode{font-size:12px;color:var(--ink-2);background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:7px 10px}
@@ -142,7 +160,7 @@
   .down{color:var(--ink-3);font-size:12px;text-align:center;margin:-2px 0}
 
   /* monthly loop */
-  .loop{margin-top:16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+  .loop{margin-top:14px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
   .loop-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
   .days{display:flex;flex-direction:column;gap:8px}
   .day{display:flex;gap:10px;align-items:flex-start;background:var(--panel-2);border:1px solid var(--line);border-left:3px solid var(--violet-ln);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:8px 11px}
@@ -150,97 +168,163 @@
   .day .t{font-size:12px;color:var(--ink-2)} .day .t b{color:var(--ink);font-weight:600}
   .gates-col{display:flex;flex-direction:column;gap:10px}
   .grow{display:flex;align-items:center;gap:10px;background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:9px 12px}
-  .q{font-family:var(--disp);font-weight:600;font-size:11.5px;flex:0 0 132px}
+  .q{font-family:var(--disp);font-weight:600;font-size:11.5px;flex:0 0 128px}
   .ans{font-size:12px;color:var(--ink-2)} .ans b{color:var(--ink);font-weight:600}
-  .ans .mini{font-size:10px;font-weight:600;font-family:var(--disp);padding:1px 6px;border-radius:999px;margin-right:6px}
+  .mini{font-size:10px;font-weight:600;font-family:var(--disp);padding:1px 6px;border-radius:999px;margin-right:6px}
   .mini.ok{background:var(--teal-bg);color:var(--teal-ink)} .mini.warn{background:var(--amber-bg);color:var(--amber-ink)} .mini.bad{background:var(--coral-bg);color:var(--coral-ink)}
 
-  /* convert + context + footer */
-  .two{display:grid;grid-template-columns:1.3fr 1fr;gap:12px;margin-top:16px}
+  /* convert + support + footer */
+  .two{display:grid;grid-template-columns:1.25fr 1fr;gap:12px;margin-top:12px}
   .convert{display:flex;flex-direction:column;gap:10px}
   .pcard{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--pink-ln);border-radius:var(--radius);padding:12px 15px}
+  .pcard .ph{display:flex;align-items:center;justify-content:space-between;gap:8px}
   .pcard .code{font-family:var(--disp);font-weight:700;font-size:13px}
   .pcard p{margin:4px 0 0;font-size:12.5px;color:var(--ink-2)}
+  .support{display:flex;flex-direction:column;gap:10px}
   .context{background:var(--purple-bg);border:1px solid var(--purple-ln);border-radius:var(--radius);padding:14px 16px}
-  .context h4{font-family:var(--disp);font-size:13px;margin:0 0 6px;color:var(--purple-ink)}
-  .context p{margin:0;font-size:12.5px;color:var(--purple-ink);opacity:.92}
-  .foot{margin-top:28px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
+  .context h4{font-family:var(--disp);font-size:13px;margin:0 0 6px;color:var(--purple-ink);display:flex;justify-content:space-between;gap:8px;align-items:center}
+  .context p{margin:0 0 8px;font-size:12.5px;color:var(--purple-ink);opacity:.92}
+  .uiux{background:var(--coral-bg);border:1px solid var(--coral-ln);border-radius:var(--radius);padding:14px 16px}
+  .uiux h4{font-family:var(--disp);font-size:13px;margin:0 0 6px;color:var(--coral-ink);display:flex;justify-content:space-between;gap:8px;align-items:center}
+  .uiux p{margin:0 0 8px;font-size:12.5px;color:var(--coral-ink);opacity:.92}
+  .foot{margin-top:26px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
     background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px}
   .flow-gate{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--disp);font-weight:600;font-size:12.5px}
   .flow-gate .st{background:var(--panel-2);border:1px solid var(--line);padding:4px 10px;border-radius:999px}
   .flow-gate .ar{color:var(--ink-3)}
   .foot .rule{font-size:12px;color:var(--coral-ink);background:var(--coral-bg);padding:5px 11px;border-radius:999px;font-weight:600}
 
-  @media (max-width:720px){
+  @media (max-width:760px){
+    .legends{grid-template-columns:1fr}
     .band-bd{grid-template-columns:1fr} .col+.col{border-left:none;border-top:1px solid var(--line)}
     .loop-grid{grid-template-columns:1fr} .two{grid-template-columns:1fr}
-    .lane{grid-template-columns:1fr;gap:8px} .grow{flex-direction:column;align-items:flex-start;gap:4px} .q{flex-basis:auto}
+    .lane{grid-template-columns:1fr;gap:10px} .lane-hd .roles{margin-top:4px}
+    .grow{flex-direction:column;align-items:flex-start;gap:4px} .q{flex-basis:auto}
+    .handover{grid-template-columns:1fr}
   }
 </style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <marker id="ca" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M1 1 L8 5 L1 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs></svg>
 
 <div class="wrap">
   <header>
     <h1>SEO/GEO Pipeline</h1>
-    <p class="sub">The agency operating system, end to end: from onboarding and research to a client-approved plan, a quick-win &amp; winning-strategy gate, parallel execution lanes, and a monthly measure-and-report loop. Gate on every step — PIC runs, SEN reviews, AM/PM sends to the client.</p>
+    <p class="sub">The agency operating system run on Claude Code: skills do the work, Connectors reach GA4, Sheets, Asana, Slack and more, and a GitHub repo stores every project's context. This board shows each stage and, on each card, what it needs — a skill, a connector, GitHub memory, a human decision, or a task Claude runs on its own.</p>
   </header>
 
-  <section class="legend" aria-label="Role legend">
-    <h3>Role legend (key)</h3>
-    <div class="legend-grid">
-      <div class="lg"><span class="chip c-ampm">AM/PM</span> Account / Project Manager</div>
-      <div class="lg"><span class="chip c-sen">SEN</span> SEO Seniors</div>
-      <div class="lg"><span class="chip c-pic">PIC</span> SEO PIC (runs most steps)</div>
-      <div class="lg"><span class="chip c-l">L</span> SEO Lead</div>
-      <div class="lg"><span class="chip c-m">M</span> SEO Manager</div>
-      <div class="lg"><span class="chip c-jr">JR</span> Junior</div>
-      <div class="lg"><span class="chip c-int">INT</span> Intern</div>
+  <div class="legends">
+    <section class="legend" aria-label="Role legend">
+      <h3>Roles (who)</h3>
+      <div class="legend-grid">
+        <div class="lg"><span class="chip c-ampm">AM/PM</span> Account / Project Manager</div>
+        <div class="lg"><span class="chip c-sen">SEN</span> SEO Senior (reviews)</div>
+        <div class="lg"><span class="chip c-pic">PIC</span> SEO PIC (runs most)</div>
+        <div class="lg"><span class="chip c-l">L</span> SEO Lead</div>
+        <div class="lg"><span class="chip c-m">M</span> SEO Manager</div>
+        <div class="lg"><span class="chip c-jr">JR</span> Junior</div>
+        <div class="lg"><span class="chip c-int">INT</span> Intern</div>
+        <div class="lg"><span class="chip c-design">UX</span> Designer</div>
+      </div>
+    </section>
+    <section class="legend" aria-label="Automation legend">
+      <h3>Automation layer (how it runs)</h3>
+      <div class="legend-grid">
+        <div class="lg"><span class="b b-s">S</span> Claude <b style="font-weight:600;color:var(--ink)">skill</b> runs here (<code style="font-size:10px">/command</code>)</div>
+        <div class="lg"><span class="b b-c">C</span> <b style="font-weight:600;color:var(--ink)">Connector</b> to an app (GA4, Sheets, Asana…)</div>
+        <div class="lg"><span class="b b-g">G</span> <b style="font-weight:600;color:var(--ink)">GitHub</b> repo = project memory</div>
+        <div class="lg"><span class="b b-h">H</span> <b style="font-weight:600;color:var(--ink)">Human</b> input / decision / approval</div>
+        <div class="lg"><span class="b b-a">A</span> Claude <b style="font-weight:600;color:var(--ink)">auto-executes</b> the task</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Handover feeder -->
+  <div class="handover" aria-label="Handover">
+    <div class="ttl">Handover<span>taking over a project</span>
+      <div class="roles" style="margin-top:6px"><span class="chip c-pic">PIC new</span><span class="chip c-ampm">AM/PM</span></div>
     </div>
-  </section>
+    <div>
+      <div class="hsteps">
+        <span class="sstep"><b>Handover from previous owner</b></span><span class="mini-arrow">→</span>
+        <span class="sstep"><b>Review existing plan</b></span><span class="mini-arrow">→</span>
+        <span class="sstep"><b>Review onboarding form</b></span><span class="mini-arrow">→</span>
+        <span class="sstep"><b>Catch-up: old PIC + AM/PM</b></span><span class="mini-arrow">↦ P01</span>
+      </div>
+      <div class="needs" style="margin-top:8px">
+        <span class="lb">Uses</span>
+        <span class="ne"><span class="b b-s">S</span><code>/context-sync</code></span>
+        <span class="ne"><span class="b b-c">C</span>Slack · Gmail · Calendar</span>
+        <span class="ne"><span class="b b-g">G</span>read repo context</span>
+        <span class="ne"><span class="b b-h">H</span>catch-up meeting</span>
+      </div>
+    </div>
+  </div>
 
   <!-- PART A -->
-  <div class="parthd"><h2>Part A · Diagnose &amp; Plan</h2><span class="note">Build the evidence, lock the plan, then decide what wins — every gate recorded in the Masterfile.</span></div>
+  <div class="parthd"><h2>Part A · Diagnose &amp; Plan</h2><span class="note">Build the evidence, lock the plan, decide what wins — every gate recorded in the repo &amp; Masterfile.</span></div>
 
   <div class="track">
     <div class="start">New project /<br>new client</div>
-    <div class="arrow">→</div>
+    <svg class="cv" viewBox="0 0 44 38" fill="none" aria-hidden="true"><path d="M3 12 C 20 12, 24 26, 40 26" stroke="currentColor" stroke-width="1.6" marker-end="url(#ca)"/></svg>
 
     <article class="stage edge-blue">
-      <div class="stage-hd"><span class="code">P01 · Onboarding</span><span class="chip c-ampm">AM/PM</span></div>
+      <div class="stage-hd"><span class="code">P01 · Onboarding</span><div class="roles"><span class="chip c-ampm">AM/PM</span></div></div>
       <div class="stage-bd">
         <div class="kv"><span class="k">Input</span><span class="v">Completed client onboarding form</span></div>
-        <div class="kv"><span class="k">Output</span><span class="v">Form checked, completed and confirmed by AM/PM</span></div>
+        <div class="kv"><span class="k">Output</span><span class="v">Form checked &amp; confirmed by AM/PM</span></div>
         <div class="kv"><span class="k">Review</span><span class="v">AM/PM + PIC</span></div>
-        <div class="kv"><span class="k">Note</span><span class="v">Review all submitted info; ensure the onboarding file is complete</span></div>
+        <div class="divline"></div>
+        <div class="needs">
+          <span class="ne"><span class="b b-s">S</span><code>/new-project</code></span>
+          <span class="ne"><span class="b b-c">C</span>Google Drive</span>
+          <span class="ne"><span class="b b-g">G</span>create config + brand pack</span>
+          <span class="ne"><span class="b b-h">H</span>client fills form</span>
+        </div>
       </div>
     </article>
-    <div class="arrow">→</div>
+    <svg class="cv" viewBox="0 0 44 38" fill="none" aria-hidden="true"><path d="M3 19 C 18 19, 26 19, 40 19" stroke="currentColor" stroke-width="1.6" marker-end="url(#ca)"/></svg>
 
     <article class="stage edge-purple">
-      <div class="stage-hd"><span class="code">P02 · Access &amp; Tracking</span><span class="chip c-pic">PIC</span></div>
+      <div class="stage-hd"><span class="code">P02 · Access &amp; Tracking</span><div class="roles"><span class="chip c-pic">PIC</span></div></div>
       <div class="stage-bd">
-        <div class="kv"><span class="k">Input</span><span class="v">Onboarding form; if missing, return to P01 and contact AM/PM</span></div>
-        <div class="kv"><span class="k">Output</span><span class="v">Access check for GA4 · GSC · GTM · CMS · GBP · booking engine; gaps flagged</span></div>
+        <div class="kv"><span class="k">Input</span><span class="v">Onboarding form; if missing → P01, contact AM/PM</span></div>
+        <div class="kv"><span class="k">Output</span><span class="v">Access check GA4·GSC·GTM·CMS·GBP·booking; gaps flagged</span></div>
         <div class="kv"><span class="k">Review</span><span class="v">AM/PM + PIC</span></div>
-        <div class="kv"><span class="k">Checklist</span><span class="v">GA4 · GSC · GTM (create if needed) · CMS admin · GBP · booking-engine tracking</span></div>
+        <div class="divline"></div>
+        <div class="needs">
+          <span class="ne"><span class="b b-h">H</span>client grants access</span>
+          <span class="ne"><span class="b b-c">C</span>Agency Analytics</span>
+          <span class="ne"><span class="b b-a">A</span>verify tracking fires</span>
+          <span class="ne"><span class="b b-g">G</span>log SEO Assets</span>
+        </div>
       </div>
     </article>
-    <div class="arrow">→</div>
+    <svg class="cv" viewBox="0 0 44 38" fill="none" aria-hidden="true"><path d="M3 19 C 18 19, 26 19, 40 19" stroke="currentColor" stroke-width="1.6" marker-end="url(#ca)"/></svg>
 
     <article class="stage edge-green">
-      <div class="stage-hd"><span class="code">P03 · Research</span><span class="chip c-pic">PIC</span></div>
+      <div class="stage-hd"><span class="code">P03 · Research</span><div class="roles"><span class="chip c-pic">PIC</span></div></div>
       <div class="stage-bd">
-        <div class="kv"><span class="k">Input</span><span class="v">Market &amp; competitor info from the onboarding form</span></div>
-        <div class="kv"><span class="k">Output</span><span class="v">Clear read on industry trends, business competitors and SEO competitors</span></div>
+        <div class="kv"><span class="k">Input</span><span class="v">Market &amp; competitor info from onboarding</span></div>
+        <div class="kv"><span class="k">Output</span><span class="v">Read on trends, business &amp; SEO competitors</span></div>
         <div class="kv"><span class="k">Review</span><span class="v">PIC</span></div>
-        <div class="kv"><span class="k">Note</span><span class="v">If anything needs reconfirmation, contact AM/PM</span></div>
+        <div class="divline"></div>
+        <div class="needs">
+          <span class="ne"><span class="b b-s">S</span><code>/research</code></span>
+          <span class="ne"><span class="b b-c">C</span>DataForSEO · SERP · Firecrawl</span>
+          <span class="ne"><span class="b b-a">A</span>competitor analysis</span>
+          <span class="ne"><span class="b b-g">G</span>write Foundation</span>
+        </div>
       </div>
     </article>
-    <div class="arrow">→</div>
+    <svg class="cv lg" viewBox="0 0 60 38" fill="none" aria-hidden="true"><path d="M3 19 C 26 19, 36 19, 56 19" stroke="currentColor" stroke-width="1.6" marker-end="url(#ca)"/></svg>
 
     <article class="stage wide edge-amber">
-      <div class="stage-hd"><span class="code">P04 · SEO/GEO Plan</span><span class="chip c-sen">Review: SEN</span></div>
+      <div class="stage-hd"><span class="code">P04 · SEO/GEO Plan</span><div class="roles"><span class="chip c-pic">PIC</span><span class="chip c-sen">SEN review</span></div></div>
       <div class="stage-bd">
-        <div class="kv"><span class="k">Owner</span><span class="v">PIC &nbsp;·&nbsp; <span class="k" style="display:inline">Input</span> info from all previous steps</span></div>
         <div class="subflow">
           <div class="sstep"><b>P04a</b><span>Problem patterns</span></div><span class="mini-arrow">→</span>
           <div class="sstep"><b>P04b</b><span>Keywords + prompts</span></div><span class="mini-arrow">→</span>
@@ -248,12 +332,20 @@
           <div class="sstep"><b>P04d</b><span>Technical baseline</span></div><span class="mini-arrow">→</span>
           <div class="sstep"><b>P04e</b><span>Complete plan</span></div>
         </div>
-        <div class="subflow" style="margin-top:8px">
+        <div class="subflow">
           <div class="sstep"><b>Send to client</b><span>via AM/PM</span></div><span class="mini-arrow">→</span>
           <div class="sstep"><b>Meeting</b><span>feedback</span></div><span class="mini-arrow">→</span>
-          <div class="sstep" style="border-style:dashed"><b>Revisions needed?</b><span>Yes → loop · No → approved</span></div>
+          <div class="sstep" style="border-style:dashed;border-color:var(--coral-ln)"><b>Revisions needed?</b><span>Yes → loop · No → approved</span></div>
         </div>
-        <div class="kv" style="margin-top:4px"><span class="k">Output</span><span class="v">SEO/GEO plan approved by the client</span></div>
+        <div class="kv"><span class="k">Output</span><span class="v">SEO/GEO plan approved by the client</span></div>
+        <div class="divline"></div>
+        <div class="needs">
+          <span class="ne"><span class="b b-s">S</span><code>/p04*</code> · <code>/forecast</code></span>
+          <span class="ne"><span class="b b-c">C</span>DataForSEO · Agency Analytics · Sheets</span>
+          <span class="ne"><span class="b b-a">A</span>draft all 7 tabs</span>
+          <span class="ne"><span class="b b-h">H</span>SEN review + client approval gate</span>
+          <span class="ne"><span class="b b-g">G</span>store plan + decisions</span>
+        </div>
       </div>
     </article>
   </div>
@@ -263,7 +355,8 @@
     <div class="band-hd">
       <span class="newpill">NEW · PIVOTAL</span>
       <span class="star">★ P04f · Quick Win &amp; Win Strategy</span>
-      <span class="band-sub">Owner PIC · review SEN. The plan says <em>what</em> to do; this step decides <em>what to do first</em> for fast results, and the <em>strategy to win</em> — hit KPI and drive bookings, submits, purchases, revenue.</span>
+      <div class="roles"><span class="chip c-pic">PIC</span><span class="chip c-sen">SEN review</span></div>
+      <span class="band-sub">The plan says <em>what</em> to do; this decides <em>what to do first</em> for fast results, and the <em>strategy to win</em> — hit KPI and drive bookings, submits, purchases, revenue.</span>
     </div>
     <div class="band-bd">
       <div class="col">
@@ -273,17 +366,17 @@
           <li><b>Striking distance</b> — positions 5–20 with intent, push into the top 3</li>
           <li><b>Money-page on-page</b> — fix title/H1/meta/schema/CTA on service &amp; booking pages</li>
           <li><b>Technical quick-fix</b> — index blockers, speed, missing schema on revenue pages</li>
-          <li><b>GBP / local</b> — complete profile, posts, fix NAP (for local/booking)</li>
+          <li><b>GBP / local</b> — complete profile, posts, fix NAP</li>
           <li><b>CTR rewrite</b> — top-10 pages with weak CTR → sharper title/meta</li>
         </ul>
       </div>
       <div class="col">
         <h4><span class="tags">B · WIN</span> Winning strategy (path to KPI + revenue)</h4>
         <ul class="items">
-          <li><b>Topical coverage</b> — own the whole problem-pattern cluster, become category leader</li>
-          <li><b>Template / programmatic</b> — best-time-to-visit, food guide, toplist, best-hotel-near-X at scale</li>
+          <li><b>Topical coverage</b> — own the whole problem-pattern cluster</li>
+          <li><b>Template / programmatic</b> — best-time-to-visit, food guide, best-hotel-near-X at scale</li>
           <li><b>Local SEO</b> — GBP, local landing pages, reviews, map pack</li>
-          <li><b>Backlinks / authority</b> — digital PR &amp; industry sources, lift GEO citations</li>
+          <li><b>Backlinks / authority</b> — digital PR, lift GEO citations</li>
           <li><b>GEO coverage</b> — answer chunks, entities, proof so AI search cites you</li>
           <li><b>CRO</b> — turn traffic into booking / submit / purchase</li>
         </ul>
@@ -291,63 +384,91 @@
       </div>
     </div>
     <div class="band-ft">
-      <span><span class="ic">Score:</span> rank every item by ICE (Impact × Confidence ÷ Effort)</span>
-      <span><span class="ic">Output:</span> ranked quick wins + strategy pillars + 30/60/90-day order</span>
-      <span><span class="ic">Then:</span> reorders the Content Plan → feeds <code>/task-plan</code> → gate: SEN-approved → execution</span>
+      <span class="needs" style="margin:0">
+        <span class="lb">Uses</span>
+        <span class="ne"><span class="b b-s">S</span><code>/quick-win</code></span>
+        <span class="ne"><span class="b b-c">C</span>Agency Analytics · DataForSEO · SERP</span>
+        <span class="ne"><span class="b b-a">A</span>scan signals + ICE score</span>
+        <span class="ne"><span class="b b-h">H</span>SEN approves strategy</span>
+        <span class="ne"><span class="b b-g">G</span>write strategy md</span>
+      </span>
+      <span><span class="ic">Then:</span> reorders Content Plan → feeds <code>/task-plan</code> → execution</span>
     </div>
   </section>
 
   <!-- PART B -->
-  <div class="parthd"><h2>Part B · Execute &amp; Measure</h2><span class="note">Technical &amp; money pages first, then the content cycle. Lanes run in parallel, in P04f priority order. Re-audit quarterly.</span></div>
+  <div class="parthd"><h2>Part B · Execute &amp; Measure</h2><span class="note">Technical &amp; money pages first, then the content cycle. Lanes run in parallel, in P04f priority. Re-audit quarterly.</span></div>
 
-  <div class="flow-gate" style="margin-top:16px">
-    <span class="st">Plan approved</span><span class="ar">→</span>
-    <span class="st">P05 Execution</span><span class="ar">→</span>
-    <span class="st">P06 Monitor &amp; Report</span><span class="ar">→</span>
+  <div class="flow-gate" style="margin-top:14px">
+    <span class="st">Plan approved</span>
+    <svg class="cv" viewBox="0 0 44 24" fill="none" aria-hidden="true" style="height:22px"><path d="M3 12 C 16 12, 26 12, 40 12" stroke="currentColor" stroke-width="1.6" marker-end="url(#ca)"/></svg>
+    <span class="st">P05 Execution</span>
+    <svg class="cv" viewBox="0 0 44 24" fill="none" aria-hidden="true" style="height:22px"><path d="M3 12 C 16 12, 26 12, 40 12" stroke="currentColor" stroke-width="1.6" marker-end="url(#ca)"/></svg>
+    <span class="st">P06 Monitor &amp; Report</span>
+    <svg class="cv" viewBox="0 0 44 24" fill="none" aria-hidden="true" style="height:22px"><path d="M3 12 C 16 12, 26 12, 40 12" stroke="currentColor" stroke-width="1.6" marker-end="url(#ca)"/></svg>
     <span class="st">P07 Convert &amp; Grow</span>
   </div>
 
   <!-- P05 lanes -->
-  <div style="margin-top:14px;font-family:var(--disp);font-weight:600;font-size:13px;color:var(--ink-2)">P05 · Execution — build by lane <span style="font-weight:400;color:var(--ink-3)">· Owner PIC · supervisor SEN</span></div>
+  <div class="seclabel">P05 · Execution — build by lane <span>· owner PIC · supervisor SEN</span></div>
   <div class="lanes">
     <div class="lane">
-      <div class="lane-hd">Technical &amp; on-page<span>do first</span></div>
-      <div class="lane-steps">
-        <span class="sstep"><b>Fix blockers</b></span><span class="mini-arrow">→</span>
-        <span class="sstep"><b>Optimise money pages</b></span><span class="mini-arrow">→</span>
-        <span class="sstep"><b>Internal links</b></span>
+      <div class="lane-hd">Technical &amp; on-page<span>do first</span><div class="roles"><span class="chip c-pic">PIC</span><span class="chip c-sen">SEN</span></div></div>
+      <div class="lane-right">
+        <div class="lane-steps">
+          <span class="sstep"><b>Fix blockers</b></span><span class="mini-arrow">→</span>
+          <span class="sstep"><b>Optimise money pages</b></span><span class="mini-arrow">→</span>
+          <span class="sstep"><b>Internal links</b></span>
+        </div>
+        <div class="needs"><span class="ne"><span class="b b-s">S</span><code>/tech-audit</code> · <code>/tech-fix</code> · <code>/onpage</code></span><span class="ne"><span class="b b-c">C</span>Firecrawl + Playwright</span><span class="ne"><span class="b b-a">A</span>audit &amp; patch</span><span class="ne"><span class="b b-h">H</span>deploy to CMS</span></div>
       </div>
     </div>
     <div class="lane">
-      <div class="lane-hd">Content<span>cycle after gate</span></div>
-      <div class="lane-steps">
-        <span class="sstep"><b>Brief</b></span><span class="mini-arrow">→</span>
-        <span class="sstep"><b>Draft &amp; review</b></span><span class="mini-arrow">→</span>
-        <span class="sstep"><b>Publish &amp; log</b></span>
+      <div class="lane-hd">Content<span>cycle after gate</span><div class="roles"><span class="chip c-pic">PIC</span><span class="chip c-jr">JR</span><span class="chip c-sen">SEN</span></div></div>
+      <div class="lane-right">
+        <div class="lane-steps">
+          <span class="sstep"><b>Brief</b></span><span class="mini-arrow">→</span>
+          <span class="sstep"><b>Draft &amp; review</b></span><span class="mini-arrow">→</span>
+          <span class="sstep"><b>Publish &amp; log</b></span>
+        </div>
+        <div class="needs"><span class="ne"><span class="b b-s">S</span><code>/content-month</code> · <code>/write</code> · <code>/translate</code></span><span class="ne"><span class="b b-c">C</span>Google Docs</span><span class="ne"><span class="b b-a">A</span>draft + lint</span><span class="ne"><span class="b b-h">H</span>SEN + client approve</span></div>
       </div>
     </div>
     <div class="lane">
-      <div class="lane-hd">Off-page / Local</div>
-      <div class="lane-steps">
-        <span class="sstep"><b>Entity &amp; local</b></span><span class="mini-arrow">→</span>
-        <span class="sstep"><b>Authority / backlinks</b></span>
+      <div class="lane-hd">Off-page / Local<div class="roles"><span class="chip c-pic">PIC</span></div></div>
+      <div class="lane-right">
+        <div class="lane-steps">
+          <span class="sstep"><b>Entity &amp; local</b></span><span class="mini-arrow">→</span>
+          <span class="sstep"><b>Authority / backlinks</b></span>
+        </div>
+        <div class="needs"><span class="ne"><span class="b b-s">S</span><code>/offpage-plan</code> · <code>/gbp-posts</code></span><span class="ne"><span class="b b-a">A</span>prospect list + drafts</span><span class="ne"><span class="b b-h">H</span>outreach sent by team</span></div>
       </div>
     </div>
     <div class="lane">
-      <div class="lane-hd">Analytics / GEO</div>
-      <div class="lane-steps">
-        <span class="sstep"><b>GTM tracking</b><span>booking / form success</span></span><span class="mini-arrow">→</span>
-        <span class="sstep"><b>Extractable content</b></span><span class="mini-arrow">→</span>
-        <span class="sstep"><b>Prompt-set tests</b></span>
+      <div class="lane-hd">Analytics / GEO<span>GTM has no connector</span><div class="roles"><span class="chip c-pic">PIC</span><span class="chip c-sen">SEN</span></div></div>
+      <div class="lane-right">
+        <div class="lane-steps">
+          <span class="sstep"><b>GTM tracking</b><span>booking / form success</span></span><span class="mini-arrow">→</span>
+          <span class="sstep"><b>Extractable content</b></span><span class="mini-arrow">→</span>
+          <span class="sstep"><b>Prompt-set tests</b></span>
+        </div>
+        <div class="needs"><span class="ne"><span class="b b-s">S</span><code>/gtm-plan</code> · <code>/gtm-build</code> · <code>/gtm-verify</code></span><span class="ne"><span class="b b-g">G</span>container JSON in repo</span><span class="ne"><span class="b b-a">A</span>build merge JSON</span><span class="ne"><span class="b b-h">H</span>import &amp; publish GTM</span></div>
       </div>
     </div>
   </div>
 
   <!-- P06 diagnosis -->
-  <div style="margin-top:22px;font-family:var(--disp);font-weight:600;font-size:13px;color:var(--ink-2)">P06 · Monitor, report &amp; diagnose <span style="font-weight:400;color:var(--ink-3)">· health check (Asana) · monthly &amp; executive reports · client meetings</span></div>
+  <div class="seclabel" style="margin-top:20px">P06 · Monitor, report &amp; diagnose <span>· health check → Asana · monthly &amp; executive reports · client meetings</span></div>
+  <div class="needs" style="margin:8px 0 2px">
+    <span class="lb">Layer</span>
+    <span class="ne"><span class="b b-s">S</span><code>/health-check</code> · <code>/report</code> · <code>/diagnose</code> · <code>/geo-visibility</code></span>
+    <span class="ne"><span class="b b-c">C</span>Agency Analytics · SE Ranking · Asana</span>
+    <span class="ne"><span class="b b-a">A</span>pull data + write reports</span>
+    <span class="ne"><span class="b b-h">H</span>AM/PM runs client meeting</span>
+  </div>
   <div class="diag">
     <div class="dcard">
-      <h4><span class="chip c-pic" style="font-size:10px">SEO · Path 1</span></h4>
+      <h4><span>SEO · Path 1</span><span class="chip c-pic">PIC</span></h4>
       <p class="meas">Content underperforming</p>
       <div class="flowline">
         <div class="fnode"><span class="yn no">NO</span>Indexed? → fix technical cause</div>
@@ -359,7 +480,7 @@
       </div>
     </div>
     <div class="dcard">
-      <h4><span class="chip c-pic" style="font-size:10px">SEO · Path 2</span></h4>
+      <h4><span>SEO · Path 2</span><span class="chip c-pic">PIC</span></h4>
       <p class="meas">Everything fine but weak</p>
       <div class="flowline">
         <div class="fnode">Likely technical</div>
@@ -369,7 +490,7 @@
       </div>
     </div>
     <div class="dcard">
-      <h4><span class="chip c-pic" style="font-size:10px">SEO · Path 3</span></h4>
+      <h4><span>SEO · Path 3</span><span class="chip c-pic">PIC</span></h4>
       <p class="meas">Technical also okay</p>
       <div class="flowline">
         <div class="fnode">Check interface &amp; CTA</div>
@@ -378,16 +499,16 @@
       </div>
     </div>
     <div class="dcard">
-      <h4><span class="chip c-green" style="font-size:10px">GEO · P06e</span></h4>
+      <h4><span>GEO · P06e</span><span class="chip c-pic">PIC</span></h4>
       <p class="meas">Poor GEO visibility / low growth</p>
       <div class="flowline">
-        <div class="fnode">Find GEO gap vs competitors (research P03)</div>
+        <div class="fnode">Find GEO gap vs competitors (P03)</div>
         <div class="down">↓</div>
         <div class="fnode">Add the missing gaps into site content</div>
       </div>
     </div>
     <div class="dcard">
-      <h4><span class="chip c-green" style="font-size:10px">GEO · P06f</span></h4>
+      <h4><span>GEO · P06f</span><span class="chip c-pic">PIC</span></h4>
       <p class="meas">Negative / incorrect AI mentions</p>
       <div class="flowline">
         <div class="fnode">Find the source</div>
@@ -399,35 +520,49 @@
 
   <!-- monthly loop -->
   <div class="loop" aria-label="Monthly cycle and report">
-    <div style="font-family:var(--disp);font-weight:600;font-size:13px;margin-bottom:12px">Monthly cycle &amp; report</div>
+    <div class="seclabel" style="margin:0 0 12px">Monthly cycle &amp; report <span>· <code>/task-plan</code> pushes proposed tasks to Asana, human approves before assigning</span></div>
     <div class="loop-grid">
       <div class="days">
-        <div class="day"><span class="d">Day 1–5</span><span class="t"><b>Close data</b> — pull GA4 / GSC via Agency Analytics</span></div>
-        <div class="day"><span class="d">Day 2–7</span><span class="t"><b>Delivery check</b> — what shipped vs plan</span></div>
-        <div class="day"><span class="d">Day 4–7</span><span class="t"><b>Performance check</b> — actual vs KPI / forecast</span></div>
-        <div class="day"><span class="d">Day 7–10</span><span class="t"><b>Report</b> — monthly + executive, then propose next tasks</span></div>
+        <div class="day"><span class="d">Day 1–5</span><span class="t"><b>Close data</b> — pull GA4 / GSC via Agency Analytics &nbsp;<span class="b b-c" style="vertical-align:middle">C</span></span></div>
+        <div class="day"><span class="d">Day 2–7</span><span class="t"><b>Delivery check</b> — what shipped vs plan &nbsp;<span class="b b-g" style="vertical-align:middle">G</span></span></div>
+        <div class="day"><span class="d">Day 4–7</span><span class="t"><b>Performance check</b> — actual vs KPI / forecast &nbsp;<span class="b b-a" style="vertical-align:middle">A</span></span></div>
+        <div class="day"><span class="d">Day 7–10</span><span class="t"><b>Report</b> — monthly + executive, propose next tasks &nbsp;<span class="b b-h" style="vertical-align:middle">H</span></span></div>
       </div>
       <div class="gates-col">
         <div class="grow"><span class="q">KPI on track?</span><span class="ans"><span class="mini ok">YES</span><b>Next month's plan</b> — keep compounding</span></div>
-        <div class="grow"><span class="q">Delivery stalled?</span><span class="ans"><span class="mini warn">STALLED</span>Fix delivery first → <b>back to P04f</b> re-prioritise</span></div>
-        <div class="grow"><span class="q">Shipped but no lift?</span><span class="ans"><span class="mini bad">NO LIFT</span>Strategy miss → <b>back to P03 / P04</b></span></div>
+        <div class="grow"><span class="q">Delivery stalled?</span><span class="ans"><span class="mini warn">STALLED</span>Fix delivery first → <b>back to P04f</b></span></div>
+        <div class="grow"><span class="q">Shipped, no lift?</span><span class="ans"><span class="mini bad">NO LIFT</span>Strategy miss → <b>back to P03 / P04</b></span></div>
         <div class="grow"><span class="q">Quarter end?</span><span class="ans"><span class="mini ok">Q</span><b>Quarterly review</b> — re-audit &amp; reset KPI</span></div>
       </div>
     </div>
   </div>
 
-  <!-- P07 + context -->
+  <!-- P07 + support (Context Sync + UI/UX) -->
   <div class="two">
     <div class="convert">
-      <div style="font-family:var(--disp);font-weight:600;font-size:13px;color:var(--ink-2)">P07 · Conversion optimisation</div>
-      <div class="pcard"><span class="code">P07a</span><p>Optimise booking / organic-leads conversion (CRO) — interface, CTA, friction.</p></div>
-      <div class="pcard"><span class="code">P07b</span><p>Expand prompts and optimise AI-driven conversion — win the pages AI search cites.</p></div>
+      <div class="seclabel" style="margin:0">P07 · Conversion optimisation</div>
+      <div class="pcard"><div class="ph"><span class="code">P07a · CRO</span><div class="roles"><span class="chip c-pic">PIC</span><span class="chip c-sen">SEN</span></div></div>
+        <p>Optimise booking / organic-leads conversion — interface, CTA, friction.</p>
+        <div class="needs" style="margin-top:8px"><span class="ne"><span class="b b-s">S</span><code>/cro-audit</code></span><span class="ne"><span class="b b-a">A</span>recommendations</span><span class="ne"><span class="b b-h">H</span>team implements</span></div>
+      </div>
+      <div class="pcard"><div class="ph"><span class="code">P07b · AI conversion</span><div class="roles"><span class="chip c-pic">PIC</span></div></div>
+        <p>Expand prompts, optimise the pages AI search cites.</p>
+        <div class="needs" style="margin-top:8px"><span class="ne"><span class="b b-s">S</span><code>/geo-expand</code></span><span class="ne"><span class="b b-a">A</span>expand prompt set</span></div>
+      </div>
       <div class="pcard" style="border-top-color:var(--ink-3)"><p style="margin:0"><b>If any step still isn't working</b>, loop back to the previous relevant step.</p></div>
     </div>
-    <aside class="context">
-      <h4>Context Sync · always-on</h4>
-      <p>Runs across the whole pipeline: reads Slack + Gmail + Calendar into <code>project/context.md</code> so handover and every catch-up keep full memory. Read-only — never replies or forwards.</p>
-    </aside>
+    <div class="support">
+      <aside class="context">
+        <h4>Context Sync · always-on <div class="roles"><span class="chip c-pic">PIC</span></div></h4>
+        <p>Runs across the whole pipeline: reads Slack + Gmail + Calendar into the repo so handover and every catch-up keep full memory.</p>
+        <div class="needs"><span class="ne"><span class="b b-s">S</span><code>/context-sync</code></span><span class="ne"><span class="b b-c">C</span>Slack · Gmail · Calendar</span><span class="ne"><span class="b b-g">G</span><code>project/context.md</code></span></div>
+      </aside>
+      <aside class="uiux">
+        <h4>UI/UX audit · support <div class="roles"><span class="chip c-pic">PIC</span><span class="chip c-design">UX</span></div></h4>
+        <p>On demand from diagnosis (Path 2/3): annotated UX report tied to the design file.</p>
+        <div class="needs"><span class="ne"><span class="b b-s">S</span><code>/uiux-audit</code></span><span class="ne"><span class="b b-c">C</span>Figma</span><span class="ne"><span class="b b-h">H</span>designer review</span></div>
+      </aside>
+    </div>
   </div>
 
   <!-- footer gate -->
