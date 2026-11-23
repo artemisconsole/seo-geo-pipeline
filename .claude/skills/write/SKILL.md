@@ -32,6 +32,10 @@ Viết bài từ outline đã duyệt. Tuân thủ CLAUDE.md §6 + `core/rules/c
 - **Internal link:** đúng URL thật outline chỉ định; anchor mô tả; ≥ min_internal_links.
 - **Punctuation cứng:** không em dash (—), không chấm phẩy (;) trong thân bài.
 - **learned.md:** áp dụng mọi bài học trước đó của dự án.
+- **Ranking/thống kê (EEAT) — bắt buộc:** mọi thứ tự/con số tựa trên số liệu **GỐC + nguồn + năm** từ
+  research (`core/rules/eeat-data.md`). Bảng dẫn nguồn + nguồn inline mỗi số; nêu caveat phương pháp
+  (re-export, nước không báo cáo, ước tính). Thêm mục **Sources** (nguồn + ngày truy cập), **Last reviewed**
+  (ngày), **Reviewed by** (vai trò). Không có số → `[STAT NEEDED]`, **không xếp hạng chay**.
 
 ## Thành phần
 Title (H1 từ outline) · meta description verbatim · Intro 100–150 từ (mở bằng tình huống, không

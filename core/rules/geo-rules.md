@@ -8,6 +8,7 @@
 - Nêu entity rõ: tên riêng, địa danh, ngày, số. Không "soon", "the hotel", "it".
 - Dẫn nguồn inline cho số/claim ("according to <nguồn> <năm>").
 - Đưa dữ kiện riêng của brand (facts.yaml / cột Proof) để AI có lý do trích brand.
+- Ranking/thống kê: theo `core/rules/eeat-data.md` — số GỐC + nguồn + năm + caveat, không xếp hạng chay.
 
 ## Bảng & list
 - Bảng tiêu chí/so sánh/khoảng cách: cell ngắn, dễ AI trích và dễ đọc mobile.

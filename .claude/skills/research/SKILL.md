@@ -26,6 +26,11 @@ serp_locations, competitors) và `project/brand/*` trước.
    trích (để biết phải hơn ai); entity bắt buộc nêu.
 6. **Brand hook** — từ `facts.yaml`/Problem Pattern: dữ kiện riêng của brand bài có thể dùng để AI
    có lý do trích; internal link ứng viên từ `internal-links.csv`.
+7. **Số liệu uy tín (EEAT) — BẮT BUỘC cho bài ranking/toplist/có thống kê.** Xem `core/rules/eeat-data.md`.
+   Lấy số **GỐC**: thương mại qua `alexandria_library_read` (`comtradeplus-un-org`, `trade_data`: HS code +
+   flow X + partner 0 + năm), hoặc WTO/World Bank/cơ quan quốc gia. Ghi phạm vi (HS, chiều, đơn vị, năm) +
+   caveat (re-export, nước không báo cáo, ước tính). Cache `data/stats/<slug>.json`. **Không xếp hạng nếu
+   không có số có nguồn** — thiếu thì ghi `[STAT NEEDED]` để /write không bịa.
 
 ## Output → `content/YYYY-MM/<slug>/research.md`
 ```
@@ -37,7 +42,8 @@ Locale/SERP location · Intent (Informational/Commercial/...) · Volume/KD
 ## Khác biệt hoá: bài này làm gì competitor không
 ## GEO: prompt cần trả lời · entity bắt buộc · nguồn AI đang trích
 ## Brand hook: dữ kiện facts.yaml dùng được · internal link ứng viên
-## Cảnh báo: dữ kiện cần [VERIFY]/[NEED CLIENT CONFIRMATION]
+## Số liệu & nguồn (bài ranking/stat): bảng chỉ số · giá trị · nguồn GỐC · năm · ghi chú phương pháp
+## Cảnh báo: dữ kiện cần [VERIFY]/[NEED CLIENT CONFIRMATION]/[STAT NEEDED]
 ```
 
 Báo PIC: brief sẵn sàng cho `/outline`. Không gửi khách.
