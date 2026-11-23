@@ -18,11 +18,16 @@ Mục tiêu: bài xếp hạng được Google + được AI trích, nhờ **d�
      không phản ánh sản xuất thật.
    - **Nước không báo cáo:** vd Bangladesh KHÔNG nộp UN Comtrade → số lấy từ ước tính WTO/EPB, ghi rõ "ước tính".
    - **Ước tính vs báo cáo**, mirror data, năm chưa đầy đủ.
-5. **Mỗi số trong thân bài có nguồn inline:** "about US$152.5 billion in 2023 (UN Comtrade)". Số cũ hơn
-   12 tháng → kiểm lại trước khi tái dùng.
-6. **Bảng số liệu dẫn nguồn** cho bài ranking/toplist, kèm 1 dòng nguồn ngay dưới bảng (nguồn · phạm vi · năm).
-7. **Tín hiệu EEAT khác (bắt buộc với bài ranking/stat):** mục **Sources** cuối bài (nguồn gốc + ngày truy
-   cập), dòng **Last reviewed** (ngày), **Reviewed by** (vai trò người duyệt). Không bịa số, không bịa nguồn.
+5. **Mỗi số có EXTERNAL LINK inline ngay chỗ con số** — bấm vào ra nguồn gốc, không chỉ ghi tên nguồn và
+   không gom hết xuống mục Source cuối bài. Link y như internal link nhưng trỏ ra ngoài:
+   `[about US$152.5 billion](https://comtradeplus.un.org/)`. Ưu tiên deep-link tới đúng truy vấn/trang
+   tạo ra số (vd URL truy vấn UN Comtrade cho HS + nước + năm), để người duyệt tự kiểm số không bịa. Số cũ
+   hơn 12 tháng → kiểm lại trước khi tái dùng.
+6. **Bảng số liệu dẫn nguồn** cho bài ranking/toplist: mỗi ô giá trị là 1 link, kèm 1 dòng dưới bảng
+   **link tới đúng truy vấn gốc** (nguồn · phạm vi HS · năm) để verify.
+7. **Tín hiệu EEAT khác (bắt buộc với bài ranking/stat):** dòng **Last reviewed** (ngày) + **Reviewed by**
+   (vai trò người duyệt). Nguồn nằm **inline tại chỗ con số** (mục Sources cuối bài là tùy chọn, không thay
+   cho link inline). Không bịa số, không bịa nguồn.
 
 ## Cách lấy số (trong Claude Code)
 - `alexandria_library_read` → `comtradeplus-un-org` / `trade-statistics/trade_data`:
