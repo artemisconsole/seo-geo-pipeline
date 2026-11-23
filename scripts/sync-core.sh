@@ -1,25 +1,36 @@
 #!/usr/bin/env bash
-# sync-core.sh — kéo bản mới của Core từ template về repo dự án (chiến lược cập nhật v1).
-# Chỉ đồng bộ .claude/, core/, scripts/ và CLAUDE.md. KHÔNG đụng project/, website/, content/,
-# audits/, reports/, data/, .credentials/.
-#
-# Dùng trong repo DỰ ÁN:
-#   scripts/sync-core.sh [TEMPLATE_GIT_URL] [BRANCH]
-# Mặc định: template của agency, nhánh main.
+# Down-sync: cập nhật phần CHUNG (core/skills/agents/docs/CLAUDE.md/scripts) từ repo Pipeline tổng
+# về repo dự án này, qua một branch + Pull Request. KHÔNG đụng project/ hay dữ liệu khách.
+# Dùng: bash scripts/sync-core.sh [URL-repo-tong]
 set -euo pipefail
 
-TEMPLATE_URL="${1:-https://github.com/talabadao/seo-geo-pipeline.git}"
-BRANCH="${2:-main}"
-TMP="$(mktemp -d)"
-trap 'rm -rf "$TMP"' EXIT
+PIPELINE_URL="${1:-https://github.com/artemisconsole/seo-geo-pipeline.git}"
+SHARED_PATHS=(core .claude/skills .claude/agents docs scripts CLAUDE.md)
+BRANCH="sync/core-$(date +%Y%m%d-%H%M)"
 
-echo "→ Lấy Core từ $TEMPLATE_URL ($BRANCH)"
-git clone --depth 1 --branch "$BRANCH" "$TEMPLATE_URL" "$TMP" >/dev/null 2>&1
+# 1. Remote 'pipeline' trỏ về repo tổng
+if ! git remote get-url pipeline >/dev/null 2>&1; then
+  git remote add pipeline "$PIPELINE_URL"
+fi
+git fetch pipeline main
 
-for path in .claude core scripts CLAUDE.md; do
-  echo "→ Đồng bộ $path"
-  rsync -a --delete "$TMP/$path" "./$(dirname "$path")/" 2>/dev/null || cp -r "$TMP/$path" "./"
+# 2. Branch mới, lấy phiên bản mới nhất của các path CHUNG từ tổng
+git switch -c "$BRANCH"
+for p in "${SHARED_PATHS[@]}"; do
+  git checkout pipeline/main -- "$p" 2>/dev/null || echo "skip (chưa có ở tổng): $p"
 done
 
-echo "✓ Xong. Xem 'git diff' rồi commit. project/ và nội dung dự án KHÔNG bị đụng."
-echo "  Nếu có tùy biến riêng, đặt trong project/overrides/ để không bị ghi đè lần sau."
+# 3. Commit nếu có thay đổi
+git add "${SHARED_PATHS[@]}" 2>/dev/null || true
+if git diff --cached --quiet; then
+  echo "Không có cập nhật core mới. Xoá branch tạm."
+  git switch -
+  git branch -D "$BRANCH"
+  exit 0
+fi
+git commit -m "Sync core from pipeline ($(date +%Y-%m-%d))"
+
+# 4. Mở PR (cần gh đã đăng nhập). Không tự merge — để PIC duyệt diff.
+echo "Đã tạo branch '$BRANCH'. Xem diff rồi mở PR:"
+echo "  gh pr create --fill --base main --head \"$BRANCH\""
+gh pr create --fill --base main --head "$BRANCH" 2>/dev/null || true

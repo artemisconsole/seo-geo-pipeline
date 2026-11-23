@@ -190,3 +190,18 @@ cấp quyền Editor thì bật tính năng tạo folder/copy Sheet mẫu.
 5. Tab liên quan trong Plan/Masterfile (qua ID trong config).
 
 Nếu `config.yaml` trống hoặc thiếu ID: chạy `/new-project` trước.
+
+---
+
+## 10. Tier, tự động hoá & đồng bộ repo
+
+- **Tier dự án** (`config.yaml › tier`: platinum/diamond/gold/silver) quyết định workstream bật và KPI
+  must-hit — chi tiết `core/tiers.md`. Tier thấp: tăng trưởng traffic + ranking bằng content blog + on-page
+  trang Services. Tier cao: thêm CRO, AI conversion, UX/UI, GEO sâu (visibility, citation).
+- **Quyền & tự động hoá** (`config.yaml › access`) quyết định Claude tự làm tới đâu — `core/automation-levels.md`.
+  Quyền thấp (`cms: none`) vẫn chạy MVP: Claude giao deliverable để người áp dụng, **không chạm production**.
+- **MVP content (ưu tiên hiện tại):** dự án handover không cần Masterfile — chạy `/brand-init` (tạo brand pack
+  từ thông tin thương hiệu mẫu) → `/content-mvp` (viết từ `project/keywords.csv`). Ra bài ngay.
+- **Đồng bộ 2 chiều** (`docs/sync.md`): phần CHUNG (`core/`, `.claude/`, `docs/`, `scripts/`, file này) sync
+  từ repo tổng về dự án bằng `scripts/sync-core.sh` / workflow `sync-core.yml` → PR. Bài học CHUNG đẩy ngược
+  về tổng bằng `/contribute-learning`. Dữ liệu khách (`project/`, `content/`, credential) **KHÔNG bao giờ sync**.

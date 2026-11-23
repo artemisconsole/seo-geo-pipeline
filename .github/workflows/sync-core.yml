@@ -1,0 +1,39 @@
+name: Sync core from pipeline
+
+# Down-sync: kéo phần CHUNG (core/skills/agents/docs/scripts/CLAUDE.md) từ repo Pipeline tổng
+# về repo dự án này, mở PR để PIC duyệt. project/ và dữ liệu khách KHÔNG bị đụng.
+# Chạy hàng tuần + bấm tay (Actions › Run workflow). Trong repo tổng, bước này no-op.
+
+on:
+  schedule:
+    - cron: "0 2 * * 1"   # Thứ Hai 02:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pull shared core from pipeline
+        run: |
+          git remote add pipeline https://github.com/artemisconsole/seo-geo-pipeline.git || true
+          git fetch pipeline main
+          for p in core .claude/skills .claude/agents docs scripts CLAUDE.md; do
+            git checkout pipeline/main -- "$p" 2>/dev/null || echo "skip (chưa có): $p"
+          done
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: sync/core-auto
+          delete-branch: true
+          title: "Sync core from pipeline"
+          commit-message: "Sync core from pipeline (automated down-sync)"
+          body: |
+            Tự động kéo phần CHUNG (core/, skills, agents, docs, scripts, CLAUDE.md) từ template Pipeline.
+            `project/` và dữ liệu khách không bị đụng. Xem diff rồi merge nếu ổn.

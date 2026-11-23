@@ -11,6 +11,19 @@ project:
   cms: ""                          # wordpress | shopify | webflow | custom
   stage: P01                       # bước hiện tại
   team: { am_pm: "", pic: "", sen: "" }
+  tier: ""                         # platinum | diamond | gold | silver → core/tiers.md (nỗ lực + KPI)
+
+kpi:                               # → core/tiers.md ; /report chấm tăng trưởng theo tier
+  must_hit: [organic_traffic, ai_sessions, service_ranking]   # tier cao thêm: cro, ai_conversion, ai_visibility, ai_citation
+  nice_to_have: [organic_leads, organic_booking, ai_leads]
+  committed_keywords: ""           # file/link bộ từ khoá dịch vụ cam kết
+
+access:                            # quyền thao tác → core/automation-levels.md (Claude tự làm tới đâu)
+  cms: ""                          # full | limited | none
+  cms_notes: ""                    # vd: chỉ sửa blog, không sửa template
+  tracking: ""                     # full | readonly | none (GA4/GSC/GTM)
+
+automation_focus: [content, internal_links, onpage_services, file_templates, tracking_check, performance_check, monthly_report]
 
 languages:
   primary: en-GB                   # → core/markets/en.md

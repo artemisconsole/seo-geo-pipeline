@@ -14,10 +14,17 @@ Mỗi thư mục là một skill (SKILL.md). Phase 1 đã dựng các skill cont
 | `/content-month` | Điều phối cả tháng theo Content Plan + cổng duyệt |
 | `/learn` | Ghi bài học từ feedback khách/SEN vào brand pack |
 
+## MVP content — chạy ngay cho dự án handover
+| Lệnh | Việc |
+| --- | --- |
+| `/brand-init` | Tạo Brand Guideline + brand pack từ thông tin thương hiệu mẫu (không cần Drive) → mở khoá viết bài |
+| `/content-mvp` | Viết content ngay từ `project/keywords.csv` (không cần Masterfile): research → outline → write theo tier |
+
 ## Chiến lược & vận hành (bổ sung)
 | Lệnh | Việc |
 | --- | --- |
 | `/quick-win` | Sau Plan (P04f): tìm Quick Win (ăn thịt từ khoá, striking distance, on-page money-page) + Winning Strategy (phủ nội dung, content template, local, backlink, GEO, CRO) → xếp ưu tiên ICE, sắp lại Content Plan |
+| `/contribute-learning` | Đẩy bài học CHUNG (skill, core/*) từ dự án ngược về repo tổng bằng PR (vd cải thiện skill dịch 1 ngôn ngữ) |
 | `/gtm-plan` | Phân tích site + container JSON → tìm tracking thiếu (Booking/Form Submit...) |
 | `/gtm-build` | Dựng container JSON merge thêm tag thiếu (để người import, không tự publish) |
 | `/gtm-verify` | Checklist Preview/DebugView xác minh event bắn đúng |

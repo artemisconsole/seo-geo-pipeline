@@ -1,0 +1,4 @@
+keyword,intent,content_type,format,target_url,language,priority,notes
+best time to visit hoi an,informational,velocity,best-time-to-visit,,en-GB,1,weather + festival angle → booking CTA
+hoi an food guide,informational,authority,food-guide,,en-GB,2,link to restaurant/service page
+boutique hotels in hoi an old town,commercial,infrastructure,onpage,/hotels/hoi-an,en-GB,1,on-page the service landing page (no new article)

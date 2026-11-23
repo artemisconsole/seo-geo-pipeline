@@ -257,6 +257,28 @@
     </section>
   </div>
 
+  <!-- Project inputs: Tier + Automation -->
+  <div class="parthd"><h2>Project inputs · set before you start</h2><span class="note">In project/config.yaml — they scale effort and how much Claude automates.</span></div>
+  <div class="legends" style="grid-template-columns:1.5fr 1fr">
+    <section class="legend">
+      <h3>Tier → KPI focus &amp; effort</h3>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="lg"><span class="chip" style="background:var(--violet-bg);color:var(--violet-ink)">Platinum</span> Growth + CRO · AI conversion · UX/UI · AI visibility &amp; citation</div>
+        <div class="lg"><span class="chip" style="background:var(--blue-bg);color:var(--blue-ink)">Diamond</span> Growth + CRO · AI conversion · GEO visibility</div>
+        <div class="lg"><span class="chip" style="background:var(--amber-bg);color:var(--amber-ink)">Gold</span> Traffic + ranking · leads tracked · deeper on-page</div>
+        <div class="lg"><span class="chip" style="background:var(--panel-2);color:var(--ink-2);border:1px solid var(--line)">Silver</span> Min growth: traffic · AI sessions · ranking (blog + basic on-page)</div>
+      </div>
+      <p style="font-size:11px;color:var(--ink-3);margin:10px 0 0">Must-hit (all tiers): organic traffic ↑ · AI sessions ↑ · service ranking ↑. Nice: leads · booking · AI leads.</p>
+    </section>
+    <section class="legend">
+      <h3>Automation by access</h3>
+      <div class="lg"><span class="chip c-pic">cms: full</span> Claude edits / patches the site</div>
+      <div class="lg"><span class="chip c-pic">cms: limited</span> edits allowed areas (e.g. blog)</div>
+      <div class="lg"><span class="chip c-pic">cms: none</span> hands deliverables, team applies</div>
+      <p style="font-size:11px;color:var(--ink-3);margin:10px 0 0">MVP tasks AI runs regardless of access: content · internal links · on-page for service pages · file templates · GA4/G-Tag check · performance check · monthly report.</p>
+    </section>
+  </div>
+
   <!-- Handover feeder -->
   <div class="handover" aria-label="Handover">
     <div class="ttl">Handover<span>taking over a project</span></div>
@@ -619,5 +641,10 @@
       <span class="st">Client</span>
     </div>
     <span class="rule">Claude never sends anything directly to the client</span>
+  </div>
+
+  <div style="margin-top:14px;font-size:12px;color:var(--ink-3);display:flex;gap:9px;align-items:flex-start;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:12px 15px">
+    <span class="bi bi-gh"><svg class="ic"><use href="#i-github"/></svg></span>
+    <span style="flex:1;min-width:0">Repo model: this page is the <b style="color:var(--ink-2)">template</b>. Each project is a repo made from it. Shared <code>core/</code> + skills sync down via a GitHub Action → PR; project learnings flow back up via <code>/contribute-learning</code> → PR. Client data (<code>project/</code>, content, credentials) never syncs. MVP content path: <code>/brand-init</code> → <code>/content-mvp</code> from a keyword list. See <code>docs/sync.md</code>.</span>
   </div>
 </div>
