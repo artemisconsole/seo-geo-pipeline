@@ -1,6 +1,6 @@
 # Ngành: Hospitality (khách sạn / resort / du thuyền / lưu trú)
 
-Áp dụng cho phần lớn dự án hiện tại (Sukosol, I'Msignia, Bhaya, Ad-Lib, Holiday Inn, La Siesta...).
+Áp dụng cho phần lớn dự án lưu trú: khách sạn thành phố, resort, du thuyền, chuỗi hotel, khu nghỉ dưỡng.
 
 ## Người mua & hành vi
 - Khách lẻ (FIT), gia đình, cặp đôi, công tác, MICE/planner, cưới. Mỗi nhóm là một ICP với tiêu chí

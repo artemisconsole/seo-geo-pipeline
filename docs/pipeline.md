@@ -1,6 +1,6 @@
 # Pipeline SEO/GEO (P01–P07 + Handover)
 
-Nguồn: sơ đồ "Liam's Pod SEO/GEO Project Pipeline". Mỗi bước gắn với skill + tab/output + cổng duyệt.
+Nguồn: sơ đồ "Heads On Pillows SEO/GEO Project Pipeline". Mỗi bước gắn với skill + tab/output + cổng duyệt.
 Chi tiết ghi output ở từng skill trong `.claude/skills/`.
 
 ## Diagram

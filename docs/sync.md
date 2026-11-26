@@ -9,7 +9,7 @@ tạo từ template. Hai luồng tách bạch theo đúng ranh giới `core/` (c
    core/ · skills│   = template, nguồn sự thật  │   bài học chung → PR
    ┌─────────────┴─────────────────────────────┴─────────────┐
    ▼                         ▼                                ▼
- seo-sukosol            seo-clientB                      seo-clientC
+ seo-clientA            seo-clientB                      seo-clientC
  (project/ riêng)       (project/ riêng)                 (project/ riêng)
 ```
 
