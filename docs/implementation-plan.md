@@ -2,11 +2,11 @@
 
 **Phiên bản:** v0.2 (đã chốt 4 quyết định bên dưới, các câu còn lại ở Mục 13)
 **Ngày:** 13/11/2026
-**Phạm vi:** Template GitHub dùng chung cho quy trình SEO/GEO của Liam's Pod (P01–P07 + Handover), chạy bằng Claude Code, kết nối Google Drive/Sheets/Docs, Agency Analytics, SERP API, Firecrawl, DataforSEO và SE Ranking.
+**Phạm vi:** Template GitHub dùng chung cho quy trình SEO/GEO của Heads On Pillows (P01–P07 + Handover), chạy bằng Claude Code, kết nối Google Drive/Sheets/Docs, Agency Analytics, SERP API, Firecrawl, DataforSEO và SE Ranking.
 
 **Thay đổi so với v0.1:** đã đọc được 4 folder Drive mẫu, nên plan được viết lại theo format thật đang dùng:
 
-- Chọn format Plan 7 tab của The Sukosol và I'Msignia làm chuẩn, vì các tab này khớp 1-1 với P03–P04e (Mục 2.2).
+- Chọn Format chung 7 tab (rút từ các dự án mẫu) làm chuẩn, vì các tab này khớp 1-1 với P03–P04e (Mục 2.2).
 - Output của skill viết bài theo đúng format Content Doc hiện tại: `Draft_EN` / `Draft_TH`, bảng meta, danh sách xác nhận với khách (Mục 2.3).
 - Forecast giữ đúng công thức của tab Measurement (Mục 2.5).
 - Thêm các rủi ro mới phát hiện: quyền Drive chỉ ở mức xem, và mật khẩu CMS đang lưu dạng plain text trong Sheet (Mục 1).
@@ -23,7 +23,7 @@ write, translate, content-month, learn) + 4 subagent, sync-core.sh. Brand pack �
 | --- | --- | --- |
 | A1 | Template repo + mỗi khách một repo private `seo-<client>` | Làm `sync-core.sh` ở Phase 1, chuyển sang plugin ở v2 |
 | A2 | Chạy chủ yếu trên web/app claude.ai/code | Dùng connector của org, không cần cấu hình MCP trên từng máy. Health check hằng tuần dùng scheduled task. Mỗi phiên cần bật đủ connector, nên README sẽ có checklist bật connector |
-| B2 | Giữ đúng format Plan 7 tab của The Sukosol | Schema trong repo bám đúng cột hiện có. Không thêm tab mới khi team chưa yêu cầu |
+| B2 | Giữ đúng Format chung 7 tab | Schema trong repo bám đúng cột hiện có. Không thêm tab mới khi team chưa yêu cầu |
 | E1 | Pilot kép: CWG (P01→P04) + The Sukosol (P05–P06) | Phase 2 thử content trên Sukosol, Phase 3 dựng Plan cho CWG |
 
 ---
@@ -624,7 +624,7 @@ Câu ★ là câu đang chặn Phase 0–1. Câu đánh dấu ✅ đã có câu 
 **B. Google Drive**
 - ✅ Cấu trúc Plan/Masterfile và format Content Doc: đã đọc từ Sukosol và I'Msignia.
 - ★B1. Tài khoản đang kết nối chỉ có quyền **xem** trên các folder mẫu. Folder dự án mới sẽ nằm ở đâu (Shared Drive của team hay My Drive của `analytics@`), và có cấp quyền Editor cho tài khoản chạy Claude không?
-- ✅ B2. Giữ đúng format Plan 7 tab của The Sukosol.
+- ✅ B2. Giữ đúng Format chung 7 tab.
 - B3. Ad-Lib và Bhaya (format cũ) có cần chuyển sang format mới, hay giữ nguyên?
 - B4. Đồng ý chuyển mật khẩu ra khỏi tab SEO Assets và đổi mật khẩu CMS của Sukosol?
 

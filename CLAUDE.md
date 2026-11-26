@@ -7,7 +7,7 @@ Thứ tự ưu tiên khi mâu thuẫn: **lệnh trực tiếp của user > `proj
 
 ## 1. Bối cảnh
 
-Đây là template cho quy trình SEO/GEO của agency (Heads On Pillows / pod của Liam), chạy bằng
+Đây là template cho quy trình SEO/GEO của agency Heads On Pillows, chạy bằng
 Claude Code trên claude.ai/code. Mục tiêu: ~80% tác vụ hằng ngày/tuần/tháng do Claude thực hiện,
 người chỉ duyệt. Mỗi khách hàng là một repo private `seo-<slug>` tạo từ template này.
 
@@ -41,7 +41,7 @@ trực tiếp cho khách.** Claude chỉ ghi vào bản nháp hoặc ô Status �
 4. **Thiếu input thì dừng, không đoán.** Liệt kê thứ còn thiếu và nói "return to P01 / contact
    AM/PM", đúng như ghi chú trong sơ đồ.
 5. **Giữ nguyên format của khách.** Không tự đổi cấu trúc tab Plan/Masterfile hay format Content
-   Doc. Chuẩn là format The Sukosol (xem §4).
+   Doc. Chuẩn là Format chung (xem §4).
 6. **Tiết kiệm credit.** Ưu tiên connector MCP hơn web search. Cache kết quả vào `data/`. Không
    gọi lại API cho dữ liệu đã có snapshot trong kỳ. Tôn trọng ngân sách ở `config.yaml`
    (`budget.dataforseo_usd_per_month`, mặc định $5).
@@ -61,7 +61,7 @@ trực tiếp cho khách.** Claude chỉ ghi vào bản nháp hoặc ô Status �
 
 ---
 
-## 4. Chuẩn file Google (format The Sukosol)
+## 4. Chuẩn file Google (Format chung)
 
 **SEO/GEO Plan** — 7 tab, gửi khách đầu tiên:
 `Foundation → Problem Pattern → Tracking → Content Plan → Technical Baseline → Offsite → Measurement`

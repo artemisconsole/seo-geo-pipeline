@@ -1,4 +1,4 @@
-# Khuôn Content Doc (chuẩn The Sukosol)
+# Khuôn Content Doc (Format chung)
 
 Mỗi bài = một Google Doc, tên = keyword chính, trong `Content/YYYY-MM/`. Gồm `Draft_EN`, rồi
 `Draft_<lang>` nếu có ngôn ngữ 2, và **Client Confirmation List** ở cuối (xóa trước khi đăng).

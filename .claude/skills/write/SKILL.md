@@ -1,6 +1,6 @@
 ---
 name: write
-description: "Viết bài hoàn chỉnh từ outline + brand pack, xuất ra Content Doc format The Sukosol (Draft_EN + bảng meta + Client Confirmation List). Bản nâng cấp của seo-article-writer: ghi vào content/ và Google Doc (không dùng path claude.ai), đối chiếu facts.yaml và tự gắn tag [NEED CLIENT CONFIRMATION]/[VERIFY], chèn disclaimer theo rules.yaml, chạy content_lint, đọc learned.md để không lặp lỗi cũ. Dùng khi user gõ /write hoặc sau khi outline được duyệt."
+description: "Viết bài hoàn chỉnh từ outline + brand pack, xuất ra Content Doc Format chung (Draft_EN + bảng meta + Client Confirmation List). Bản nâng cấp của seo-article-writer: ghi vào content/ và Google Doc (không dùng path claude.ai), đối chiếu facts.yaml và tự gắn tag [NEED CLIENT CONFIRMATION]/[VERIFY], chèn disclaimer theo rules.yaml, chạy content_lint, đọc learned.md để không lặp lỗi cũ. Dùng khi user gõ /write hoặc sau khi outline được duyệt."
 ---
 
 # write  (nâng cấp seo-article-writer)
@@ -42,7 +42,7 @@ Viết bài từ outline đã duyệt. Tuân thủ CLAUDE.md §6 + `core/rules/c
 Title (H1 từ outline) · meta description verbatim · Intro 100–150 từ (mở bằng tình huống, không
 keyword) · các H2/H3 · Conclusion 80–120 từ (CTA + URL nội bộ) · FAQ 5–7 (35–75 từ/câu theo format).
 
-## Xuất ra (format The Sukosol — xem core/doc-templates/content-doc.md)
+## Xuất ra (Format chung — xem core/doc-templates/content-doc.md)
 1. `content/YYYY-MM/<slug>/draft.md` — chạy **content_lint**; sửa tới khi 0 ERR.
 2. Chạy agent `content-reviewer` (đóng vai SEN) chấm theo checklist.
 3. Ghi vào Google Doc của bài: `Draft_EN` (bảng meta + bài) + **Client Confirmation List** ở cuối.

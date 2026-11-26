@@ -23,7 +23,7 @@ không cần Plan/Masterfile trên Sheet, không cần quyền CMS. Output là f
    đang trích). Cache lại, không gọi API trùng.
 2. **/outline** → `content/YYYY-MM/<slug>/outline.md` (ghép lớp brand > format > content-type > industry >
    market; có answer chunk + entity + internal link URL thật).
-3. **/write** → `content/YYYY-MM/<slug>/draft.md` (format The Sukosol: bảng meta + Draft_EN + Client
+3. **/write** → `content/YYYY-MM/<slug>/draft.md` (Format chung: bảng meta + Draft_EN + Client
    Confirmation List). Chạy `content_lint` tới 0 ERR; gọi agent `content-reviewer` (đóng vai SEN).
 4. Nếu `language` ≠ ngôn ngữ chính hoặc `config.languages.secondary` có giá trị → `/translate` thêm bản dịch.
 5. Cập nhật `content/content-log.md`: keyword · slug · content_type · Status · ngày · link file.

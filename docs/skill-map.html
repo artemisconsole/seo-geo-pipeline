@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Skill &amp; Connector Map</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Coverage map for the Heads On Pillows SEO/GEO Pipeline: which skill + connector each task needs, what is built vs planned, and how they coordinate in Claude Code.">
+<link rel="canonical" href="./skill-map.html">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+  :root{
+    --bg:#f3f4f2; --panel:#ffffff; --panel-2:#fafaf8; --ink:#24262b; --ink-2:#565a63; --ink-3:#8a8e97;
+    --line:#e3e4e0; --line-2:#d2d4cf;
+    --blue-bg:#e6f1fb; --blue-ink:#0c447c; --blue-ln:#378add;
+    --purple-bg:#eeedfe; --purple-ink:#3c3489; --purple-ln:#7f77dd;
+    --green-bg:#eaf3de; --green-ink:#27500a; --green-ln:#639922;
+    --amber-bg:#faeeda; --amber-ink:#633806; --amber-ln:#ba7517;
+    --teal-bg:#e1f5ee; --teal-ink:#085041; --teal-ln:#1d9e75;
+    --pink-bg:#fbeaf0; --pink-ink:#72243e; --pink-ln:#d4537e;
+    --violet-bg:#efeafe; --violet-ink:#4b2e86; --violet-ln:#8b63d4;
+    --coral-bg:#faece7; --coral-ink:#712b13; --coral-ln:#d85a30;
+    --gold:#f6c343; --gold-ink:#5a3d00; --gold-edge:#b8860b;
+    --radius:12px; --r-sm:8px;
+    --sans:"Inter",system-ui,sans-serif; --disp:"Space Grotesk",var(--sans);
+  }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+    --bg:#15171a; --panel:#1e2024; --panel-2:#23262b; --ink:#e7e8e4; --ink-2:#aab0b8; --ink-3:#7c818b;
+    --line:#2e3238; --line-2:#3a3f46;
+    --blue-bg:#13314e; --blue-ink:#9fc6f2; --blue-ln:#4f93d8;
+    --purple-bg:#2a2555; --purple-ink:#c3bdf2; --purple-ln:#8d85e0;
+    --green-bg:#223616; --green-ink:#bcdd92; --green-ln:#79ad3f;
+    --amber-bg:#3e2c10; --amber-ink:#f3c683; --amber-ln:#c98f33;
+    --teal-bg:#0f352c; --teal-ink:#8fe0c6; --teal-ln:#2fab82;
+    --pink-bg:#3c1b28; --pink-ink:#eda9c0; --pink-ln:#d4679a;
+    --violet-bg:#2c2152; --violet-ink:#cbb8f2; --violet-ln:#9b79da;
+    --coral-bg:#3a1d12; --coral-ink:#e8a98f; --coral-ln:#d8713f;
+    --gold:#caa032; --gold-ink:#ffe9b0; --gold-edge:#e0b84a;
+    color-scheme:dark;
+  }}
+  :root[data-theme="dark"]{
+    --bg:#15171a; --panel:#1e2024; --panel-2:#23262b; --ink:#e7e8e4; --ink-2:#aab0b8; --ink-3:#7c818b;
+    --line:#2e3238; --line-2:#3a3f46;
+    --blue-bg:#13314e; --blue-ink:#9fc6f2; --blue-ln:#4f93d8;
+    --purple-bg:#2a2555; --purple-ink:#c3bdf2; --purple-ln:#8d85e0;
+    --green-bg:#223616; --green-ink:#bcdd92; --green-ln:#79ad3f;
+    --amber-bg:#3e2c10; --amber-ink:#f3c683; --amber-ln:#c98f33;
+    --teal-bg:#0f352c; --teal-ink:#8fe0c6; --teal-ln:#2fab82;
+    --pink-bg:#3c1b28; --pink-ink:#eda9c0; --pink-ln:#d4679a;
+    --violet-bg:#2c2152; --violet-ink:#cbb8f2; --violet-ln:#9b79da;
+    --coral-bg:#3a1d12; --coral-ink:#e8a98f; --coral-ln:#d8713f;
+    --gold:#caa032; --gold-ink:#ffe9b0; --gold-edge:#e0b84a;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;margin:0}
+  .wrap{max-width:1200px;margin:0 auto;padding:28px max(16px,env(safe-area-inset-left,0px)) 56px}
+  a{color:var(--blue-ln)}
+  h1{font-family:var(--disp);font-weight:700;font-size:clamp(25px,4.2vw,38px);letter-spacing:-.02em;margin:0;text-wrap:balance}
+  .sub{color:var(--ink-2);margin:6px 0 0;max-width:74ch;font-size:14px}
+  h2{font-family:var(--disp);font-weight:600;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin:0}
+  .sechd{margin:38px 0 14px;padding-bottom:9px;border-bottom:1px solid var(--line-2);display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .sechd .note{font-size:12.5px;color:var(--ink-3)}
+  code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88em;background:var(--panel-2);padding:1px 5px;border-radius:5px;border:1px solid var(--line);white-space:nowrap}
+  .ic{width:15px;height:15px;display:inline-block;vertical-align:-2px}
+  .mi{width:13px;height:13px;display:inline-block;vertical-align:-2px;margin-right:1px}
+
+  /* nav */
+  .nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .nav a{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;text-decoration:none;
+    background:var(--panel);border:1px solid var(--line-2);border-radius:999px;padding:6px 13px;color:var(--ink-2)}
+  .nav a:hover{border-color:var(--blue-ln);color:var(--ink)}
+  .nav a.here{background:var(--blue-bg);border-color:var(--blue-ln);color:var(--blue-ink)}
+
+  /* tiles */
+  .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .tile{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px}
+  .tile .num{font-family:var(--disp);font-weight:700;font-size:30px;letter-spacing:-.02em;line-height:1}
+  .tile .lbl{font-size:12px;color:var(--ink-2);margin-top:6px}
+  .tile.g .num{color:var(--green-ln)} .tile.a .num{color:var(--amber-ln)} .tile.b .num{color:var(--blue-ln)} .tile.v .num{color:var(--violet-ln)}
+
+  /* phase coverage bars */
+  .pbars{margin-top:14px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;display:flex;flex-direction:column;gap:9px}
+  .pbar{display:grid;grid-template-columns:168px 1fr 44px;align-items:center;gap:12px}
+  .pbar .pl{font-size:12.5px;color:var(--ink-2);font-weight:500}
+  .pbar .pl b{color:var(--ink);font-weight:600}
+  .track{height:9px;border-radius:999px;background:var(--panel-2);border:1px solid var(--line);overflow:hidden}
+  .fill{height:100%;border-radius:999px;background:var(--green-ln)}
+  .fill.lo{background:var(--coral-ln)} .fill.mid{background:var(--amber-ln)}
+  .pbar .pct{font-size:12px;color:var(--ink-3);text-align:right;font-variant-numeric:tabular-nums}
+
+  /* coordination flow */
+  .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;align-items:stretch;margin-top:4px}
+  .fstep{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:13px 13px;position:relative;margin-right:20px}
+  .fstep:last-child{margin-right:0}
+  .fstep::after{content:"→";position:absolute;right:-16px;top:50%;transform:translateY(-50%);color:var(--ink-3);font-size:15px}
+  .fstep:last-child::after{content:""}
+  .fstep .fn{font-family:var(--disp);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+  .fstep .ft{font-size:12.5px;color:var(--ink)}
+  .fstep .ft b{font-weight:600}
+  .fstep ul{margin:6px 0 0;padding-left:15px} .fstep li{font-size:11.5px;color:var(--ink-2);margin:2px 0}
+  .layerrule{margin-top:10px;font-size:11.5px;color:var(--ink-3)}
+  .layerrule code{font-size:.92em}
+
+  /* skill inventory groups */
+  .groups{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .group{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 15px}
+  .group h3{font-family:var(--disp);font-weight:600;font-size:13px;margin:0 0 3px;color:var(--ink)}
+  .group .gd{font-size:11.5px;color:var(--ink-3);margin:0 0 10px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .sk{display:inline-flex;align-items:center;gap:5px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;
+    border-radius:7px;padding:3px 8px;border:1px solid var(--line-2);background:var(--panel-2);color:var(--ink)}
+  .sk.built{background:var(--green-bg);border-color:var(--green-ln);color:var(--green-ink)}
+  .sk.plan{background:var(--panel-2);border-style:dashed;color:var(--ink-3)}
+  .sk .dot{width:6px;height:6px;border-radius:50%;background:var(--green-ln)}
+  .sk.plan .dot{background:var(--ink-3)}
+  .sk.agent{background:var(--teal-bg);border-color:var(--teal-ln);color:var(--teal-ink)}
+  .sk.agent .dot{background:var(--teal-ln)}
+
+  /* matrix table */
+  .mtx-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel)}
+  table.mtx{border-collapse:collapse;width:100%;min-width:760px;font-size:12.5px}
+  table.mtx th,table.mtx td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.mtx thead th{position:sticky;top:0;background:var(--panel-2);font-family:var(--disp);font-weight:600;font-size:11px;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);border-bottom:1px solid var(--line-2);z-index:1}
+  table.mtx tr:last-child td{border-bottom:none}
+  table.mtx .stg{font-weight:600;color:var(--ink);white-space:nowrap}
+  table.mtx .stg span{display:block;font-weight:400;font-size:11px;color:var(--ink-3)}
+  table.mtx td.sks code,table.mtx td.cns{line-height:1.9}
+  .pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;border-radius:999px;padding:2px 9px;white-space:nowrap}
+  .pill::before{content:"";width:7px;height:7px;border-radius:50%}
+  .s-built{background:var(--green-bg);color:var(--green-ink)} .s-built::before{background:var(--green-ln)}
+  .s-part{background:var(--amber-bg);color:var(--amber-ink)} .s-part::before{background:var(--amber-ln)}
+  .s-plan{background:var(--panel-2);color:var(--ink-3);border:1px solid var(--line-2)} .s-plan::before{background:var(--ink-3)}
+  .miss{color:var(--coral-ln);font-weight:600}
+  .ok{color:var(--green-ln);font-weight:600}
+  code.p{background:transparent;border:none;border-bottom:1px dashed var(--line-2);border-radius:0;color:var(--ink-3);padding:0 1px}
+
+  /* connector map */
+  .conns{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .conn{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-sm);padding:11px 13px}
+  .conn .cn{font-weight:600;font-size:13px;display:flex;align-items:center;gap:7px;color:var(--ink)}
+  .conn .cu{font-size:11.5px;color:var(--ink-2);margin-top:5px}
+  .conn .cu .sk{font-size:11px;padding:1px 6px;margin:2px 3px 0 0}
+  .conn.none{border-style:dashed}
+  .badge{font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border-radius:5px;padding:1px 6px;margin-left:auto}
+  .badge.core{background:var(--blue-bg);color:var(--blue-ink)}
+  .badge.opt{background:var(--panel-2);color:var(--ink-3);border:1px solid var(--line-2)}
+  .badge.nojs{background:var(--coral-bg);color:var(--coral-ink)}
+  .badge.in{background:var(--teal-bg);color:var(--teal-ink)}
+
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:11.5px;color:var(--ink-2)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+
+  .foot{margin-top:34px;font-size:12px;color:var(--ink-3);background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:13px 16px;display:flex;gap:9px;align-items:flex-start}
+
+  @media (max-width:860px){ .tiles{grid-template-columns:repeat(2,1fr)} .groups{grid-template-columns:1fr}
+    .flow{grid-template-columns:1fr;gap:12px} .fstep{margin-right:0} .fstep::after{content:"↓";right:auto;left:50%;top:auto;bottom:-15px;transform:translateX(-50%)}
+    .conns{grid-template-columns:1fr} .pbar{grid-template-columns:120px 1fr 38px} }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd"><path d="M12 0c6.63 0 12 5.276 12 11.79-.001 5.067-3.29 9.567-8.175 11.187-.6.118-.825-.25-.825-.56 0-.398.015-1.665.015-3.242 0-1.105-.375-1.813-.81-2.181 2.67-.295 5.475-1.297 5.475-5.822 0-1.297-.465-2.344-1.23-3.169.12-.295.54-1.503-.12-3.125 0 0-1.005-.324-3.3 1.209a11.32 11.32 0 00-3-.398c-1.02 0-2.04.133-3 .398-2.295-1.518-3.3-1.209-3.3-1.209-.66 1.622-.24 2.83-.12 3.125-.765.825-1.23 1.887-1.23 3.169 0 4.51 2.79 5.527 5.46 5.822-.345.294-.66.81-.765 1.577-.69.31-2.415.81-3.495-.973-.225-.354-.9-1.223-1.845-1.209-1.005.015-.405.56.015.781.51.28 1.095 1.327 1.23 1.666.24.663 1.02 1.93 4.035 1.385 0 .988.015 1.916.015 2.196 0 .31-.225.664-.825.56C3.303 21.374-.003 16.867 0 11.791 0 5.276 5.37 0 12 0z"/></symbol>
+  <symbol id="i-claudecode" viewBox="0 0 24 24" fill="currentColor"><path clip-rule="evenodd" d="M20.998 10.949H24v3.102h-3v3.028h-1.487V20H18v-2.921h-1.487V20H15v-2.921H9V20H7.488v-2.921H6V20H4.487v-2.921H3V14.05H0V10.95h3V5h17.998v5.949zM6 10.949h1.488V8.102H6v2.847zm10.51 0H18V8.102h-1.49v2.847z"/></symbol>
+  <symbol id="i-claude" viewBox="0 0 24 24"><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z" fill="#D97757" fill-rule="nonzero"/></symbol>
+  <symbol id="i-figma" viewBox="0 0 24 24"><path d="M4 20a4 4 0 014-4h4v4a4 4 0 01-8 0z" fill="#24CB71"/><path d="M12 0v8h4a4 4 0 000-8h-4z" fill="#FF7237"/><path d="M15.967 16a4 4 0 100-8 4 4 0 000 8z" fill="#00B6FF"/><path d="M4 4a4 4 0 004 4h4V0H8a4 4 0 00-4 4z" fill="#FF3737"/><path d="M4 12a4 4 0 004 4h4V8H8a4 4 0 00-4 4z" fill="#874FFF"/></symbol>
+  <symbol id="i-firecrawl" viewBox="0 0 24 24"><path d="M18.183 7.67c-.939.278-1.647.905-2.166 1.586-.11.146-.343.036-.299-.143.993-4.058-.318-7.432-4.407-9.092a.272.272 0 00-.368.317C12.803 7.76 4.98 7.135 5.969 15.55a.17.17 0 01-.266.159c-.37-.265-.784-.817-1.068-1.205a.17.17 0 00-.302.054A8.631 8.631 0 004 16.9a8.43 8.43 0 003.843 7.07c.133.086.303-.038.258-.189a4.533 4.533 0 01-.133-2.041c.097-.637.32-1.244.694-1.797 1.283-1.914 3.854-3.763 3.443-6.273-.026-.16.162-.264.281-.155 1.812 1.645 2.17 3.858 1.873 5.844-.026.172.192.264.302.129.277-.345.615-.647.983-.875a.17.17 0 01.25.088c.204.592.508 1.148.796 1.704a4.528 4.528 0 01.307 3.375.17.17 0 00.257.192A8.43 8.43 0 0021 16.9a8.746 8.746 0 00-.524-2.98c-.718-1.982-2.54-3.47-2.08-6.053a.17.17 0 00-.213-.195z" fill="#ff4d00"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 13.5a4 4 0 005.657 0l2.122-2.122a4 4 0 00-5.657-5.657l-1 1"/><path d="M14.5 10.5a4 4 0 00-5.657 0L6.72 12.62a4 4 0 005.657 5.657l1-1"/></symbol>
+</defs></svg>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Skill &amp; Connector Map</h1>
+    <p class="sub">Companion to the pipeline board. It answers three questions: <b>what skills the project has</b> (built vs planned), <b>which skill + connector each task needs</b>, and <b>how they coordinate inside Claude Code</b>. Status reflects what exists in the repo today, not the roadmap.</p>
+    <nav class="nav">
+      <a href="./pipeline-board.html"><svg class="ic"><use href="#i-claudecode"/></svg> Pipeline board</a>
+      <a class="here" href="./skill-map.html"><svg class="ic"><use href="#i-plug"/></svg> Skill &amp; Connector map</a>
+      <a href="./pipeline.md"><svg class="ic"><use href="#i-github"/></svg> Pipeline doc</a>
+      <a href="./implementation-plan.md"><svg class="ic"><use href="#i-github"/></svg> Implementation plan</a>
+    </nav>
+  </header>
+
+  <!-- AT A GLANCE -->
+  <div class="sechd"><h2>Where we are</h2><span class="note">Coverage of the ~49 skills the pipeline references.</span></div>
+  <div class="tiles">
+    <div class="tile g"><div class="num">16</div><div class="lbl">Skills built &amp; usable today</div></div>
+    <div class="tile a"><div class="num">33</div><div class="lbl">Skills referenced but not built yet</div></div>
+    <div class="tile b"><div class="num">4</div><div class="lbl">Subagents built (serp · competitor · reviewer · tech)</div></div>
+    <div class="tile v"><div class="num">13</div><div class="lbl">Connectors wired + Playwright built-in</div></div>
+  </div>
+
+  <div class="pbars">
+    <div class="pbar"><span class="pl"><b>Content engine</b> · P05 content</span><div class="track"><div class="fill" style="width:86%"></div></div><span class="pct">6/7</span></div>
+    <div class="pbar"><span class="pl"><b>MVP · Setup · Ops</b> cross-cutting</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="pct">5/5</span></div>
+    <div class="pbar"><span class="pl"><b>Analytics / GEO · GTM</b> P05</span><div class="track"><div class="fill mid" style="width:75%"></div></div><span class="pct">3/4</span></div>
+    <div class="pbar"><span class="pl"><b>P01 Onboarding</b></span><div class="track"><div class="fill mid" style="width:50%"></div></div><span class="pct">1/2</span></div>
+    <div class="pbar"><span class="pl"><b>P03 Research</b></span><div class="track"><div class="fill lo" style="width:33%"></div></div><span class="pct">1/3</span></div>
+    <div class="pbar"><span class="pl"><b>P06 Monitor &amp; Report</b></span><div class="track"><div class="fill lo" style="width:10%"></div></div><span class="pct">1/10</span></div>
+    <div class="pbar"><span class="pl"><b>P04 Plan spine</b> a–e + forecast</span><div class="track"><div class="fill lo" style="width:10%"></div></div><span class="pct">1/9*</span></div>
+    <div class="pbar"><span class="pl"><b>P05 Technical / on-page / off-page</b></span><div class="track"><div class="fill lo" style="width:0%"></div></div><span class="pct">0/8</span></div>
+    <div class="pbar"><span class="pl"><b>P02 Access</b> · <b>P07 Convert</b> · <b>UI/UX</b> · <b>Handover</b></span><div class="track"><div class="fill lo" style="width:0%"></div></div><span class="pct">0/6</span></div>
+  </div>
+  <p style="font-size:11.5px;color:var(--ink-3);margin:8px 2px 0">* P04f <code>/quick-win</code> is built, but it depends on P04a–e being built first. One-line read: <b style="color:var(--ink-2)">the content engine + MVP + strategy/GTM/context are alive; the Plan-building spine (P02, P03 Foundation, P04a–e) and most of Execution / Monitor / Convert are not.</b></p>
+
+  <!-- HOW IT COORDINATES -->
+  <div class="sechd"><h2>How a skill runs in Claude Code</h2><span class="note">Every skill follows the same spine — this is the "how they connect" picture.</span></div>
+  <div class="flow">
+    <div class="fstep"><div class="fn">1 · Trigger</div><div class="ft">Someone types <b>/command</b> (PIC/JR), or a scheduled task fires it.</div></div>
+    <div class="fstep"><div class="fn">2 · Read context</div><div class="ft">Skill loads layered context from the <b>repo</b>:
+      <ul><li>CLAUDE.md (rules + gates)</li><li>core/ (format · industry · market)</li><li>project/brand + config (tier · access)</li></ul></div></div>
+    <div class="fstep"><div class="fn">3 · Do the work</div><div class="ft">Pulls &amp; writes via <b>Connectors</b>, offloads heavy reads to <b>subagents</b>, and <b>hooks</b> lint on save.</div></div>
+    <div class="fstep"><div class="fn">4 · Write output</div><div class="ft">To the <b>Sheet/Doc</b> (connector) + <b>content/ &amp; decisions.md</b> (GitHub) — never straight to the client.</div></div>
+    <div class="fstep"><div class="fn">5 · Gate</div><div class="ft"><b>PIC → SEN → AM/PM → client.</b> Skill updates Status and names who approves next.</div></div>
+  </div>
+  <p class="layerrule">Conflict order when layers disagree: <code>brand &gt; project/overrides &gt; format &gt; content-type &gt; industry &gt; market &gt; core</code>. <b style="color:var(--ink-2)">tier</b> decides <i>what</i> to do &amp; how deep; <b style="color:var(--ink-2)">access</b> (cms none/limited/full) decides <i>how far Claude acts</i> — both chosen at <code>/new-project</code>.</p>
+
+  <!-- SKILL INVENTORY -->
+  <div class="sechd"><h2>The skill set</h2><span class="note">Green = built (has SKILL.md). Dashed grey = referenced by the pipeline, not built yet.</span></div>
+  <div class="groups">
+    <div class="group">
+      <h3>Content engine <span class="ok">· built</span></h3>
+      <p class="gd">The monthly content cycle, end to end.</p>
+      <div class="chips">
+        <span class="sk built"><span class="dot"></span>/new-project</span>
+        <span class="sk built"><span class="dot"></span>/research</span>
+        <span class="sk built"><span class="dot"></span>/outline</span>
+        <span class="sk built"><span class="dot"></span>/write</span>
+        <span class="sk built"><span class="dot"></span>/translate</span>
+        <span class="sk built"><span class="dot"></span>/content-month</span>
+        <span class="sk built"><span class="dot"></span>/learn</span>
+        <span class="sk plan"><span class="dot"></span>/html</span>
+      </div>
+    </div>
+    <div class="group">
+      <h3>MVP · Strategy · Ops <span class="ok">· built</span></h3>
+      <p class="gd">Run content now + lock strategy + 2-way repo sync.</p>
+      <div class="chips">
+        <span class="sk built"><span class="dot"></span>/brand-init</span>
+        <span class="sk built"><span class="dot"></span>/content-mvp</span>
+        <span class="sk built"><span class="dot"></span>/quick-win</span>
+        <span class="sk built"><span class="dot"></span>/task-plan</span>
+        <span class="sk built"><span class="dot"></span>/context-sync</span>
+        <span class="sk built"><span class="dot"></span>/contribute-learning</span>
+      </div>
+    </div>
+    <div class="group">
+      <h3>Analytics / GEO · GTM <span class="ok">· mostly built</span></h3>
+      <p class="gd">GTM has no connector → Claude builds merge-JSON for a human to import.</p>
+      <div class="chips">
+        <span class="sk built"><span class="dot"></span>/gtm-plan</span>
+        <span class="sk built"><span class="dot"></span>/gtm-build</span>
+        <span class="sk built"><span class="dot"></span>/gtm-verify</span>
+        <span class="sk plan"><span class="dot"></span>/llms-txt</span>
+        <span class="sk plan"><span class="dot"></span>/analytics</span>
+        <span class="sk plan"><span class="dot"></span>/geo-visibility</span>
+      </div>
+    </div>
+    <div class="group">
+      <h3>Subagents <span style="color:var(--teal-ink)">· built</span></h3>
+      <p class="gd">Heavy or parallel reads, kept out of the main context.</p>
+      <div class="chips">
+        <span class="sk agent"><span class="dot"></span>serp-researcher</span>
+        <span class="sk agent"><span class="dot"></span>competitor-analyst</span>
+        <span class="sk agent"><span class="dot"></span>content-reviewer</span>
+        <span class="sk agent"><span class="dot"></span>tech-auditor</span>
+      </div>
+    </div>
+    <div class="group" style="grid-column:1/-1">
+      <h3>Not built yet <span class="miss">· 33 skills</span></h3>
+      <p class="gd">The Plan-building spine and most of Execution / Monitor / Convert. These are where the next dev rounds go.</p>
+      <div class="chips">
+        <span class="sk plan"><span class="dot"></span>/handover</span>
+        <span class="sk plan"><span class="dot"></span>/p01-onboarding</span>
+        <span class="sk plan"><span class="dot"></span>/p02-access</span>
+        <span class="sk plan"><span class="dot"></span>/p03-foundation</span>
+        <span class="sk plan"><span class="dot"></span>/p03-market</span>
+        <span class="sk plan"><span class="dot"></span>/p04a-patterns</span>
+        <span class="sk plan"><span class="dot"></span>/p04b-tracking</span>
+        <span class="sk plan"><span class="dot"></span>/p04c-content-plan</span>
+        <span class="sk plan"><span class="dot"></span>/p04d-tech-baseline</span>
+        <span class="sk plan"><span class="dot"></span>/p04e-offsite</span>
+        <span class="sk plan"><span class="dot"></span>/forecast</span>
+        <span class="sk plan"><span class="dot"></span>/p04e-review</span>
+        <span class="sk plan"><span class="dot"></span>/p04-to-masterfile</span>
+        <span class="sk plan"><span class="dot"></span>/onpage</span>
+        <span class="sk plan"><span class="dot"></span>/tech-audit</span>
+        <span class="sk plan"><span class="dot"></span>/tech-fix</span>
+        <span class="sk plan"><span class="dot"></span>/html</span>
+        <span class="sk plan"><span class="dot"></span>/site-inventory</span>
+        <span class="sk plan"><span class="dot"></span>/offpage-plan</span>
+        <span class="sk plan"><span class="dot"></span>/gbp-posts</span>
+        <span class="sk plan"><span class="dot"></span>/llms-txt</span>
+        <span class="sk plan"><span class="dot"></span>/analytics</span>
+        <span class="sk plan"><span class="dot"></span>/health-check</span>
+        <span class="sk plan"><span class="dot"></span>/report</span>
+        <span class="sk plan"><span class="dot"></span>/diagnose</span>
+        <span class="sk plan"><span class="dot"></span>/geo-visibility</span>
+        <span class="sk plan"><span class="dot"></span>/geo-gap</span>
+        <span class="sk plan"><span class="dot"></span>/geo-fix-mentions</span>
+        <span class="sk plan"><span class="dot"></span>/meeting-prep</span>
+        <span class="sk plan"><span class="dot"></span>/meeting-notes</span>
+        <span class="sk plan"><span class="dot"></span>/cro-audit</span>
+        <span class="sk plan"><span class="dot"></span>/geo-expand</span>
+        <span class="sk plan"><span class="dot"></span>/uiux-audit</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- COVERAGE MATRIX -->
+  <div class="sechd"><h2>Coverage matrix · task → skill → connector</h2><span class="note">The gap view: which task is missing which skill, and which connector it leans on.</span></div>
+  <div class="mtx-wrap">
+    <table class="mtx">
+      <thead><tr><th>Pipeline task</th><th>Skill(s)</th><th>Connectors (how it reaches the world)</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="stg">Handover</td><td class="sks"><code class="p">/handover</code></td><td class="cns">Slack · Gmail · Google Calendar</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">Context Sync<span>cross-cutting</span></td><td class="sks"><code>/context-sync</code></td><td class="cns"><svg class="mi"><use href="#i-plug"/></svg>Slack · Gmail · Google Calendar</td><td><span class="pill s-built">Built</span></td></tr>
+        <tr><td class="stg">P01 · Onboarding</td><td class="sks"><code>/new-project</code> <span class="ok">ok</span><br><code class="p">/p01-onboarding</code></td><td class="cns">Google Drive · Sheets · Docs</td><td><span class="pill s-part">Partial</span></td></tr>
+        <tr><td class="stg">P02 · Access &amp; Tracking</td><td class="sks"><code class="p">/p02-access</code></td><td class="cns">Agency Analytics (GA4/GSC) · Google Sheets</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P03 · Research</td><td class="sks"><code>/research</code> <span class="ok">ok</span><br><code class="p">/p03-foundation</code> · <code class="p">/p03-market</code></td><td class="cns">DataForSEO · SERP API · <svg class="mi"><use href="#i-firecrawl"/></svg>Firecrawl · SE Ranking</td><td><span class="pill s-part">Partial</span></td></tr>
+        <tr><td class="stg">P04a–e · Build the Plan</td><td class="sks"><code class="p">/p04a-patterns</code> · <code class="p">/p04b-tracking</code> · <code class="p">/p04c-content-plan</code> · <code class="p">/p04d-tech-baseline</code> · <code class="p">/p04e-offsite</code> · <code class="p">/forecast</code></td><td class="cns">DataForSEO · Agency Analytics · SE Ranking · Google Sheets/Docs <span style="color:var(--ink-3)">(<code>forecast.py</code> script exists)</span></td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">★ P04f · Quick Win</td><td class="sks"><code>/quick-win</code></td><td class="cns"><svg class="mi"><use href="#i-plug"/></svg>Agency Analytics · DataForSEO · SERP API · Google Sheets</td><td><span class="pill s-built">Built</span></td></tr>
+        <tr><td class="stg">P04 → Masterfile</td><td class="sks"><code class="p">/p04-to-masterfile</code></td><td class="cns">Google Sheets</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P05 · Technical SEO</td><td class="sks"><code class="p">/tech-audit</code> · <code class="p">/tech-fix</code> <span style="color:var(--teal-ink)">+ tech-auditor</span></td><td class="cns"><svg class="mi"><use href="#i-firecrawl"/></svg>Firecrawl · Playwright <span class="ok">(in)</span> · Google Sheets</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P05 · Content SEO</td><td class="sks"><code>/content-month</code> · <code>/research</code> · <code>/outline</code> · <code>/write</code> · <code>/translate</code> <span class="ok">ok</span><br><code class="p">/html</code></td><td class="cns">Google Docs · Google Drive <span style="color:var(--ink-3)">+ content_lint hook + content-reviewer</span></td><td><span class="pill s-part">Partial</span></td></tr>
+        <tr><td class="stg">P05 · On-page</td><td class="sks"><code class="p">/onpage</code> · <code class="p">/site-inventory</code></td><td class="cns">Google Sheets · <svg class="mi"><use href="#i-firecrawl"/></svg>Firecrawl</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P05 · Off-page / Local</td><td class="sks"><code class="p">/offpage-plan</code> · <code class="p">/gbp-posts</code></td><td class="cns">DataForSEO (backlinks) · <svg class="mi"><use href="#i-firecrawl"/></svg>Firecrawl · GBP</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P05 · Analytics / GEO</td><td class="sks"><code>/gtm-plan</code> · <code>/gtm-build</code> · <code>/gtm-verify</code> <span class="ok">ok</span><br><code class="p">/llms-txt</code></td><td class="cns">SERP API · SE Ranking · Playwright <span class="ok">(in)</span> · <span class="miss">GTM = no connector → repo JSON</span></td><td><span class="pill s-part">Partial</span></td></tr>
+        <tr><td class="stg">P06 · Health check</td><td class="sks"><code class="p">/health-check</code> <span style="color:var(--ink-3)">(scheduled)</span></td><td class="cns">Agency Analytics · <svg class="mi"><use href="#i-firecrawl"/></svg>Firecrawl</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P06 · Task planning</td><td class="sks"><code>/task-plan</code></td><td class="cns"><svg class="mi"><use href="#i-plug"/></svg>Agency Analytics · Asana · Google Sheets</td><td><span class="pill s-built">Built</span></td></tr>
+        <tr><td class="stg">P06 · Reports &amp; analytics</td><td class="sks"><code class="p">/report</code> · <code class="p">/analytics</code></td><td class="cns">Agency Analytics · Google Sheets/Docs</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P06 · Meetings</td><td class="sks"><code class="p">/meeting-prep</code> · <code class="p">/meeting-notes</code></td><td class="cns">Google Calendar · Docs · Sheets</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P06 · Diagnose</td><td class="sks"><code class="p">/diagnose</code></td><td class="cns">Agency Analytics · SERP API</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P06 · GEO</td><td class="sks"><code class="p">/geo-visibility</code> · <code class="p">/geo-gap</code> · <code class="p">/geo-fix-mentions</code></td><td class="cns">SERP API (AI Overview) · SE Ranking (AI visibility)</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P07a · CRO</td><td class="sks"><code class="p">/cro-audit</code></td><td class="cns">Agency Analytics · <svg class="mi"><use href="#i-figma"/></svg>Figma</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P07b · AI conversion</td><td class="sks"><code class="p">/geo-expand</code></td><td class="cns">SERP API · SE Ranking</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">UI/UX · support</td><td class="sks"><code class="p">/uiux-audit</code></td><td class="cns">Playwright <span class="ok">(in)</span> · <svg class="mi"><use href="#i-figma"/></svg>Figma</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">MVP path<span>cross-cutting</span></td><td class="sks"><code>/brand-init</code> → <code>/content-mvp</code></td><td class="cns">No Drive needed · DataForSEO/SERP via <code>/research</code></td><td><span class="pill s-built">Built</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="legend">
+    <span><span class="pill s-built">Built</span> SKILL.md exists, runs today</span>
+    <span><span class="pill s-part">Partial</span> stage has some skills, others missing</span>
+    <span><span class="pill s-plan">Planned</span> referenced by pipeline, not built</span>
+    <span><span class="ok">(in)</span> Playwright built-in, no connector</span>
+  </div>
+
+  <!-- CONNECTOR MAP -->
+  <div class="sechd"><h2>Connector map · who uses what</h2><span class="note">Which connector each skill reaches through. core = used across the pipeline; optional = install when the tier needs it.</span></div>
+  <div class="conns">
+    <div class="conn"><div class="cn"><svg class="ic"><use href="#i-plug"/></svg> Google Sheets / Docs / Drive <span class="badge core">core</span></div><div class="cu">Plan · Masterfile · Content Docs — the client-facing files.<br><span class="sk built">/new-project</span><span class="sk built">/content-month</span><span class="sk built">/write</span><span class="sk built">/translate</span><span class="sk built">/quick-win</span><span class="sk built">/task-plan</span></div></div>
+    <div class="conn"><div class="cn"><svg class="ic"><use href="#i-plug"/></svg> DataForSEO <span class="badge core">core</span></div><div class="cu">Volume · KD · SERP · backlinks · competitor gap.<br><span class="sk built">/research</span><span class="sk built">/quick-win</span><span class="sk plan">/p04b</span><span class="sk plan">/offpage-plan</span></div></div>
+    <div class="conn"><div class="cn"><svg class="ic"><use href="#i-plug"/></svg> Agency Analytics <span class="badge core">core</span></div><div class="cu">GA4 / GSC history for reports &amp; forecast.<br><span class="sk built">/quick-win</span><span class="sk built">/task-plan</span><span class="sk plan">/report</span><span class="sk plan">/health-check</span><span class="sk plan">/forecast</span></div></div>
+    <div class="conn"><div class="cn"><svg class="ic"><use href="#i-plug"/></svg> SERP API <span class="badge core">core</span></div><div class="cu">SERP top 10 · PAA · AI Overview.<br><span class="sk built">/research</span><span class="sk built">/quick-win</span><span class="sk plan">/geo-visibility</span></div></div>
+    <div class="conn"><div class="cn"><svg class="mi" style="width:15px;height:15px"><use href="#i-firecrawl"/></svg> Firecrawl <span class="badge core">core</span></div><div class="cu">Read competitor &amp; client pages.<br><span class="sk built">/research</span><span class="sk built">/gtm-plan</span><span class="sk plan">/tech-audit</span><span class="sk plan">/onpage</span></div></div>
+    <div class="conn"><div class="cn"><svg class="ic"><use href="#i-plug"/></svg> SE Ranking <span class="badge core">core</span></div><div class="cu">Rank tracking · audit · AI visibility.<br><span class="sk built">/research</span><span class="sk plan">/geo-visibility</span><span class="sk plan">/report</span></div></div>
+    <div class="conn"><div class="cn"><svg class="ic"><use href="#i-plug"/></svg> Slack · Gmail · Calendar <span class="badge core">core</span></div><div class="cu">Read-only context into the repo.<br><span class="sk built">/context-sync</span><span class="sk plan">/handover</span><span class="sk plan">/meeting-prep</span></div></div>
+    <div class="conn"><div class="cn"><svg class="ic"><use href="#i-plug"/></svg> Asana <span class="badge opt">optional</span></div><div class="cu">Push proposed tasks (section awaits approval).<br><span class="sk built">/task-plan</span></div></div>
+    <div class="conn"><div class="cn"><svg class="mi" style="width:15px;height:15px"><use href="#i-figma"/></svg> Figma <span class="badge opt">optional</span></div><div class="cu">Read designs for UI/UX &amp; CRO.<br><span class="sk plan">/uiux-audit</span><span class="sk plan">/cro-audit</span></div></div>
+    <div class="conn"><div class="cn"><svg class="ic"><use href="#i-claude"/></svg> Playwright <span class="badge in">built-in</span></div><div class="cu">Headless Chromium: crawl JS, screenshots, PageSpeed.<br><span class="sk built">/gtm-verify</span><span class="sk plan">/tech-audit</span><span class="sk plan">/uiux-audit</span></div></div>
+    <div class="conn none"><div class="cn"><svg class="ic"><use href="#i-claude"/></svg> Google Tag Manager <span class="badge nojs">no connector</span></div><div class="cu">Claude builds merge-JSON → a human imports it. Claude never publishes the container.<br><span class="sk built">/gtm-build</span><span class="sk built">/gtm-verify</span></div></div>
+    <div class="conn"><div class="cn"><svg class="ic"><use href="#i-github"/></svg> GitHub repo <span class="badge core">core</span></div><div class="cu">Project memory: core/ + project/ + content/ + decisions.md.<br><span class="sk built">/contribute-learning</span><span style="color:var(--ink-3);font-size:11px"> + every skill writes here</span></div></div>
+  </div>
+
+  <div class="foot">
+    <span class="bi"><svg class="ic"><use href="#i-github"/></svg></span>
+    <span>This page lives in the <b style="color:var(--ink-2)">template</b> repo (<code>docs/skill-map.html</code>) and reads as a snapshot of what is built today. As skills land, update the status pills here and the counts above. Full step-by-step mapping is in <a href="./pipeline.md">pipeline.md</a>; the roadmap is in <a href="./implementation-plan.md">implementation-plan.md</a>.</span>
+  </div>
+</div>
+</body>
+</html>

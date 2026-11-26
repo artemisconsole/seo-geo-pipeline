@@ -1,4 +1,4 @@
-# Schema — SEO/GEO Plan (7 tab, chuẩn The Sukosol)
+# Schema — SEO/GEO Plan (7 tab, Format chung)
 
 Cột "ngôn ngữ 2" đọc từ `config.yaml › languages.secondary`. Skill ghi đúng header này, không đổi.
 
