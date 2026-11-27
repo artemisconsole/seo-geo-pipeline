@@ -147,6 +147,9 @@
   .badge.opt{background:var(--panel-2);color:var(--ink-3);border:1px solid var(--line-2)}
   .badge.nojs{background:var(--coral-bg);color:var(--coral-ink)}
   .badge.in{background:var(--teal-bg);color:var(--teal-ink)}
+  .badge.ext{background:var(--coral-bg);color:var(--coral-ink)}
+  .tpl-stage{font-family:var(--disp);font-weight:700;white-space:nowrap}
+  .lives{font-size:11px;color:var(--ink-2)}
 
   .legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:11.5px;color:var(--ink-2)}
   .legend span{display:inline-flex;align-items:center;gap:6px}
@@ -170,8 +173,8 @@
 <body>
 <div class="wrap">
   <header>
-    <h1>Skill &amp; Connector Map</h1>
-    <p class="sub">Companion to the pipeline board. It answers three questions: <b>what skills the project has</b> (built vs planned), <b>which skill + connector each task needs</b>, and <b>how they coordinate inside Claude Code</b>. Status reflects what exists in the repo today, not the roadmap.</p>
+    <h1>Skill, Connector &amp; Template Map</h1>
+    <p class="sub">Companion to the pipeline board, kept in sync with it. It shows <b>what skills the project has</b> (built vs planned), <b>which skill + connector each task needs</b>, and the <b>templates to complete &amp; standardize</b> for each stage. Status reflects what exists in the repo today, not the roadmap.</p>
     <nav class="nav">
       <a href="./index.html"><svg class="ic"><use href="#i-claude"/></svg> Overview</a>
       <a href="./pipeline-board.html"><svg class="ic"><use href="#i-claudecode"/></svg> SEO/GEO Pipeline</a>
@@ -184,9 +187,9 @@
   <div class="sechd"><h2>Where we are</h2><span class="note">Coverage of the ~49 skills the pipeline references.</span></div>
   <div class="tiles">
     <div class="tile g"><div class="num">16</div><div class="lbl">Skills built &amp; usable today</div></div>
-    <div class="tile a"><div class="num">33</div><div class="lbl">Skills referenced but not built yet</div></div>
+    <div class="tile a"><div class="num">37</div><div class="lbl">Skills referenced but not built yet</div></div>
     <div class="tile b"><div class="num">4</div><div class="lbl">Subagents built (serp · competitor · reviewer · tech)</div></div>
-    <div class="tile v"><div class="num">13</div><div class="lbl">Connectors wired + Playwright built-in</div></div>
+    <div class="tile v"><div class="num">6</div><div class="lbl">External tracking tools (no MCP connector)</div></div>
   </div>
 
   <div class="pbars">
@@ -266,9 +269,13 @@
       </div>
     </div>
     <div class="group" style="grid-column:1/-1">
-      <h3>Not built yet <span class="miss">· 33 skills</span></h3>
-      <p class="gd">The Plan-building spine and most of Execution / Monitor / Convert. These are where the next dev rounds go.</p>
+      <h3>Not built yet <span class="miss">· 37 skills</span></h3>
+      <p class="gd">The Plan-building spine and most of Execution / Monitor / Convert, plus the new GEO-attribute &amp; audit skills. These are where the next dev rounds go.</p>
       <div class="chips">
+        <span class="sk plan"><span class="dot"></span>/attribute-analysis</span>
+        <span class="sk plan"><span class="dot"></span>/content-audit</span>
+        <span class="sk plan"><span class="dot"></span>/entity-audit</span>
+        <span class="sk plan"><span class="dot"></span>/internal-link</span>
         <span class="sk plan"><span class="dot"></span>/handover</span>
         <span class="sk plan"><span class="dot"></span>/p01-onboarding</span>
         <span class="sk plan"><span class="dot"></span>/p02-access</span>
@@ -312,28 +319,27 @@
     <table class="mtx">
       <thead><tr><th>Pipeline task</th><th>Skill(s)</th><th>Connectors (how it reaches the world)</th><th>Status</th></tr></thead>
       <tbody>
-        <tr><td class="stg">Handover</td><td class="sks"><code class="p">/handover</code></td><td class="cns">Slack · Gmail · Google Calendar</td><td><span class="pill s-plan">Planned</span></td></tr>
         <tr><td class="stg">Context Sync<span>cross-cutting</span></td><td class="sks"><code>/context-sync</code></td><td class="cns"><svg class="mi"><use href="#i-plug"/></svg>Slack · Gmail · Google Calendar</td><td><span class="pill s-built">Built</span></td></tr>
-        <tr><td class="stg">P01 · Onboarding</td><td class="sks"><code>/new-project</code> <span class="ok">ok</span><br><code class="p">/p01-onboarding</code></td><td class="cns">Google Drive · Sheets · Docs</td><td><span class="pill s-part">Partial</span></td></tr>
-        <tr><td class="stg">P02 · Access &amp; Tracking</td><td class="sks"><code class="p">/p02-access</code></td><td class="cns">Agency Analytics (GA4/GSC) · Google Sheets</td><td><span class="pill s-plan">Planned</span></td></tr>
-        <tr><td class="stg">P03 · Research</td><td class="sks"><code>/research</code> <span class="ok">ok</span><br><code class="p">/p03-foundation</code> · <code class="p">/p03-market</code></td><td class="cns">DataForSEO · SERP API · <svg class="mi"><use href="#i-firecrawl"/></svg>Firecrawl · SE Ranking</td><td><span class="pill s-part">Partial</span></td></tr>
-        <tr><td class="stg">P04a–e · Build the Plan</td><td class="sks"><code class="p">/p04a-patterns</code> · <code class="p">/p04b-tracking</code> · <code class="p">/p04c-content-plan</code> · <code class="p">/p04d-tech-baseline</code> · <code class="p">/p04e-offsite</code> · <code class="p">/forecast</code></td><td class="cns">DataForSEO · Agency Analytics · SE Ranking · Google Sheets/Docs <span style="color:var(--ink-3)">(<code>forecast.py</code> script exists)</span></td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P01 · Onboarding<span>+ Brand Guideline</span></td><td class="sks"><code>/new-project</code> · <code>/brand-init</code> <span class="ok">ok</span><br><code class="p">/p01-onboarding</code></td><td class="cns">Google Drive · Sheets · Docs</td><td><span class="pill s-part">Partial</span></td></tr>
+        <tr><td class="stg">P02 · Access &amp; Tracking<span>tracking stack wired here</span></td><td class="sks"><code class="p">/p02-access</code></td><td class="cns">Agency Analytics · SE Ranking · <span class="miss">Bing WMT · Ahrefs · MS Clarity · Merchant Center · INGENTICS · SEO Console (external)</span> · GTM</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P03 · Research &amp; Brand<span>root / rare / unique attribute</span></td><td class="sks"><code>/research</code> <span class="ok">ok</span><br><code class="p">/attribute-analysis</code> · <code class="p">/p03-foundation</code></td><td class="cns">DataForSEO · SERP API · <svg class="mi"><use href="#i-firecrawl"/></svg>Firecrawl · SE Ranking</td><td><span class="pill s-part">Partial</span></td></tr>
+        <tr><td class="stg">P04 · Plan · 7 tabs<span>4 AI-draftable · 3 human</span></td><td class="sks"><code class="p">/p04a-patterns</code> · <code class="p">/p04b-tracking</code> · <code class="p">/p04c-content-plan</code> · <code class="p">/p04d-tech-baseline</code> · <code class="p">/p04e-offsite</code> · <code class="p">/forecast</code></td><td class="cns">DataForSEO · Agency Analytics · SE Ranking · Google Sheets/Docs <span style="color:var(--ink-3)">· AI: Foundation·Pattern·Technical·Offsite — human: Tracking·Content Plan·Measurement</span></td><td><span class="pill s-plan">Planned</span></td></tr>
         <tr><td class="stg">★ P04f · Quick Win</td><td class="sks"><code>/quick-win</code></td><td class="cns"><svg class="mi"><use href="#i-plug"/></svg>Agency Analytics · DataForSEO · SERP API · Google Sheets</td><td><span class="pill s-built">Built</span></td></tr>
         <tr><td class="stg">P04 → Masterfile</td><td class="sks"><code class="p">/p04-to-masterfile</code></td><td class="cns">Google Sheets</td><td><span class="pill s-plan">Planned</span></td></tr>
-        <tr><td class="stg">P05 · Technical SEO</td><td class="sks"><code class="p">/tech-audit</code> · <code class="p">/tech-fix</code> <span style="color:var(--teal-ink)">+ tech-auditor</span></td><td class="cns"><svg class="mi"><use href="#i-firecrawl"/></svg>Firecrawl · Playwright <span class="ok">(in)</span> · Google Sheets</td><td><span class="pill s-plan">Planned</span></td></tr>
-        <tr><td class="stg">P05 · Content SEO</td><td class="sks"><code>/content-month</code> · <code>/research</code> · <code>/outline</code> · <code>/write</code> · <code>/translate</code> <span class="ok">ok</span><br><code class="p">/html</code></td><td class="cns">Google Docs · Google Drive <span style="color:var(--ink-3)">+ content_lint hook + content-reviewer</span></td><td><span class="pill s-part">Partial</span></td></tr>
-        <tr><td class="stg">P05 · On-page</td><td class="sks"><code class="p">/onpage</code> · <code class="p">/site-inventory</code></td><td class="cns">Google Sheets · <svg class="mi"><use href="#i-firecrawl"/></svg>Firecrawl</td><td><span class="pill s-plan">Planned</span></td></tr>
-        <tr><td class="stg">P05 · Off-page / Local</td><td class="sks"><code class="p">/offpage-plan</code> · <code class="p">/gbp-posts</code></td><td class="cns">DataForSEO (backlinks) · <svg class="mi"><use href="#i-firecrawl"/></svg>Firecrawl · GBP</td><td><span class="pill s-plan">Planned</span></td></tr>
-        <tr><td class="stg">P05 · Analytics / GEO</td><td class="sks"><code>/gtm-plan</code> · <code>/gtm-build</code> · <code>/gtm-verify</code> <span class="ok">ok</span><br><code class="p">/llms-txt</code></td><td class="cns">SERP API · SE Ranking · Playwright <span class="ok">(in)</span> · <span class="miss">GTM = no connector → repo JSON</span></td><td><span class="pill s-part">Partial</span></td></tr>
-        <tr><td class="stg">P06 · Health check</td><td class="sks"><code class="p">/health-check</code> <span style="color:var(--ink-3)">(scheduled)</span></td><td class="cns">Agency Analytics · <svg class="mi"><use href="#i-firecrawl"/></svg>Firecrawl</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P05 · Technical</td><td class="sks"><code class="p">/tech-audit</code> · <code class="p">/tech-fix</code> · <code class="p">/llms-txt</code> <span style="color:var(--teal-ink)">+ tech-auditor</span></td><td class="cns"><svg class="mi"><use href="#i-firecrawl"/></svg>Firecrawl · Playwright <span class="ok">(in)</span> · GSC · Screaming Frog · Ahrefs</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P05 · On-page</td><td class="sks"><code class="p">/onpage</code> · <code class="p">/internal-link</code> · <code class="p">/site-inventory</code></td><td class="cns">Google Sheets · <svg class="mi"><use href="#i-firecrawl"/></svg>Firecrawl</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P05 · Content<span>old + new</span></td><td class="sks"><code>/content-month</code> · <code>/research</code> · <code>/outline</code> · <code>/write</code> · <code>/translate</code> <span class="ok">ok</span><br><code class="p">/content-audit</code> · <code class="p">/html</code></td><td class="cns">Google Docs · Drive · WordPress API <span style="color:var(--ink-3)">+ content_lint hook + content-reviewer</span></td><td><span class="pill s-part">Partial</span></td></tr>
+        <tr><td class="stg">P05 · Off-page &amp; Local</td><td class="sks"><code class="p">/offpage-plan</code> · <code class="p">/gbp-posts</code> · <code class="p">/entity-audit</code></td><td class="cns">DataForSEO (backlinks) · <svg class="mi"><use href="#i-firecrawl"/></svg>Firecrawl · GBP · Google Sheet (GBP auto)</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P05 · GTM tracking</td><td class="sks"><code>/gtm-plan</code> · <code>/gtm-build</code> · <code>/gtm-verify</code></td><td class="cns">Playwright <span class="ok">(in)</span> · <span class="miss">GTM = no connector → repo JSON</span></td><td><span class="pill s-built">Built</span></td></tr>
+        <tr><td class="stg">P06 · Monitor<span>5 areas, daily/weekly</span></td><td class="sks"><code class="p">/health-check</code> · <code class="p">/diagnose</code></td><td class="cns">Agency Analytics · SE Ranking · <span class="miss">Ahrefs · SEO Console · MS Clarity (external)</span> · GSC</td><td><span class="pill s-plan">Planned</span></td></tr>
         <tr><td class="stg">P06 · Task planning</td><td class="sks"><code>/task-plan</code></td><td class="cns"><svg class="mi"><use href="#i-plug"/></svg>Agency Analytics · Asana · Google Sheets</td><td><span class="pill s-built">Built</span></td></tr>
-        <tr><td class="stg">P06 · Reports &amp; analytics</td><td class="sks"><code class="p">/report</code> · <code class="p">/analytics</code></td><td class="cns">Agency Analytics · Google Sheets/Docs</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P06 · Reports<span>weekly · monthly · exec</span></td><td class="sks"><code class="p">/report</code> · <code class="p">/analytics</code></td><td class="cns">Asana (weekly) · Agency Analytics (monthly) · <span class="miss">Canva (executive)</span></td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P06 · GEO</td><td class="sks"><code class="p">/geo-visibility</code> · <code class="p">/geo-gap</code> · <code class="p">/geo-fix-mentions</code></td><td class="cns">SERP API (AI Overview) · SE Ranking · <span class="miss">INGENTICS</span></td><td><span class="pill s-plan">Planned</span></td></tr>
         <tr><td class="stg">P06 · Meetings</td><td class="sks"><code class="p">/meeting-prep</code> · <code class="p">/meeting-notes</code></td><td class="cns">Google Calendar · Docs · Sheets</td><td><span class="pill s-plan">Planned</span></td></tr>
-        <tr><td class="stg">P06 · Diagnose</td><td class="sks"><code class="p">/diagnose</code></td><td class="cns">Agency Analytics · SERP API</td><td><span class="pill s-plan">Planned</span></td></tr>
-        <tr><td class="stg">P06 · GEO</td><td class="sks"><code class="p">/geo-visibility</code> · <code class="p">/geo-gap</code> · <code class="p">/geo-fix-mentions</code></td><td class="cns">SERP API (AI Overview) · SE Ranking (AI visibility)</td><td><span class="pill s-plan">Planned</span></td></tr>
-        <tr><td class="stg">P07a · CRO</td><td class="sks"><code class="p">/cro-audit</code></td><td class="cns">Agency Analytics · <svg class="mi"><use href="#i-figma"/></svg>Figma</td><td><span class="pill s-plan">Planned</span></td></tr>
-        <tr><td class="stg">P07b · AI conversion</td><td class="sks"><code class="p">/geo-expand</code></td><td class="cns">SERP API · SE Ranking</td><td><span class="pill s-plan">Planned</span></td></tr>
-        <tr><td class="stg">UI/UX · support</td><td class="sks"><code class="p">/uiux-audit</code></td><td class="cns">Playwright <span class="ok">(in)</span> · <svg class="mi"><use href="#i-figma"/></svg>Figma</td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P07a · CRO</td><td class="sks"><code class="p">/cro-audit</code></td><td class="cns">Agency Analytics · <svg class="mi"><use href="#i-figma"/></svg>Figma · <span class="miss">MS Clarity</span></td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">P07b · AI conversion</td><td class="sks"><code class="p">/geo-expand</code></td><td class="cns">SERP API · SE Ranking · <span class="miss">INGENTICS</span></td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">UI/UX · support</td><td class="sks"><code class="p">/uiux-audit</code></td><td class="cns">Playwright <span class="ok">(in)</span> · <svg class="mi"><use href="#i-figma"/></svg>Figma · <span class="miss">MS Clarity</span></td><td><span class="pill s-plan">Planned</span></td></tr>
+        <tr><td class="stg">Handover<span>at the bottom of the board</span></td><td class="sks"><code>/context-sync</code> <span class="ok">ok</span> · <code class="p">/handover</code></td><td class="cns">Slack · Gmail · Google Calendar</td><td><span class="pill s-part">Partial</span></td></tr>
         <tr><td class="stg">MVP path<span>cross-cutting</span></td><td class="sks"><code>/brand-init</code> → <code>/content-mvp</code></td><td class="cns">No Drive needed · DataForSEO/SERP via <code>/research</code></td><td><span class="pill s-built">Built</span></td></tr>
       </tbody>
     </table>
@@ -360,11 +366,56 @@
     <div class="conn"><div class="cn"><svg class="ic"><use href="#i-claude"/></svg> Playwright <span class="badge in">built-in</span></div><div class="cu">Headless Chromium: crawl JS, screenshots, PageSpeed.<br><span class="sk built">/gtm-verify</span><span class="sk plan">/tech-audit</span><span class="sk plan">/uiux-audit</span></div></div>
     <div class="conn none"><div class="cn"><svg class="ic"><use href="#i-claude"/></svg> Google Tag Manager <span class="badge nojs">no connector</span></div><div class="cu">Claude builds merge-JSON → a human imports it. Claude never publishes the container.<br><span class="sk built">/gtm-build</span><span class="sk built">/gtm-verify</span></div></div>
     <div class="conn"><div class="cn"><svg class="ic"><use href="#i-github"/></svg> GitHub repo <span class="badge core">core</span></div><div class="cu">Project memory: core/ + project/ + content/ + decisions.md.<br><span class="sk built">/contribute-learning</span><span style="color:var(--ink-3);font-size:11px"> + every skill writes here</span></div></div>
+    <div class="conn none"><div class="cn"><svg class="ic"><use href="#i-plug"/></svg> INGENTICS <span class="badge ext">external</span></div><div class="cu">Prompt tracking &amp; AI Visibility (GEO) — no MCP; read/report manually.<br><span class="sk plan">/geo-visibility</span><span class="sk plan">/geo-expand</span></div></div>
+    <div class="conn none"><div class="cn"><svg class="ic"><use href="#i-plug"/></svg> SEO Console <span class="badge ext">external</span></div><div class="cu">Combined numbers, tasks &amp; project insight — the daily/weekly monitor home.<br><span class="sk plan">/health-check</span><span class="sk plan">/report</span></div></div>
+    <div class="conn none"><div class="cn"><svg class="ic"><use href="#i-plug"/></svg> Ahrefs Audit <span class="badge ext">external</span></div><div class="cu">Technical audit &amp; alerts.<br><span class="sk plan">/tech-audit</span><span class="sk plan">/health-check</span></div></div>
+    <div class="conn none"><div class="cn"><svg class="ic"><use href="#i-plug"/></svg> Microsoft Clarity <span class="badge ext">external</span></div><div class="cu">UX recordings &amp; heatmaps.<br><span class="sk plan">/uiux-audit</span><span class="sk plan">/cro-audit</span></div></div>
+    <div class="conn none"><div class="cn"><svg class="ic"><use href="#i-plug"/></svg> Bing Webmaster Tools <span class="badge ext">external</span></div><div class="cu">Bing index &amp; search data.<br><span class="sk plan">/p02-access</span><span class="sk plan">/health-check</span></div></div>
+    <div class="conn none"><div class="cn"><svg class="ic"><use href="#i-plug"/></svg> Google Merchant Center <span class="badge ext">external · e-com</span></div><div class="cu">E-commerce sites only.<br><span class="sk plan">/p02-access</span></div></div>
+  </div>
+
+  <!-- TEMPLATES -->
+  <div class="sechd"><h2>Templates to complete &amp; standardize</h2><span class="note">Alongside the skills — every stage needs a standard template. Where it lives + what's left to do.</span></div>
+  <div class="mtx-wrap">
+    <table class="mtx">
+      <thead><tr><th>Stage</th><th>Template</th><th>Lives in</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="tpl-stage">P01</td><td>Onboarding Questions</td><td class="lives">Google Sheet</td><td><span class="pill s-plan">To build</span></td></tr>
+        <tr><td class="tpl-stage">P01</td><td><code>project/config.yaml</code></td><td class="lives">repo <span style="color:var(--ink-3)">(example)</span></td><td><span class="pill s-built">In repo</span></td></tr>
+        <tr><td class="tpl-stage">P01</td><td>Brand Guideline (attributes · voice · facts)</td><td class="lives">repo <code>core/doc-templates/brand-guideline-template.md</code></td><td><span class="pill s-part">Standardize</span></td></tr>
+        <tr><td class="tpl-stage">P02</td><td>SEO Assets tab (TRUE/FALSE, no passwords)</td><td class="lives">Masterfile · schema in repo</td><td><span class="pill s-part">Standardize</span></td></tr>
+        <tr><td class="tpl-stage">P02</td><td>GTM success-event measurement log</td><td class="lives">Google Sheet</td><td><span class="pill s-plan">To build</span></td></tr>
+        <tr><td class="tpl-stage">P02</td><td>Access &amp; tracking checklist (+ data-sharing asks)</td><td class="lives">repo</td><td><span class="pill s-plan">To build</span></td></tr>
+        <tr><td class="tpl-stage">P03</td><td><b>GEO attribute worksheet</b> — root / rare / unique</td><td class="lives">repo / Google Doc</td><td><span class="pill s-plan">To build</span></td></tr>
+        <tr><td class="tpl-stage">P03</td><td>Foundation tab · competitor &amp; market brief</td><td class="lives">Plan Sheet · schema in repo</td><td><span class="pill s-part">Standardize</span></td></tr>
+        <tr><td class="tpl-stage">P04</td><td><b>SEO/GEO Plan — 7-tab master</b> (Foundation→Measurement)</td><td class="lives">Google Sheet · schemas in repo</td><td><span class="pill s-plan">To build</span></td></tr>
+        <tr><td class="tpl-stage">P04</td><td>Technical checklist (sitemap·robots·llms·headings·hreflang·speed·crawl budget)</td><td class="lives">in Plan Sheet</td><td><span class="pill s-plan">To build</span></td></tr>
+        <tr><td class="tpl-stage">P04</td><td>Forecast (Measurement) — Organic · AI · Booking</td><td class="lives">Sheet + <code>scripts/forecast.py</code></td><td><span class="pill s-part">Standardize</span></td></tr>
+        <tr><td class="tpl-stage">P05</td><td>Content Doc (Draft_EN + meta + Confirmation List)</td><td class="lives">repo <code>core/doc-templates/content-doc.md</code></td><td><span class="pill s-part">Standardize</span></td></tr>
+        <tr><td class="tpl-stage">P05</td><td>On-page checklist (money page · schema · CTA)</td><td class="lives">repo</td><td><span class="pill s-plan">To build</span></td></tr>
+        <tr><td class="tpl-stage">P05</td><td>Schema markup set (Article·FAQ·Breadcrumb·Hotel/LocalBusiness)</td><td class="lives">repo</td><td><span class="pill s-plan">To build</span></td></tr>
+        <tr><td class="tpl-stage">P05</td><td>Internal-link map · Content Audit inventory</td><td class="lives">Google Sheet</td><td><span class="pill s-plan">To build</span></td></tr>
+        <tr><td class="tpl-stage">P05</td><td>GBP post auto-tool</td><td class="lives">Google Sheet</td><td><span class="pill s-plan">To build</span></td></tr>
+        <tr><td class="tpl-stage">P05</td><td>GTM container JSON · llms.txt</td><td class="lives">repo · <code>core/checklists/gtm-tracking.md</code></td><td><span class="pill s-part">Standardize</span></td></tr>
+        <tr><td class="tpl-stage">P05</td><td>HTML blog templates (TOC·FAQ·CTA·author box)</td><td class="lives">repo <code>core/html-templates/</code></td><td><span class="pill s-plan">To build</span></td></tr>
+        <tr><td class="tpl-stage">P06</td><td>Weekly / Bi-weekly report (run-rate · blockers)</td><td class="lives">Asana portfolio</td><td><span class="pill s-plan">To build</span></td></tr>
+        <tr><td class="tpl-stage">P06</td><td>Monthly client report</td><td class="lives">Agency Analytics</td><td><span class="pill s-part">Standardize</span></td></tr>
+        <tr><td class="tpl-stage">P06</td><td>Executive report (6 / 12 months)</td><td class="lives">Canva</td><td><span class="pill s-plan">To build</span></td></tr>
+        <tr><td class="tpl-stage">P06</td><td>Monitor dashboard (5 areas) · diagnosis checklist</td><td class="lives">SEO Console · repo</td><td><span class="pill s-plan">To build</span></td></tr>
+        <tr><td class="tpl-stage">P07</td><td>CRO audit · GEO prompt-set / expand template</td><td class="lives">repo</td><td><span class="pill s-plan">To build</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="legend">
+    <span><span class="pill s-built">In repo</span> solid, usable</span>
+    <span><span class="pill s-part">Standardize</span> exists as draft/schema — needs polishing</span>
+    <span><span class="pill s-plan">To build</span> not created yet</span>
+    <span style="color:var(--ink-3)">Templates in Google Sheet / Doc / Canva / Asana live outside the repo; the repo keeps the schema &amp; rules.</span>
   </div>
 
   <div class="foot">
     <span class="bi"><svg class="ic"><use href="#i-github"/></svg></span>
-    <span>This page lives in the <b style="color:var(--ink-2)">template</b> repo (<code>docs/skill-map.html</code>) and reads as a snapshot of what is built today. As skills land, update the status pills here and the counts above. Full step-by-step mapping is in <a href="./pipeline.md">pipeline.md</a>; the roadmap is in <a href="./implementation-plan.md">implementation-plan.md</a>.</span>
+    <span>This page lives in the <b style="color:var(--ink-2)">template</b> repo (<code>docs/skill-map.html</code>) and reads as a snapshot of what is built today, kept in sync with the <a href="./pipeline-board.html">pipeline board</a>. As skills &amp; templates land, update the status pills here. Full step-by-step mapping is in <a href="./pipeline.md">pipeline.md</a>; the roadmap is in <a href="./implementation-plan.md">implementation-plan.md</a>.</span>
   </div>
 </div>
 </body>
