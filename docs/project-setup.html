@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Project Setup</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Project setup for the Heads On Pillows SEO/GEO pipeline: pick tier, automation level and brand/website strength; the Goal stays the same, the KPI, effort, AI-automatable tasks and quick wins change.">
+<link rel="canonical" href="./project-setup.html">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+  :root{
+    --bg:#f3f4f2; --panel:#ffffff; --panel-2:#fafaf8; --ink:#24262b; --ink-2:#565a63; --ink-3:#8a8e97;
+    --line:#e3e4e0; --line-2:#d2d4cf;
+    --blue-bg:#e6f1fb; --blue-ink:#0c447c; --blue-ln:#378add;
+    --purple-bg:#eeedfe; --purple-ink:#3c3489; --purple-ln:#7f77dd;
+    --green-bg:#eaf3de; --green-ink:#27500a; --green-ln:#639922;
+    --amber-bg:#faeeda; --amber-ink:#633806; --amber-ln:#ba7517;
+    --teal-bg:#e1f5ee; --teal-ink:#085041; --teal-ln:#1d9e75;
+    --pink-bg:#fbeaf0; --pink-ink:#72243e; --pink-ln:#d4537e;
+    --violet-bg:#efeafe; --violet-ink:#4b2e86; --violet-ln:#8b63d4;
+    --coral-bg:#faece7; --coral-ink:#712b13; --coral-ln:#d85a30;
+    --gold:#f6c343; --gold-ink:#5a3d00; --gold-edge:#b8860b;
+    --radius:12px; --r-sm:8px;
+    --sans:"Inter",system-ui,sans-serif; --disp:"Space Grotesk",var(--sans);
+  }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+    --bg:#15171a; --panel:#1e2024; --panel-2:#23262b; --ink:#e7e8e4; --ink-2:#aab0b8; --ink-3:#7c818b;
+    --line:#2e3238; --line-2:#3a3f46;
+    --blue-bg:#13314e; --blue-ink:#9fc6f2; --blue-ln:#4f93d8;
+    --purple-bg:#2a2555; --purple-ink:#c3bdf2; --purple-ln:#8d85e0;
+    --green-bg:#223616; --green-ink:#bcdd92; --green-ln:#79ad3f;
+    --amber-bg:#3e2c10; --amber-ink:#f3c683; --amber-ln:#c98f33;
+    --teal-bg:#0f352c; --teal-ink:#8fe0c6; --teal-ln:#2fab82;
+    --pink-bg:#3c1b28; --pink-ink:#eda9c0; --pink-ln:#d4679a;
+    --violet-bg:#2c2152; --violet-ink:#cbb8f2; --violet-ln:#9b79da;
+    --coral-bg:#3a1d12; --coral-ink:#e8a98f; --coral-ln:#d8713f;
+    --gold:#caa032; --gold-ink:#ffe9b0; --gold-edge:#e0b84a;
+    color-scheme:dark;
+  }}
+  :root[data-theme="dark"]{
+    --bg:#15171a; --panel:#1e2024; --panel-2:#23262b; --ink:#e7e8e4; --ink-2:#aab0b8; --ink-3:#7c818b;
+    --line:#2e3238; --line-2:#3a3f46;
+    --blue-bg:#13314e; --blue-ink:#9fc6f2; --blue-ln:#4f93d8;
+    --green-bg:#223616; --green-ink:#bcdd92; --green-ln:#79ad3f;
+    --amber-bg:#3e2c10; --amber-ink:#f3c683; --amber-ln:#c98f33;
+    --teal-bg:#0f352c; --teal-ink:#8fe0c6; --teal-ln:#2fab82;
+    --violet-bg:#2c2152; --violet-ink:#cbb8f2; --violet-ln:#9b79da;
+    --coral-bg:#3a1d12; --coral-ink:#e8a98f; --coral-ln:#d8713f;
+    --purple-ln:#8d85e0; --pink-ln:#d4679a;
+    --gold:#caa032; --gold-ink:#ffe9b0; --gold-edge:#e0b84a;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;margin:0}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px max(16px,env(safe-area-inset-left,0px)) 56px}
+  h1{font-family:var(--disp);font-weight:700;font-size:clamp(25px,4.2vw,38px);letter-spacing:-.02em;margin:0;text-wrap:balance}
+  .sub{color:var(--ink-2);margin:6px 0 0;max-width:74ch;font-size:14px}
+  h2{font-family:var(--disp);font-weight:600;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin:0}
+  a{color:var(--blue-ln)}
+  code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88em;background:var(--panel-2);padding:1px 5px;border-radius:5px;border:1px solid var(--line)}
+  .ic{width:15px;height:15px;display:inline-block;vertical-align:-2px}
+  .sechd{margin:36px 0 14px;padding-bottom:9px;border-bottom:1px solid var(--line-2);display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .sechd .note{font-size:12.5px;color:var(--ink-3)}
+
+  .nav{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+  .nav a{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;text-decoration:none;
+    background:var(--panel);border:1px solid var(--line-2);border-radius:999px;padding:6px 13px;color:var(--ink-2)}
+  .nav a:hover{border-color:var(--blue-ln);color:var(--ink)}
+  .nav a.here{background:var(--blue-bg);border-color:var(--blue-ln);color:var(--blue-ink)}
+
+  /* picker */
+  .picker{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin-top:4px}
+  .prow{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:center;padding:9px 0}
+  .prow+.prow{border-top:1px solid var(--line)}
+  .prow .plabel{font-family:var(--disp);font-weight:600;font-size:13px;color:var(--ink)}
+  .prow .plabel span{display:block;font-weight:400;font-size:11px;color:var(--ink-3)}
+  .opts{display:flex;gap:7px;flex-wrap:wrap}
+  .opt{cursor:pointer;font-size:12.5px;font-weight:600;border-radius:8px;padding:6px 13px;border:1px solid var(--line-2);background:var(--panel-2);color:var(--ink-2);user-select:none}
+  .opt:hover{border-color:var(--ink-3)}
+  .opt[aria-pressed="true"]{background:var(--blue-bg);border-color:var(--blue-ln);color:var(--blue-ink)}
+  .opt.t-silver[aria-pressed="true"]{background:var(--panel-2);border-color:var(--ink-3);color:var(--ink)}
+  .opt.t-gold[aria-pressed="true"]{background:var(--amber-bg);border-color:var(--amber-ln);color:var(--amber-ink)}
+  .opt.t-diamond[aria-pressed="true"]{background:var(--blue-bg);border-color:var(--blue-ln);color:var(--blue-ink)}
+  .opt.t-platinum[aria-pressed="true"]{background:var(--violet-bg);border-color:var(--violet-ln);color:var(--violet-ink)}
+
+  .result{margin-top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .rc{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--ln,var(--ink-3));border-radius:var(--radius);padding:13px 15px}
+  .rc h4{margin:0 0 7px;font-size:11px;font-family:var(--disp);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+  .rc .big{font-family:var(--disp);font-weight:700;font-size:18px;color:var(--ink);line-height:1.2}
+  .rc .big small{display:block;font-size:11.5px;font-weight:400;color:var(--ink-2);margin-top:3px}
+  .rc ul{margin:7px 0 0;padding-left:15px} .rc li{font-size:12px;color:var(--ink-2);margin:3px 0}
+  .rc.kpi{--ln:var(--green-ln)} .rc.effort{--ln:var(--amber-ln)} .rc.auto{--ln:var(--teal-ln)} .rc.qw{--ln:var(--gold-edge)}
+
+  /* goal / kpi / observe */
+  .gko{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .gcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px}
+  .gcard.goal{border-left:4px solid var(--green-ln)} .gcard.kpis{border-left:4px solid var(--blue-ln)} .gcard.observe{border-left:4px solid var(--teal-ln)}
+  .gcard h3{font-family:var(--disp);font-weight:700;font-size:15px;margin:0 0 3px;color:var(--ink)}
+  .gcard .gd{font-size:11.5px;color:var(--ink-3);margin:0 0 10px}
+  .gcard ol,.gcard ul{margin:0;padding-left:17px} .gcard li{font-size:12.5px;color:var(--ink-2);margin:4px 0}
+  .gcard li b{color:var(--ink)}
+  .kpilev{background:var(--panel-2);border:1px solid var(--line-2);border-radius:var(--r-sm);padding:9px 11px;margin-bottom:8px}
+  .kpilev .lv{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-radius:5px;padding:2px 7px;margin-right:6px}
+  .kpilev.l1 .lv{background:var(--green-bg);color:var(--green-ink)} .kpilev.l2 .lv{background:var(--blue-bg);color:var(--blue-ink)}
+  .kpilev b{font-size:12.5px;color:var(--ink)}
+  .kpilev p{margin:5px 0 0;font-size:11.5px;color:var(--ink-2)}
+  .allnote{margin-top:10px;font-size:11.5px;color:var(--ink-3);background:var(--green-bg);border-radius:var(--r-sm);padding:8px 11px;color:var(--green-ink)}
+
+  /* tier ladder table */
+  .mtx-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel)}
+  table.mtx{border-collapse:collapse;width:100%;min-width:760px;font-size:12.5px}
+  table.mtx th,table.mtx td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.mtx thead th{background:var(--panel-2);font-family:var(--disp);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);border-bottom:1px solid var(--line-2)}
+  table.mtx tr:last-child td{border-bottom:none}
+  table.mtx .tier{font-family:var(--disp);font-weight:700;white-space:nowrap}
+  .tchip{display:inline-block;font-size:11px;font-weight:700;border-radius:6px;padding:2px 9px}
+  .tchip.silver{background:var(--panel-2);color:var(--ink);border:1px solid var(--line-2)}
+  .tchip.gold{background:var(--amber-bg);color:var(--amber-ink)}
+  .tchip.diamond{background:var(--blue-bg);color:var(--blue-ink)}
+  .tchip.platinum{background:var(--violet-bg);color:var(--violet-ink)}
+  .lvtag{display:inline-block;font-size:10px;font-weight:700;border-radius:5px;padding:1px 7px}
+  .lvtag.l1{background:var(--green-bg);color:var(--green-ink)} .lvtag.l2{background:var(--blue-bg);color:var(--blue-ink)}
+
+  .cards3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .scard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-sm);padding:13px 15px}
+  .scard h4{margin:0 0 6px;font-size:13px;font-family:var(--disp);color:var(--ink)}
+  .scard .tag{font-size:10px;font-weight:700;border-radius:5px;padding:1px 7px;margin-left:6px}
+  .scard p{font-size:12px;color:var(--ink-2);margin:0 0 6px}
+  .scard ul{margin:0;padding-left:16px} .scard li{font-size:11.5px;color:var(--ink-2);margin:2px 0}
+
+  .foot{margin-top:30px;font-size:12px;color:var(--ink-3);background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:13px 16px}
+
+  @media (max-width:900px){ .result{grid-template-columns:1fr 1fr} .gko{grid-template-columns:1fr} .cards3{grid-template-columns:1fr} .prow{grid-template-columns:1fr} }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-claude" viewBox="0 0 24 24"><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z" fill="#D97757" fill-rule="nonzero"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 13.5a4 4 0 005.657 0l2.122-2.122a4 4 0 00-5.657-5.657l-1 1"/><path d="M14.5 10.5a4 4 0 00-5.657 0L6.72 12.62a4 4 0 005.657 5.657l1-1"/></symbol>
+</defs></svg>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Project Setup</h1>
+    <p class="sub">The three inputs you pick when a project starts. The <b>Goal is the same for every client</b>; the <b>KPI, effort, what AI can do, and the quick-win focus change</b> with the tier, the automation level and how strong the brand / website already is.</p>
+    <nav class="nav">
+      <a href="./index.html"><svg class="ic"><use href="#i-claude"/></svg> Overview</a>
+      <a href="./pipeline-board.html">Pipeline · general</a>
+      <a href="./pipeline-hospitality.html">Pipeline · hospitality</a>
+      <a class="here" href="./project-setup.html">Project setup</a>
+      <a href="./skill-map.html"><svg class="ic"><use href="#i-plug"/></svg> Skill &amp; Connector map</a>
+    </nav>
+  </header>
+
+  <!-- INTERACTIVE PICKER -->
+  <div class="sechd"><h2>Pick the inputs</h2><span class="note">Tap a choice in each row — the panel below updates.</span></div>
+  <div class="picker">
+    <div class="prow">
+      <div class="plabel">Customer tier<span>effort &amp; workstreams</span></div>
+      <div class="opts" data-group="tier">
+        <span class="opt t-silver" data-val="silver" aria-pressed="true">Silver</span>
+        <span class="opt t-gold" data-val="gold" aria-pressed="false">Gold</span>
+        <span class="opt t-diamond" data-val="diamond" aria-pressed="false">Diamond</span>
+        <span class="opt t-platinum" data-val="platinum" aria-pressed="false">Platinum</span>
+      </div>
+    </div>
+    <div class="prow">
+      <div class="plabel">Brand / website strength<span>new vs established</span></div>
+      <div class="opts" data-group="brand">
+        <span class="opt" data-val="new" aria-pressed="true">New &amp; weak</span>
+        <span class="opt" data-val="growing" aria-pressed="false">Growing</span>
+        <span class="opt" data-val="strong" aria-pressed="false">Established &amp; strong</span>
+      </div>
+    </div>
+    <div class="prow">
+      <div class="plabel">Automation level<span>how far Claude acts</span></div>
+      <div class="opts" data-group="auto">
+        <span class="opt" data-val="none" aria-pressed="true">cms: none</span>
+        <span class="opt" data-val="limited" aria-pressed="false">cms: limited</span>
+        <span class="opt" data-val="full" aria-pressed="false">cms: full</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="result" id="result">
+    <div class="rc kpi"><h4>KPI level</h4><div class="big" id="r-kpi"></div></div>
+    <div class="rc effort"><h4>Effort &amp; workstreams</h4><div class="big" id="r-effort"></div></div>
+    <div class="rc auto"><h4>What AI can do</h4><div id="r-auto"></div></div>
+    <div class="rc qw"><h4>Quick-win focus</h4><div id="r-qw"></div></div>
+  </div>
+
+  <!-- GOAL / KPI / OBSERVE -->
+  <div class="sechd"><h2>Goal · KPI · Observe</h2><span class="note">Goal is shared; KPI has two levels; Observe metrics are the leading signals we watch.</span></div>
+  <div class="gko">
+    <div class="gcard goal">
+      <h3>Goal</h3>
+      <p class="gd">Same for every client — the business outcome.</p>
+      <ul>
+        <li><b>Lead</b> — direct booking, revenue</li>
+        <li><b>Lead pipeline</b> — book-now clicks, contact-us, enquiries</li>
+      </ul>
+      <div class="allnote">Every tier is driving the same goal. Only the <b>KPI bar</b> and the <b>effort</b> to clear it differ.</div>
+    </div>
+    <div class="gcard kpis">
+      <h3>KPI</h3>
+      <p class="gd">Two levels. Higher tiers must clear the higher bar.</p>
+      <div class="kpilev l1">
+        <span class="lv">Level 1</span><b>Growth baseline</b>
+        <p>Every tracked metric trends up; Organic + AI traffic targets met.</p>
+      </div>
+      <div class="kpilev l2">
+        <span class="lv">Level 2</span><b>+ Visibility</b>
+        <p>Plus keyword ranking &amp; AI Visibility targets met.</p>
+      </div>
+    </div>
+    <div class="gcard observe">
+      <h3>Observe</h3>
+      <p class="gd">Leading signals we watch between KPI checkpoints.</p>
+      <ul>
+        <li>Branded clicks</li>
+        <li>Total keyword ranking improvement</li>
+        <li>GBP impressions &amp; interactions</li>
+        <li>GSC impressions</li>
+        <li>Direct traffic</li>
+        <li>Revenue-page traffic</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TIER LADDER -->
+  <div class="sechd"><h2>Tier ladder</h2><span class="note">Same goal, climbing KPI &amp; effort. KPI level in the second column.</span></div>
+  <div class="mtx-wrap">
+    <table class="mtx">
+      <thead><tr><th>Tier</th><th>KPI level</th><th>Effort</th><th>Workstreams on</th><th>GEO depth</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="tier"><span class="tchip silver">Silver</span></td>
+          <td><span class="lvtag l1">Level 1</span></td>
+          <td>Low — content + on-page</td>
+          <td>Monthly blog · basic on-page for Service pages · internal links</td>
+          <td>Extractable content (answer chunks, entities)</td>
+        </tr>
+        <tr>
+          <td class="tier"><span class="tchip gold">Gold</span></td>
+          <td><span class="lvtag l1">Level 1</span> <span style="color:var(--ink-3);font-size:11px">+ leads tracked</span></td>
+          <td>Medium</td>
+          <td>+ deeper on-page · basic technical · GBP / local · proactive internal links</td>
+          <td>+ llms.txt · basic prompt coverage</td>
+        </tr>
+        <tr>
+          <td class="tier"><span class="tchip diamond">Diamond</span></td>
+          <td><span class="lvtag l2">Level 2</span></td>
+          <td>High</td>
+          <td>+ CRO · off-page / authority · full GTM tracking · GEO visibility</td>
+          <td>+ prompt-set tests · AI citation tracking</td>
+        </tr>
+        <tr>
+          <td class="tier"><span class="tchip platinum">Platinum</span></td>
+          <td><span class="lvtag l2">Level 2</span> <span style="color:var(--ink-3);font-size:11px">+ full-funnel</span></td>
+          <td>Highest</td>
+          <td>Everything + UX/UI audit · AI conversion</td>
+          <td>Full: visibility + citation + conversion</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11.5px;color:var(--ink-3);margin:9px 2px 0">Must-hit for every tier: organic traffic ↑ · AI sessions ↑ · tracked metrics ↑. Nice-to-have: leads · booking · AI leads. The nice-to-have becomes must-hit as the tier climbs.</p>
+
+  <!-- BRAND STRENGTH -->
+  <div class="sechd"><h2>Brand / website strength</h2><span class="note">A new brand on a new site needs more effort, and ranking + KPI arrive on a longer timeline — so the quick wins differ too.</span></div>
+  <div class="cards3">
+    <div class="scard">
+      <h4>New &amp; weak<span class="tag" style="background:var(--coral-bg);color:var(--coral-ink)">most effort</span></h4>
+      <p>Low authority, thin index, little brand search. Rankings take longer; KPI timeline is longer.</p>
+      <ul>
+        <li>Quick wins: indexation, core money pages, GBP setup, brand-SERP ownership</li>
+        <li>Heavier content velocity + technical foundation</li>
+        <li>Expect slower ranking; lead first on traffic + branded signals</li>
+      </ul>
+    </div>
+    <div class="scard">
+      <h4>Growing<span class="tag" style="background:var(--amber-bg);color:var(--amber-ink)">medium</span></h4>
+      <p>Some authority and index coverage; a few pages ranking.</p>
+      <ul>
+        <li>Quick wins: striking-distance keywords, on-page, content-gap fills</li>
+        <li>Balance new content with optimising what exists</li>
+        <li>Ranking + AI visibility start to move within the quarter</li>
+      </ul>
+    </div>
+    <div class="scard">
+      <h4>Established &amp; strong<span class="tag" style="background:var(--green-bg);color:var(--green-ink)">least effort</span></h4>
+      <p>High authority, broad index, strong brand search.</p>
+      <ul>
+        <li>Quick wins: cannibalisation, CTR rewrites, CRO, defend &amp; expand</li>
+        <li>Lean into topical coverage + GEO citation</li>
+        <li>Faster ranking; push straight for Level 2 KPI</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="foot">
+    These inputs live in <code>project/config.yaml</code> (<code>tier</code>, <code>access</code>) and the brand pack. <code>/quick-win</code> and <code>/task-plan</code> read them to rank by the tier's must-hit KPI and the brand's starting strength. The pipeline that executes them: <a href="./pipeline-board.html">general</a> · <a href="./pipeline-hospitality.html">hospitality</a>.
+  </div>
+</div>
+
+<script>
+(function(){
+  var DATA = {
+    tier: {
+      silver:   { kpi:"Level 1", kpiSub:"Growth baseline", effort:"Low", effortSub:"Blog content + basic on-page for Service pages + internal links", geo:"Extractable content" },
+      gold:     { kpi:"Level 1", kpiSub:"Growth baseline + leads tracked", effort:"Medium", effortSub:"+ deeper on-page, basic technical, GBP/local, proactive internal links", geo:"+ llms.txt, basic prompt coverage" },
+      diamond:  { kpi:"Level 2", kpiSub:"Growth + ranking & AI visibility", effort:"High", effortSub:"+ CRO, off-page/authority, full GTM tracking, GEO visibility", geo:"+ prompt-set tests, AI citation" },
+      platinum: { kpi:"Level 2", kpiSub:"Growth + visibility, full-funnel", effort:"Highest", effortSub:"Everything + UX/UI audit, AI conversion", geo:"Full: visibility + citation + conversion" }
+    },
+    brand: {
+      "new":     { qw:["Indexation + core money pages","GBP setup + brand SERP","Heavier content velocity"], note:"longer ranking + KPI timeline" },
+      "growing": { qw:["Striking-distance keywords","On-page + content-gap fills","Balance new vs optimise"], note:"ranking moves within the quarter" },
+      "strong":  { qw:["Cannibalisation + CTR rewrites","CRO + defend & expand","Topical coverage + GEO citation"], note:"faster ranking, push to Level 2" }
+    },
+    auto: {
+      "none":    ["Claude hands deliverables; the team applies them","No production changes — drafts, audits, reports, file templates"],
+      "limited": ["Claude edits allowed areas (e.g. blog)","Imports GTM / applies on-page where permitted"],
+      "full":    ["Claude edits / patches the site directly","Publishes on-page & applies tracking (within gates)"]
+    }
+  };
+  var sel = { tier:"silver", brand:"new", auto:"none" };
+  function esc(s){ return String(s).replace(/[&<>]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c]; }); }
+  function render(){
+    var t = DATA.tier[sel.tier], b = DATA.brand[sel.brand], a = DATA.auto[sel.auto];
+    document.getElementById("r-kpi").innerHTML = esc(t.kpi) + "<small>" + esc(t.kpiSub) + "</small>";
+    document.getElementById("r-effort").innerHTML = esc(t.effort) + "<small>" + esc(t.effortSub) + "</small>";
+    document.getElementById("r-auto").innerHTML = "<ul><li>" + a.map(esc).join("</li><li>") + "</li></ul>";
+    document.getElementById("r-qw").innerHTML = "<ul><li>" + b.qw.map(esc).join("</li><li>") + "</li></ul><small style='display:block;font-size:11px;color:var(--ink-3);margin-top:5px'>" + esc(b.note) + "</small>";
+  }
+  document.querySelectorAll(".opts").forEach(function(group){
+    var key = group.getAttribute("data-group");
+    group.addEventListener("click", function(e){
+      var opt = e.target.closest(".opt"); if(!opt) return;
+      sel[key] = opt.getAttribute("data-val");
+      group.querySelectorAll(".opt").forEach(function(o){ o.setAttribute("aria-pressed", o===opt ? "true":"false"); });
+      render();
+    });
+  });
+  render();
+})();
+</script>
+</body>
+</html>
