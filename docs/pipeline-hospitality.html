@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SEO/GEO Pipeline · Hospitality</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Heads On Pillows SEO/GEO pipeline tuned for hospitality (hotels, resorts, cruises). Same P01–P07 frame with a hospitality overlay: GBP/local, booking conversion, room/dining/travel-guide content, seasonality, OTA competitors.">
+<link rel="canonical" href="./pipeline-hospitality.html">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+  :root{
+    --bg:#f3f4f2; --panel:#ffffff; --panel-2:#fafaf8; --ink:#24262b; --ink-2:#565a63; --ink-3:#8a8e97;
+    --line:#e3e4e0; --line-2:#d2d4cf;
+    --blue-bg:#e6f1fb; --blue-ink:#0c447c; --blue-ln:#378add;
+    --purple-bg:#eeedfe; --purple-ink:#3c3489; --purple-ln:#7f77dd;
+    --green-bg:#eaf3de; --green-ink:#27500a; --green-ln:#639922;
+    --amber-bg:#faeeda; --amber-ink:#633806; --amber-ln:#ba7517;
+    --teal-bg:#e1f5ee; --teal-ink:#085041; --teal-ln:#1d9e75;
+    --pink-bg:#fbeaf0; --pink-ink:#72243e; --pink-ln:#d4537e;
+    --violet-bg:#efeafe; --violet-ink:#4b2e86; --violet-ln:#8b63d4;
+    --coral-bg:#faece7; --coral-ink:#712b13; --coral-ln:#d85a30;
+    --gold:#f6c343; --gold-ink:#5a3d00; --gold-edge:#b8860b;
+    --radius:12px; --r-sm:8px;
+    --sans:"Inter",system-ui,sans-serif; --disp:"Space Grotesk",var(--sans);
+  }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+    --bg:#15171a; --panel:#1e2024; --panel-2:#23262b; --ink:#e7e8e4; --ink-2:#aab0b8; --ink-3:#7c818b;
+    --line:#2e3238; --line-2:#3a3f46;
+    --blue-bg:#13314e; --blue-ink:#9fc6f2; --blue-ln:#4f93d8;
+    --purple-bg:#2a2555; --purple-ink:#c3bdf2; --purple-ln:#8d85e0;
+    --green-bg:#223616; --green-ink:#bcdd92; --green-ln:#79ad3f;
+    --amber-bg:#3e2c10; --amber-ink:#f3c683; --amber-ln:#c98f33;
+    --teal-bg:#0f352c; --teal-ink:#8fe0c6; --teal-ln:#2fab82;
+    --pink-bg:#3c1b28; --pink-ink:#eda9c0; --pink-ln:#d4679a;
+    --violet-bg:#2c2152; --violet-ink:#cbb8f2; --violet-ln:#9b79da;
+    --coral-bg:#3a1d12; --coral-ink:#e8a98f; --coral-ln:#d8713f;
+    --gold:#caa032; --gold-ink:#ffe9b0; --gold-edge:#e0b84a;
+    color-scheme:dark;
+  }}
+  :root[data-theme="dark"]{
+    --bg:#15171a; --panel:#1e2024; --panel-2:#23262b; --ink:#e7e8e4; --ink-2:#aab0b8; --ink-3:#7c818b;
+    --line:#2e3238; --line-2:#3a3f46;
+    --blue-bg:#13314e; --blue-ink:#9fc6f2; --blue-ln:#4f93d8;
+    --purple-bg:#2a2555; --purple-ink:#c3bdf2; --purple-ln:#8d85e0;
+    --green-bg:#223616; --green-ink:#bcdd92; --green-ln:#79ad3f;
+    --amber-bg:#3e2c10; --amber-ink:#f3c683; --amber-ln:#c98f33;
+    --teal-bg:#0f352c; --teal-ink:#8fe0c6; --teal-ln:#2fab82;
+    --pink-bg:#3c1b28; --pink-ink:#eda9c0; --pink-ln:#d4679a;
+    --violet-bg:#2c2152; --violet-ink:#cbb8f2; --violet-ln:#9b79da;
+    --coral-bg:#3a1d12; --coral-ink:#e8a98f; --coral-ln:#d8713f;
+    --gold:#caa032; --gold-ink:#ffe9b0; --gold-edge:#e0b84a;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;margin:0}
+  .wrap{max-width:1320px;margin:0 auto;padding-block:28px 56px;
+    padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+  h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,4.4vw,40px);letter-spacing:-.02em;margin:0;text-wrap:balance}
+  .sub{color:var(--ink-2);margin:6px 0 0;max-width:74ch;font-size:14px}
+  h2{font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin:0}
+  a{color:var(--blue-ln)}
+  code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;background:var(--panel-2);padding:1px 5px;border-radius:5px;border:1px solid var(--line)}
+  .ic{width:15px;height:15px;display:inline-block;vertical-align:-2px}
+  .mi{width:13px;height:13px;display:inline-block;vertical-align:-2px;margin-right:1px}
+
+  /* nav */
+  .nav{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+  .nav a{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;text-decoration:none;
+    background:var(--panel);border:1px solid var(--line-2);border-radius:999px;padding:6px 13px;color:var(--ink-2)}
+  .nav a:hover{border-color:var(--blue-ln);color:var(--ink)}
+  .nav a.here{background:var(--blue-bg);border-color:var(--blue-ln);color:var(--blue-ink)}
+
+  .parthd{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:40px 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-2)}
+  .parthd .note{font-size:12.5px;color:var(--ink-3)}
+  .seclabel{margin-top:18px;font-family:var(--disp);font-weight:600;font-size:13px;color:var(--ink-2)}
+  .seclabel span{font-weight:400;color:var(--ink-3)}
+
+  /* capability legend */
+  .caplegend{margin-top:16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;display:flex;flex-wrap:wrap;gap:10px 22px;align-items:flex-start}
+  .caplegend h3{font-family:var(--disp);font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin:0;width:100%}
+  .legitem{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-2)}
+  .legitem b{color:var(--ink);font-weight:600}
+  .states{display:flex;gap:12px;flex-wrap:wrap;width:100%;margin-top:2px;padding-top:9px;border-top:1px dashed var(--line);font-size:11.5px;color:var(--ink-3)}
+  .states span{display:inline-flex;align-items:center;gap:6px}
+  .dotc{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .dotc.on{background:var(--green-ln)} .dotc.part{background:var(--amber-ln)} .dotc.off{background:var(--line-2)}
+
+  /* capability chips on cards */
+  .caps{display:flex;gap:5px;flex-wrap:wrap;margin-top:2px}
+  .cap{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;padding:3px 7px;border-radius:7px;border:1px solid var(--line-2);background:var(--panel-2);color:var(--ink-3)}
+  .cap .ic{width:12px;height:12px}
+  .cap.on{background:var(--green-bg);border-color:var(--green-ln);color:var(--green-ink)}
+  .cap.part{background:var(--amber-bg);border-color:var(--amber-ln);color:var(--amber-ink);border-style:dashed}
+  .cap.off{opacity:.5}
+
+  /* pointer to setup */
+  .ptr{margin-top:12px;display:flex;gap:9px;align-items:center;flex-wrap:wrap;background:var(--violet-bg);border:1px solid var(--violet-ln);border-radius:var(--radius);padding:11px 15px;font-size:12.5px;color:var(--violet-ink)}
+  .ptr a{color:var(--violet-ink);font-weight:600}
+
+  /* handover */
+  .handover{margin-top:16px;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--ink-3);border-radius:var(--radius);padding:14px 16px;display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center}
+  .handover .ttl{font-family:var(--disp);font-weight:600;font-size:14px;display:flex;flex-direction:column}
+  .handover .ttl span{font-weight:400;font-size:11.5px;color:var(--ink-3);margin-top:2px}
+  .hsteps{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+
+  /* track + stages */
+  .track{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding:16px 2px 8px;scrollbar-width:thin}
+  .start{flex:0 0 auto;align-self:center;font-family:var(--disp);font-weight:600;font-size:12px;color:var(--ink-3);text-align:center;line-height:1.3;padding:0 4px}
+  .cv{flex:0 0 auto;align-self:center;width:40px;height:34px;color:var(--line-2)}
+  .cv.lg{width:52px}
+  .stage{flex:0 0 232px;background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--ln,var(--ink-3));border-radius:var(--radius);padding:0;display:flex;flex-direction:column}
+  .stage.wide{flex-basis:300px}
+  .edge-blue{--ln:var(--blue-ln)} .edge-purple{--ln:var(--purple-ln)} .edge-green{--ln:var(--green-ln)} .edge-amber{--ln:var(--amber-ln)}
+  .stage-hd{padding:11px 14px 8px}
+  .stage-hd .code{font-family:var(--disp);font-weight:600;font-size:13px;color:var(--ink)}
+  .stage-bd{padding:0 14px 13px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .kv{display:grid;grid-template-columns:52px 1fr;gap:8px;font-size:12px}
+  .kv .k{color:var(--ink-3);font-weight:600;font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;padding-top:1px}
+  .kv .v{color:var(--ink-2)}
+  .divline{height:1px;background:var(--line);margin:2px 0}
+  .subflow{display:flex;flex-wrap:wrap;align-items:center;gap:5px 4px}
+  .sstep{background:var(--panel-2);border:1px solid var(--line-2);border-radius:7px;padding:5px 8px;font-size:11px;line-height:1.25;display:flex;flex-direction:column;min-width:0}
+  .sstep b{font-weight:600;color:var(--ink);font-size:11.5px}
+  .sstep span{color:var(--ink-3);font-size:10px}
+  .mini-arrow{color:var(--ink-3);font-size:11px}
+
+  /* P04f band */
+  .band{margin:22px 0 6px;background:linear-gradient(180deg,var(--amber-bg),var(--panel));border:1px solid var(--gold-edge);border-radius:16px;padding:16px 18px;box-shadow:0 1px 0 var(--gold) inset}
+  .band-hd{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+  .newpill{font-family:var(--disp);font-weight:700;font-size:10px;letter-spacing:.1em;background:var(--gold);color:var(--gold-ink);border-radius:6px;padding:3px 8px}
+  .star{font-family:var(--disp);font-weight:700;font-size:17px;color:var(--ink)}
+  .band-sub{flex:1 1 300px;font-size:12px;color:var(--ink-2);min-width:220px}
+  .band-bd{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+  .col h4{margin:0 0 7px;font-size:12.5px;font-family:var(--disp);color:var(--ink)}
+  .tagq,.tags{font-size:10px;font-weight:700;letter-spacing:.05em;border-radius:5px;padding:2px 6px;margin-right:6px}
+  .tagq{background:var(--green-bg);color:var(--green-ink)} .tags{background:var(--blue-bg);color:var(--blue-ink)}
+  .items{margin:0;padding-left:16px} .items li{font-size:12px;color:var(--ink-2);margin:3px 0}
+  .col+.col{border-left:1px solid var(--line);padding-left:16px}
+  .band-ft{margin-top:12px;padding-top:10px;border-top:1px dashed var(--gold-edge)}
+
+  /* tracking stack */
+  .tstack{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+  .tcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 13px}
+  .tcard .tn{font-weight:600;font-size:13px;color:var(--ink)}
+  .tcard .tr{font-size:11.5px;color:var(--ink-2);margin-top:4px}
+  .tcard .tt{display:inline-block;margin-top:8px;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border-radius:5px;padding:2px 6px;background:var(--panel-2);border:1px solid var(--line-2);color:var(--ink-3)}
+  .tcard.conn .tt{background:var(--blue-bg);border-color:var(--blue-ln);color:var(--blue-ink)}
+  .tcard.ext .tt{background:var(--coral-bg);border-color:var(--coral-ln);color:var(--coral-ink)}
+
+  /* flow gate strip */
+  .flow-gate{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .flow-gate .st{background:var(--panel);border:1px solid var(--line-2);border-radius:999px;padding:5px 13px;font-size:12.5px;font-weight:500;color:var(--ink-2)}
+  .flow-gate .ar{color:var(--ink-3)}
+
+  /* lanes */
+  .lanes{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+  .lane{display:grid;grid-template-columns:200px 1fr;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:13px 15px}
+  .lane-hd{font-family:var(--disp);font-weight:600;font-size:13.5px;color:var(--ink);display:flex;flex-direction:column;gap:7px}
+  .lane-hd .mut{font-weight:400;font-size:11px;color:var(--ink-3)}
+  .lane-right{display:flex;flex-direction:column;gap:9px}
+  .lane-steps{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+
+  /* diagnosis */
+  .diag{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:10px}
+  .dcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-sm);padding:11px 12px}
+  .dcard h4{margin:0 0 3px;font-size:11px;font-family:var(--disp);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+  .dcard .meas{font-size:12.5px;font-weight:600;color:var(--ink);margin:0 0 7px}
+  .flowline{display:flex;flex-direction:column;gap:4px}
+  .fnode{font-size:11px;color:var(--ink-2);background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:5px 7px}
+  .fnode .yn{font-size:9px;font-weight:700;border-radius:4px;padding:1px 4px;margin-right:4px;background:var(--green-bg);color:var(--green-ink)}
+  .fnode .yn.no{background:var(--coral-bg);color:var(--coral-ink)}
+  .down{text-align:center;color:var(--ink-3);font-size:11px;line-height:1}
+
+  /* reports */
+  .reports{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}
+  .rcard{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--ln,var(--ink-3));border-radius:var(--radius);padding:14px 15px}
+  .rcard.r-int{--ln:var(--ink-3)} .rcard.r-mon{--ln:var(--teal-ln)} .rcard.r-exe{--ln:var(--violet-ln)}
+  .rcard .rh{font-family:var(--disp);font-weight:600;font-size:14px;color:var(--ink)}
+  .rcard .rc{font-size:11px;color:var(--ink-3);margin-top:1px}
+  .rcard ul{margin:9px 0 0;padding-left:16px} .rcard li{font-size:12px;color:var(--ink-2);margin:2px 0}
+  .rcard .src{margin-top:10px;font-size:11.5px;display:flex;align-items:center;gap:6px;color:var(--ink-2);padding-top:8px;border-top:1px dashed var(--line)}
+  .rcard .src b{color:var(--ink)}
+  .feed{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}
+  .feed .f{font-size:10.5px;font-weight:600;background:var(--blue-bg);color:var(--blue-ink);border-radius:6px;padding:2px 7px}
+
+  /* monthly loop */
+  .loop{margin-top:16px;background:var(--panel);border:1px dashed var(--line-2);border-radius:var(--radius);padding:15px 17px}
+  .loop-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;margin-top:4px}
+  .days{display:flex;flex-direction:column;gap:7px}
+  .day{display:grid;grid-template-columns:76px 1fr;gap:9px;align-items:center;font-size:12px}
+  .day .d{font-weight:600;color:var(--ink-3);font-size:11px}
+  .day .t{color:var(--ink-2)} .day .t b{color:var(--ink)}
+  .gates-col{display:flex;flex-direction:column;gap:7px}
+  .grow{display:flex;gap:9px;align-items:baseline;font-size:12px}
+  .grow .q{flex:0 0 118px;font-weight:600;color:var(--ink)}
+  .grow .ans{color:var(--ink-2)} .grow .ans b{color:var(--ink)}
+  .mini{font-size:9px;font-weight:700;border-radius:4px;padding:1px 5px;margin-right:5px}
+  .mini.ok{background:var(--green-bg);color:var(--green-ink)} .mini.warn{background:var(--amber-bg);color:var(--amber-ink)} .mini.bad{background:var(--coral-bg);color:var(--coral-ink)}
+
+  /* P07 + support */
+  .two{display:grid;grid-template-columns:1.3fr 1fr;gap:14px;margin-top:16px}
+  .pcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px;margin-top:10px}
+  .pcard .ph{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .pcard .ph .code{font-family:var(--disp);font-weight:600;font-size:13px;color:var(--ink)}
+  .pcard p{font-size:12px;color:var(--ink-2);margin:7px 0 8px}
+  .support aside{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px;margin-top:10px}
+  .support h4{margin:0 0 5px;font-size:13px;font-family:var(--disp);color:var(--ink)}
+  .support p{font-size:11.5px;color:var(--ink-2);margin:0 0 8px}
+  .onpurple{border-left:3px solid var(--purple-ln)} .oncoral{border-left:3px solid var(--coral-ln)}
+
+  .foot{margin-top:30px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px 18px;display:flex;flex-direction:column;gap:9px}
+  .rule{font-size:12px;color:var(--coral-ln);font-weight:600}
+  .repo-note{margin-top:14px;font-size:12px;color:var(--ink-3);display:flex;gap:9px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:12px 15px}
+
+  @media (max-width:980px){ .band-bd{grid-template-columns:1fr} .col+.col{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:12px}
+    .loop-grid{grid-template-columns:1fr} .two{grid-template-columns:1fr} .diag{grid-template-columns:1fr 1fr} .tstack{grid-template-columns:1fr 1fr} .reports{grid-template-columns:1fr} .ov-grid{grid-template-columns:1fr 1fr} }
+  @media (max-width:640px){ .lane{grid-template-columns:1fr} .handover{grid-template-columns:1fr} .diag{grid-template-columns:1fr} .tstack{grid-template-columns:1fr} .ov-grid{grid-template-columns:1fr} }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <marker id="ca" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M1 1 L8 5 L1 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd"><path d="M12 0c6.63 0 12 5.276 12 11.79-.001 5.067-3.29 9.567-8.175 11.187-.6.118-.825-.25-.825-.56 0-.398.015-1.665.015-3.242 0-1.105-.375-1.813-.81-2.181 2.67-.295 5.475-1.297 5.475-5.822 0-1.297-.465-2.344-1.23-3.169.12-.295.54-1.503-.12-3.125 0 0-1.005-.324-3.3 1.209a11.32 11.32 0 00-3-.398c-1.02 0-2.04.133-3 .398-2.295-1.518-3.3-1.209-3.3-1.209-.66 1.622-.24 2.83-.12 3.125-.765.825-1.23 1.887-1.23 3.169 0 4.51 2.79 5.527 5.46 5.822-.345.294-.66.81-.765 1.577-.69.31-2.415.81-3.495-.973-.225-.354-.9-1.223-1.845-1.209-1.005.015-.405.56.015.781.51.28 1.095 1.327 1.23 1.666.24.663 1.02 1.93 4.035 1.385 0 .988.015 1.916.015 2.196 0 .31-.225.664-.825.56C3.303 21.374-.003 16.867 0 11.791 0 5.276 5.37 0 12 0z"/></symbol>
+  <symbol id="i-claudecode" viewBox="0 0 24 24" fill="currentColor"><path clip-rule="evenodd" d="M20.998 10.949H24v3.102h-3v3.028h-1.487V20H18v-2.921h-1.487V20H15v-2.921H9V20H7.488v-2.921H6V20H4.487v-2.921H3V14.05H0V10.95h3V5h17.998v5.949zM6 10.949h1.488V8.102H6v2.847zm10.51 0H18V8.102h-1.49v2.847z"/></symbol>
+  <symbol id="i-claude" viewBox="0 0 24 24"><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z" fill="#D97757" fill-rule="nonzero"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 13.5a4 4 0 005.657 0l2.122-2.122a4 4 0 00-5.657-5.657l-1 1"/><path d="M14.5 10.5a4 4 0 00-5.657 0L6.72 12.62a4 4 0 005.657 5.657l1-1"/></symbol>
+</defs></svg>
+
+<div class="wrap">
+  <header>
+    <h1>SEO/GEO Pipeline · Hospitality</h1>
+    <p class="sub">The same P01→P07 process, tuned for Heads On Pillows' main industry — hotels, resorts and cruises. Same frame and the same capability icons as the <a href="./pipeline-board.html">general pipeline</a>; the <b>hospitality overlay</b> below says what gets emphasised at each stage.</p>
+    <nav class="nav">
+      <a href="./index.html"><svg class="ic"><use href="#i-claude"/></svg> Overview</a>
+      <a href="./pipeline-board.html"><svg class="ic"><use href="#i-claudecode"/></svg> Pipeline · general</a>
+      <a class="here" href="./pipeline-hospitality.html">Pipeline · hospitality</a>
+      <a href="./project-setup.html">Project setup</a>
+      <a href="./skill-map.html"><svg class="ic"><use href="#i-plug"/></svg> Skill &amp; Connector map</a>
+    </nav>
+  </header>
+
+  <!-- HOSPITALITY OVERLAY -->
+  <section style="margin-top:16px;background:linear-gradient(180deg,var(--teal-bg),var(--panel));border:1px solid var(--teal-ln);border-radius:var(--radius);padding:16px 18px">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:10px">
+      <span style="font-family:var(--disp);font-weight:700;font-size:10px;letter-spacing:.1em;background:var(--teal-ln);color:#fff;border-radius:6px;padding:3px 8px">OVERLAY</span>
+      <span style="font-family:var(--disp);font-weight:700;font-size:16px;color:var(--teal-ink)">What changes for hospitality</span>
+      <span style="flex:1 1 280px;font-size:12px;color:var(--ink-2);min-width:200px">Nothing is removed from the pipeline — these are the hospitality-specific emphases layered on top of each stage.</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px" class="ov-grid">
+      <div style="background:var(--panel);border:1px solid var(--line);border-radius:var(--r-sm);padding:11px 13px">
+        <div style="font-family:var(--disp);font-weight:600;font-size:12.5px;color:var(--ink)">P03 Research</div>
+        <div style="font-size:11.5px;color:var(--ink-2);margin-top:4px">OTA competitors (Booking · Agoda · Expedia) counted as real SERP rivals. Destination demand &amp; seasonality.</div>
+      </div>
+      <div style="background:var(--panel);border:1px solid var(--line);border-radius:var(--r-sm);padding:11px 13px">
+        <div style="font-family:var(--disp);font-weight:600;font-size:12.5px;color:var(--ink)">P04 Plan &amp; forecast</div>
+        <div style="font-size:11.5px;color:var(--ink-2);margin-top:4px">Infrastructure pages for room · dining · venue/MICE. High/low season baked into the forecast.</div>
+      </div>
+      <div style="background:var(--panel);border:1px solid var(--line);border-radius:var(--r-sm);padding:11px 13px">
+        <div style="font-family:var(--disp);font-weight:600;font-size:12.5px;color:var(--ink)">★ P04f Quick win</div>
+        <div style="font-size:11.5px;color:var(--ink-2);margin-top:4px">GBP / map pack, booking-page on-page, and programmatic "best hotel near X" · "things to do in X" templates.</div>
+      </div>
+      <div style="background:var(--panel);border:1px solid var(--line);border-radius:var(--r-sm);padding:11px 13px">
+        <div style="font-family:var(--disp);font-weight:600;font-size:12.5px;color:var(--ink)">P05 Content</div>
+        <div style="font-size:11.5px;color:var(--ink-2);margin-top:4px">Formats: room / product, dining outlet, venue, travel guide, things-to-do, best-time-to-visit, how-to-get-there.</div>
+      </div>
+      <div style="background:var(--panel);border:1px solid var(--line);border-radius:var(--r-sm);padding:11px 13px">
+        <div style="font-family:var(--disp);font-weight:600;font-size:12.5px;color:var(--ink)">P05 Off-page / Local</div>
+        <div style="font-size:11.5px;color:var(--ink-2);margin-top:4px">GBP posts, map-pack ranking, local citations &amp; NAP, review signals, OTA profile parity.</div>
+      </div>
+      <div style="background:var(--panel);border:1px solid var(--line);border-radius:var(--r-sm);padding:11px 13px">
+        <div style="font-family:var(--disp);font-weight:600;font-size:12.5px;color:var(--ink)">P05 Analytics · P07 CRO</div>
+        <div style="font-size:11.5px;color:var(--ink-2);margin-top:4px">Booking-engine conversion &amp; cross-domain tracking. CRO on the direct-booking funnel vs OTA leakage.</div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-size:11.5px;color:var(--teal-ink)">KPI accent: <b>direct bookings</b> and <b>booking-page / revenue-page traffic</b> weigh heavier than on a generic project.</div>
+  </section>
+
+  <!-- capability legend -->
+  <div class="caplegend">
+    <h3>What each stage needs — read the icons, not the names</h3>
+    <div class="legitem"><svg class="ic"><use href="#i-claudecode"/></svg> <b>Claude Code</b> can run it</div>
+    <div class="legitem"><svg class="ic"><use href="#i-claude"/></svg> needs a <b>Claude skill</b> (template · standard · process)</div>
+    <div class="legitem"><svg class="ic"><use href="#i-plug"/></svg> needs a <b>Connector</b> (reaches an app)</div>
+    <div class="legitem"><svg class="ic"><use href="#i-github"/></svg> needs <b>GitHub context</b> (brand, config, prior work)</div>
+    <div class="states">
+      <span><span class="dotc on"></span> needed / supported</span>
+      <span><span class="dotc part"></span> partial — or a human must finish</span>
+      <span><span class="dotc off"></span> not needed</span>
+      <span style="color:var(--ink-2)">e.g. writing content needs brand context; a fresh website audit usually does not.</span>
+    </div>
+  </div>
+
+  <div class="ptr">
+    <svg class="ic" style="color:var(--violet-ln)"><use href="#i-claude"/></svg>
+    <span>Before a project starts you pick <b>tier</b>, <b>automation level</b> and <b>brand / website strength</b> — these set the KPI, effort and what AI can do. They live on the <a href="./project-setup.html">Project setup dashboard</a>, not on this board.</span>
+  </div>
+
+  <!-- Handover -->
+  <div class="handover">
+    <div class="ttl">Handover<span>taking over a project</span></div>
+    <div>
+      <div class="hsteps">
+        <span class="sstep"><b>Handover from previous owner</b></span><span class="mini-arrow">→</span>
+        <span class="sstep"><b>Review existing plan</b></span><span class="mini-arrow">→</span>
+        <span class="sstep"><b>Review onboarding form</b></span><span class="mini-arrow">→</span>
+        <span class="sstep"><b>Catch-up with old PIC + AM/PM</b></span><span class="mini-arrow">↦ P01</span>
+      </div>
+      <div class="caps" style="margin-top:9px">
+        <span class="cap on"><svg class="ic"><use href="#i-claudecode"/></svg>Claude Code</span>
+        <span class="cap on"><svg class="ic"><use href="#i-claude"/></svg>Skill</span>
+        <span class="cap on"><svg class="ic"><use href="#i-plug"/></svg>Connector</span>
+        <span class="cap on"><svg class="ic"><use href="#i-github"/></svg>Context</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART A -->
+  <div class="parthd"><h2>Part A · Diagnose &amp; Plan</h2><span class="note">Build the evidence, lock the plan, decide what wins — stored in the repo &amp; Masterfile.</span></div>
+
+  <div class="track">
+    <div class="start">New project /<br>new client</div>
+    <svg class="cv" viewBox="0 0 44 38" fill="none" aria-hidden="true"><path d="M3 12 C 20 12, 24 26, 40 26" stroke="currentColor" stroke-width="1.6" marker-end="url(#ca)"/></svg>
+
+    <article class="stage edge-blue">
+      <div class="stage-hd"><span class="code">P01 · Onboarding</span></div>
+      <div class="stage-bd">
+        <div class="kv"><span class="k">In</span><span class="v">Completed client onboarding form</span></div>
+        <div class="kv"><span class="k">Out</span><span class="v">Config + brand pack; form confirmed by AM/PM</span></div>
+        <div class="divline"></div>
+        <div class="caps">
+          <span class="cap on"><svg class="ic"><use href="#i-claudecode"/></svg>Claude Code</span>
+          <span class="cap on"><svg class="ic"><use href="#i-claude"/></svg>Skill</span>
+          <span class="cap on"><svg class="ic"><use href="#i-plug"/></svg>Connector</span>
+          <span class="cap on"><svg class="ic"><use href="#i-github"/></svg>Context</span>
+        </div>
+      </div>
+    </article>
+    <svg class="cv" viewBox="0 0 44 38" fill="none" aria-hidden="true"><path d="M3 19 C 18 19, 26 19, 40 19" stroke="currentColor" stroke-width="1.6" marker-end="url(#ca)"/></svg>
+
+    <article class="stage edge-purple">
+      <div class="stage-hd"><span class="code">P02 · Access &amp; Tracking</span></div>
+      <div class="stage-bd">
+        <div class="kv"><span class="k">In</span><span class="v">Onboarding form; if missing → P01, contact AM/PM</span></div>
+        <div class="kv"><span class="k">Out</span><span class="v">Access &amp; tracking checked (GA4·GSC·GTM·CMS·GBP·booking); gaps flagged</span></div>
+        <div class="divline"></div>
+        <div class="caps">
+          <span class="cap on"><svg class="ic"><use href="#i-claudecode"/></svg>Claude Code</span>
+          <span class="cap on"><svg class="ic"><use href="#i-claude"/></svg>Skill</span>
+          <span class="cap on"><svg class="ic"><use href="#i-plug"/></svg>Connector</span>
+          <span class="cap off"><svg class="ic"><use href="#i-github"/></svg>Context</span>
+        </div>
+      </div>
+    </article>
+    <svg class="cv" viewBox="0 0 44 38" fill="none" aria-hidden="true"><path d="M3 19 C 18 19, 26 19, 40 19" stroke="currentColor" stroke-width="1.6" marker-end="url(#ca)"/></svg>
+
+    <article class="stage edge-green">
+      <div class="stage-hd"><span class="code">P03 · Research</span></div>
+      <div class="stage-bd">
+        <div class="kv"><span class="k">In</span><span class="v">Market &amp; competitor info from onboarding</span></div>
+        <div class="kv"><span class="k">Out</span><span class="v">Foundation + read on trends, business &amp; SEO competitors</span></div>
+        <div class="divline"></div>
+        <div class="caps">
+          <span class="cap on"><svg class="ic"><use href="#i-claudecode"/></svg>Claude Code</span>
+          <span class="cap on"><svg class="ic"><use href="#i-claude"/></svg>Skill</span>
+          <span class="cap on"><svg class="ic"><use href="#i-plug"/></svg>Connector</span>
+          <span class="cap on"><svg class="ic"><use href="#i-github"/></svg>Context</span>
+        </div>
+      </div>
+    </article>
+    <svg class="cv lg" viewBox="0 0 60 38" fill="none" aria-hidden="true"><path d="M3 19 C 26 19, 36 19, 56 19" stroke="currentColor" stroke-width="1.6" marker-end="url(#ca)"/></svg>
+
+    <article class="stage wide edge-amber">
+      <div class="stage-hd"><span class="code">P04 · SEO/GEO Plan</span></div>
+      <div class="stage-bd">
+        <div class="subflow">
+          <div class="sstep"><b>P04a</b><span>Problem patterns</span></div><span class="mini-arrow">→</span>
+          <div class="sstep"><b>P04b</b><span>Keywords + prompts</span></div><span class="mini-arrow">→</span>
+          <div class="sstep"><b>P04c</b><span>Content plan · 6 mo+</span></div><span class="mini-arrow">→</span>
+          <div class="sstep"><b>P04d</b><span>Technical baseline</span></div><span class="mini-arrow">→</span>
+          <div class="sstep"><b>P04e</b><span>Complete plan</span></div>
+        </div>
+        <div class="kv"><span class="k">Out</span><span class="v">SEO/GEO plan sent via AM/PM → meeting → revise loop → client-approved</span></div>
+        <div class="divline"></div>
+        <div class="caps">
+          <span class="cap on"><svg class="ic"><use href="#i-claudecode"/></svg>Claude Code</span>
+          <span class="cap on"><svg class="ic"><use href="#i-claude"/></svg>Skill</span>
+          <span class="cap on"><svg class="ic"><use href="#i-plug"/></svg>Connector</span>
+          <span class="cap on"><svg class="ic"><use href="#i-github"/></svg>Context</span>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- Tracking stack (set up on a new project) -->
+  <div class="seclabel">Tracking stack <span>· wire these up when a project starts, so every report and KPI has a source</span></div>
+  <div class="tstack">
+    <div class="tcard conn"><div class="tn">Agency Analytics</div><div class="tr">GA4 / GSC numbers + the monthly client report.</div><span class="tt">Connector · Monthly report</span></div>
+    <div class="tcard conn"><div class="tn">SE Ranking</div><div class="tr">Keyword ranking tracking + audit.</div><span class="tt">Connector · Ranking</span></div>
+    <div class="tcard ext"><div class="tn">INGENTICS</div><div class="tr">Prompt tracking &amp; AI Visibility (GEO).</div><span class="tt">External tool</span></div>
+    <div class="tcard ext"><div class="tn">SEO Console</div><div class="tr">One place for combined numbers, tasks &amp; project insight.</div><span class="tt">External tool</span></div>
+  </div>
+
+  <!-- P04f band -->
+  <section class="band" aria-label="P04f Quick Win and Win Strategy">
+    <div class="band-hd">
+      <span class="newpill">PIVOTAL</span>
+      <span class="star">★ P04f · Quick Win &amp; Win Strategy</span>
+      <span class="band-sub">The plan says <em>what</em> to do; this decides <em>what to do first</em> for fast results, and the <em>strategy to win</em> — hit KPI and drive bookings, submits, purchases, revenue.</span>
+    </div>
+    <div class="band-bd">
+      <div class="col">
+        <h4><span class="tagq">A · DO FIRST</span> Quick wins (high impact, low effort)</h4>
+        <ul class="items">
+          <li><b>Keyword cannibalisation</b> — merge/route competing URLs, pick the money page</li>
+          <li><b>Striking distance</b> — positions 5–20 with intent, push into the top 3</li>
+          <li><b>Money-page on-page</b> — fix title/H1/meta/schema/CTA on service &amp; booking pages</li>
+          <li><b>Technical quick-fix</b> — index blockers, speed, missing schema on revenue pages</li>
+          <li><b>GBP / local</b> — complete profile, posts, fix NAP</li>
+          <li><b>CTR rewrite</b> — top-10 pages with weak CTR → sharper title/meta</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h4><span class="tags">B · WIN</span> Winning strategy (path to KPI + revenue)</h4>
+        <ul class="items">
+          <li><b>Topical coverage</b> — own the whole problem-pattern cluster</li>
+          <li><b>Template / programmatic</b> — best-time-to-visit, food guide, best-hotel-near-X at scale</li>
+          <li><b>Local SEO</b> — GBP, local landing pages, reviews, map pack</li>
+          <li><b>Backlinks / authority</b> — digital PR, lift GEO citations</li>
+          <li><b>GEO coverage</b> — answer chunks, entities, proof so AI search cites you</li>
+          <li><b>CRO</b> — turn traffic into booking / submit / purchase</li>
+        </ul>
+      </div>
+    </div>
+    <div class="band-ft">
+      <div class="caps">
+        <span class="cap on"><svg class="ic"><use href="#i-claudecode"/></svg>Claude Code</span>
+        <span class="cap on"><svg class="ic"><use href="#i-claude"/></svg>Skill</span>
+        <span class="cap on"><svg class="ic"><use href="#i-plug"/></svg>Connector</span>
+        <span class="cap on"><svg class="ic"><use href="#i-github"/></svg>Context</span>
+        <span style="font-size:11.5px;color:var(--ink-3);margin-left:6px;align-self:center">Each pillar carries an <b style="color:var(--ink-2)">experiment</b>: hypothesis → test → win/lose metric → deadline.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PART B -->
+  <div class="parthd"><h2>Part B · Execute &amp; Measure</h2><span class="note">Technical &amp; money pages first, then the content cycle. Lanes run in parallel, in P04f priority. Re-audit quarterly.</span></div>
+
+  <div class="flow-gate" style="margin-top:14px">
+    <span class="st">Plan approved</span><span class="ar">→</span>
+    <span class="st">P05 Execution</span><span class="ar">→</span>
+    <span class="st">P06 Monitor &amp; Report</span><span class="ar">→</span>
+    <span class="st">P07 Convert &amp; Grow</span>
+  </div>
+
+  <!-- P05 lanes -->
+  <div class="seclabel">P05 · Execution — build by lane <span>· each lane shows what it needs to run</span></div>
+  <div class="lanes">
+    <div class="lane">
+      <div class="lane-hd">Technical &amp; on-page<span class="mut">do first</span></div>
+      <div class="lane-right">
+        <div class="lane-steps">
+          <span class="sstep"><b>Fix blockers</b></span><span class="mini-arrow">→</span>
+          <span class="sstep"><b>Optimise money pages</b></span><span class="mini-arrow">→</span>
+          <span class="sstep"><b>Internal links</b></span>
+        </div>
+        <div class="caps">
+          <span class="cap on"><svg class="ic"><use href="#i-claudecode"/></svg>Claude Code</span>
+          <span class="cap on"><svg class="ic"><use href="#i-claude"/></svg>Skill</span>
+          <span class="cap on"><svg class="ic"><use href="#i-plug"/></svg>Connector</span>
+          <span class="cap part"><svg class="ic"><use href="#i-github"/></svg>Context</span>
+          <span style="font-size:11px;color:var(--ink-3);align-self:center">audit = little context · on-page = needs facts</span>
+        </div>
+      </div>
+    </div>
+    <div class="lane">
+      <div class="lane-hd">Content<span class="mut">cycle after gate</span></div>
+      <div class="lane-right">
+        <div class="lane-steps">
+          <span class="sstep"><b>Brief</b></span><span class="mini-arrow">→</span>
+          <span class="sstep"><b>Draft &amp; review</b></span><span class="mini-arrow">→</span>
+          <span class="sstep"><b>Publish &amp; log</b></span>
+        </div>
+        <div class="caps">
+          <span class="cap on"><svg class="ic"><use href="#i-claudecode"/></svg>Claude Code</span>
+          <span class="cap on"><svg class="ic"><use href="#i-claude"/></svg>Skill</span>
+          <span class="cap on"><svg class="ic"><use href="#i-plug"/></svg>Connector</span>
+          <span class="cap on"><svg class="ic"><use href="#i-github"/></svg>Context</span>
+          <span style="font-size:11px;color:var(--ink-3);align-self:center">needs brand guideline + facts</span>
+        </div>
+      </div>
+    </div>
+    <div class="lane">
+      <div class="lane-hd">Off-page / Local</div>
+      <div class="lane-right">
+        <div class="lane-steps">
+          <span class="sstep"><b>Entity &amp; local</b></span><span class="mini-arrow">→</span>
+          <span class="sstep"><b>Authority / backlinks</b></span>
+        </div>
+        <div class="caps">
+          <span class="cap on"><svg class="ic"><use href="#i-claudecode"/></svg>Claude Code</span>
+          <span class="cap on"><svg class="ic"><use href="#i-claude"/></svg>Skill</span>
+          <span class="cap on"><svg class="ic"><use href="#i-plug"/></svg>Connector</span>
+          <span class="cap part"><svg class="ic"><use href="#i-github"/></svg>Context</span>
+        </div>
+      </div>
+    </div>
+    <div class="lane">
+      <div class="lane-hd">Analytics / GEO<span class="mut">GTM: Claude builds JSON, a human imports</span></div>
+      <div class="lane-right">
+        <div class="lane-steps">
+          <span class="sstep"><b>GTM tracking</b><span>booking / form success</span></span><span class="mini-arrow">→</span>
+          <span class="sstep"><b>Extractable content</b></span><span class="mini-arrow">→</span>
+          <span class="sstep"><b>Prompt-set tests</b></span>
+        </div>
+        <div class="caps">
+          <span class="cap part"><svg class="ic"><use href="#i-claudecode"/></svg>Claude Code</span>
+          <span class="cap on"><svg class="ic"><use href="#i-claude"/></svg>Skill</span>
+          <span class="cap on"><svg class="ic"><use href="#i-plug"/></svg>Connector</span>
+          <span class="cap part"><svg class="ic"><use href="#i-github"/></svg>Context</span>
+          <span style="font-size:11px;color:var(--ink-3);align-self:center">Claude never publishes the GTM container</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P06 monitor + diagnose -->
+  <div class="seclabel" style="margin-top:20px">P06 · Monitor &amp; diagnose</div>
+  <div class="caps" style="margin:8px 0 2px">
+    <span class="cap on"><svg class="ic"><use href="#i-claudecode"/></svg>Claude Code</span>
+    <span class="cap on"><svg class="ic"><use href="#i-claude"/></svg>Skill</span>
+    <span class="cap on"><svg class="ic"><use href="#i-plug"/></svg>Connector</span>
+    <span class="cap on"><svg class="ic"><use href="#i-github"/></svg>Context</span>
+    <span style="font-size:11px;color:var(--ink-3);align-self:center">pull data · write reports · propose tasks · follow the diagnosis tree</span>
+  </div>
+  <div class="diag">
+    <div class="dcard"><h4>SEO · Path 1</h4><p class="meas">Content underperforming</p>
+      <div class="flowline">
+        <div class="fnode"><span class="yn no">NO</span>Indexed? → fix technical cause</div><div class="down">↓</div>
+        <div class="fnode"><span class="yn">YES</span>Indexed but no value → content research</div>
+        <div class="fnode">Intent? · brief on-trend? · brand fit?</div><div class="down">↓</div>
+        <div class="fnode">Still weak → return to onboarding</div>
+      </div></div>
+    <div class="dcard"><h4>SEO · Path 2</h4><p class="meas">Everything fine but weak</p>
+      <div class="flowline">
+        <div class="fnode">Likely technical</div><div class="down">↓</div>
+        <div class="fnode">Full-site technical audit</div>
+        <div class="fnode">UX / UI &amp; page speed</div>
+      </div></div>
+    <div class="dcard"><h4>SEO · Path 3</h4><p class="meas">Technical also okay</p>
+      <div class="flowline">
+        <div class="fnode">Check interface &amp; CTA</div><div class="down">↓</div>
+        <div class="fnode">Conversion optimisation → P07a</div>
+      </div></div>
+    <div class="dcard"><h4>GEO · P06e</h4><p class="meas">Poor GEO / low growth</p>
+      <div class="flowline">
+        <div class="fnode">Find GEO gap vs competitors (P03)</div><div class="down">↓</div>
+        <div class="fnode">Add missing gaps into content</div>
+      </div></div>
+    <div class="dcard"><h4>GEO · P06f</h4><p class="meas">Wrong / negative AI mentions</p>
+      <div class="flowline">
+        <div class="fnode">Find the source</div><div class="down">↓</div>
+        <div class="fnode">Fix authoritative info → P07b</div>
+      </div></div>
+  </div>
+
+  <!-- Reports -->
+  <div class="seclabel" style="margin-top:20px">P06 · Reporting — three reports</div>
+  <div class="reports">
+    <div class="rcard r-int">
+      <div class="rh">Weekly / Bi-weekly</div>
+      <div class="rc">Internal · team run-rate</div>
+      <ul>
+        <li><b>Run-rate</b> vs plan</li>
+        <li>Tasks done</li>
+        <li>Undone</li>
+        <li>Blocker</li>
+        <li>Next steps</li>
+      </ul>
+      <div class="feed"><span class="f">Asana · HOP Portfolio</span><span class="f">Asana · AD Portfolio</span></div>
+      <div class="src"><svg class="ic"><use href="#i-plug"/></svg> Source: <b>Asana</b> portfolios</div>
+    </div>
+    <div class="rcard r-mon">
+      <div class="rh">Monthly report</div>
+      <div class="rc">For the client</div>
+      <ul>
+        <li>Traffic · ranking · AI sessions vs KPI</li>
+        <li>Delivered this month</li>
+        <li>Insight &amp; next-month plan</li>
+      </ul>
+      <div class="src"><svg class="ic"><use href="#i-plug"/></svg> Template &amp; data: <b>Agency Analytics</b></div>
+    </div>
+    <div class="rcard r-exe">
+      <div class="rh">Executive report</div>
+      <div class="rc">Every 6 / 12 months</div>
+      <ul>
+        <li>Business outcome: leads · booking · revenue</li>
+        <li>AI visibility &amp; citation</li>
+        <li>Strategy &amp; roadmap for leadership</li>
+      </ul>
+      <div class="src"><svg class="ic"><use href="#i-claude"/></svg> Template: <b>Canva</b></div>
+    </div>
+  </div>
+
+  <!-- monthly loop -->
+  <div class="loop" aria-label="Monthly cycle and report">
+    <div class="seclabel" style="margin:0 0 12px">Monthly cycle <span>· <code>/task-plan</code> proposes tasks → SEN approves before assigning</span></div>
+    <div class="loop-grid">
+      <div class="days">
+        <div class="day"><span class="d">Day 1–5</span><span class="t"><b>Close data</b> — GA4 / GSC via Agency Analytics</span></div>
+        <div class="day"><span class="d">Day 2–7</span><span class="t"><b>Delivery check</b> — shipped vs plan (Asana)</span></div>
+        <div class="day"><span class="d">Day 4–7</span><span class="t"><b>Performance check</b> — actual vs KPI</span></div>
+        <div class="day"><span class="d">Day 7–10</span><span class="t"><b>Report</b> — monthly client report</span></div>
+      </div>
+      <div class="gates-col">
+        <div class="grow"><span class="q">KPI on track?</span><span class="ans"><span class="mini ok">YES</span><b>Next month's plan</b> — keep compounding</span></div>
+        <div class="grow"><span class="q">Delivery stalled?</span><span class="ans"><span class="mini warn">STALLED</span>Fix delivery first → <b>back to P04f</b></span></div>
+        <div class="grow"><span class="q">Shipped, no lift?</span><span class="ans"><span class="mini bad">NO LIFT</span>Strategy miss → <b>back to P03 / P04</b></span></div>
+        <div class="grow"><span class="q">Quarter end?</span><span class="ans"><span class="mini ok">Q</span><b>Quarterly review</b> — re-audit &amp; reset KPI</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P07 + support -->
+  <div class="two">
+    <div class="convert">
+      <div class="seclabel" style="margin:0">P07 · Conversion optimisation</div>
+      <div class="pcard"><div class="ph"><span class="code">P07a · CRO</span>
+        <div class="caps">
+          <span class="cap on"><svg class="ic"><use href="#i-claudecode"/></svg>Claude Code</span>
+          <span class="cap on"><svg class="ic"><use href="#i-claude"/></svg>Skill</span>
+          <span class="cap on"><svg class="ic"><use href="#i-plug"/></svg>Connector</span>
+          <span class="cap part"><svg class="ic"><use href="#i-github"/></svg>Context</span>
+        </div></div>
+        <p>Optimise booking / organic-leads conversion — interface, CTA, friction.</p>
+      </div>
+      <div class="pcard"><div class="ph"><span class="code">P07b · AI conversion</span>
+        <div class="caps">
+          <span class="cap on"><svg class="ic"><use href="#i-claudecode"/></svg>Claude Code</span>
+          <span class="cap on"><svg class="ic"><use href="#i-claude"/></svg>Skill</span>
+          <span class="cap on"><svg class="ic"><use href="#i-plug"/></svg>Connector</span>
+          <span class="cap on"><svg class="ic"><use href="#i-github"/></svg>Context</span>
+        </div></div>
+        <p>Expand prompts, optimise the pages AI search cites.</p>
+      </div>
+      <div class="pcard" style="border-top:3px solid var(--ink-3)"><p style="margin:0"><b>If any step still isn't working</b>, loop back to the previous relevant step.</p></div>
+    </div>
+    <div class="support">
+      <div class="seclabel" style="margin:0">Cross-cutting support</div>
+      <aside class="onpurple">
+        <h4>Context Sync · always-on</h4>
+        <p>Reads Slack + Gmail + Calendar into the repo so handover and catch-ups keep full memory.</p>
+        <div class="caps">
+          <span class="cap on"><svg class="ic"><use href="#i-claudecode"/></svg>Claude Code</span>
+          <span class="cap on"><svg class="ic"><use href="#i-claude"/></svg>Skill</span>
+          <span class="cap on"><svg class="ic"><use href="#i-plug"/></svg>Connector</span>
+          <span class="cap on"><svg class="ic"><use href="#i-github"/></svg>Context</span>
+        </div>
+      </aside>
+      <aside class="oncoral">
+        <h4>UI/UX audit · on demand</h4>
+        <p>From diagnosis (Path 2/3): annotated UX report tied to the design file.</p>
+        <div class="caps">
+          <span class="cap part"><svg class="ic"><use href="#i-claudecode"/></svg>Claude Code</span>
+          <span class="cap on"><svg class="ic"><use href="#i-claude"/></svg>Skill</span>
+          <span class="cap on"><svg class="ic"><use href="#i-plug"/></svg>Connector</span>
+          <span class="cap off"><svg class="ic"><use href="#i-github"/></svg>Context</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- footer gate -->
+  <div class="foot">
+    <div class="flow-gate">
+      <span class="st">PIC runs</span><span class="ar">→</span>
+      <span class="st">SEN reviews</span><span class="ar">→</span>
+      <span class="st">AM/PM sends</span><span class="ar">→</span>
+      <span class="st">Client</span>
+    </div>
+    <span class="rule">Claude never sends anything directly to the client</span>
+  </div>
+
+  <div class="repo-note">
+    <span><svg class="ic"><use href="#i-github"/></svg></span>
+    <span style="flex:1;min-width:0">This page is the <b style="color:var(--ink-2)">template</b>. Each project is a repo made from it. Shared <code>core/</code> + skills sync down via a GitHub Action → PR; project learnings flow back up via <code>/contribute-learning</code> → PR. Client data (<code>project/</code>, content, credentials) never syncs. Which skill/connector sits behind each icon → <a href="./skill-map.html">Skill &amp; Connector map</a>.</span>
+  </div>
+</div>
+</body>
+</html>
