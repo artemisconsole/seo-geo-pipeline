@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SEO/GEO Pipeline · Flowchart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Detailed flowchart of the Heads On Pillows SEO/GEO pipeline: owner & reviewer per stage, input/output with success criteria and fallbacks, checklists, and Yes/No decision branches.">
+<link rel="canonical" href="./pipeline-flow.html">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+  :root{
+    --bg:#f3f4f2; --panel:#ffffff; --panel-2:#fafaf8; --ink:#24262b; --ink-2:#565a63; --ink-3:#8a8e97;
+    --line:#e3e4e0; --line-2:#d2d4cf;
+    --blue-bg:#e6f1fb; --blue-ink:#0c447c; --blue-ln:#378add;
+    --purple-bg:#eeedfe; --purple-ink:#3c3489; --purple-ln:#7f77dd;
+    --green-bg:#eaf3de; --green-ink:#27500a; --green-ln:#639922;
+    --amber-bg:#faeeda; --amber-ink:#633806; --amber-ln:#ba7517;
+    --teal-bg:#e1f5ee; --teal-ink:#085041; --teal-ln:#1d9e75;
+    --pink-bg:#fbeaf0; --pink-ink:#72243e; --pink-ln:#d4537e;
+    --violet-bg:#efeafe; --violet-ink:#4b2e86; --violet-ln:#8b63d4;
+    --coral-bg:#faece7; --coral-ink:#712b13; --coral-ln:#d85a30;
+    --gold:#f6c343; --gold-ink:#5a3d00; --gold-edge:#b8860b;
+    --radius:12px; --r-sm:8px;
+    --sans:"Inter",system-ui,sans-serif; --disp:"Space Grotesk",var(--sans);
+  }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+    --bg:#15171a; --panel:#1e2024; --panel-2:#23262b; --ink:#e7e8e4; --ink-2:#aab0b8; --ink-3:#7c818b;
+    --line:#2e3238; --line-2:#3a3f46;
+    --blue-bg:#13314e; --blue-ink:#9fc6f2; --blue-ln:#4f93d8;
+    --purple-bg:#2a2555; --purple-ink:#c3bdf2; --purple-ln:#8d85e0;
+    --green-bg:#223616; --green-ink:#bcdd92; --green-ln:#79ad3f;
+    --amber-bg:#3e2c10; --amber-ink:#f3c683; --amber-ln:#c98f33;
+    --teal-bg:#0f352c; --teal-ink:#8fe0c6; --teal-ln:#2fab82;
+    --pink-bg:#3c1b28; --pink-ink:#eda9c0; --pink-ln:#d4679a;
+    --violet-bg:#2c2152; --violet-ink:#cbb8f2; --violet-ln:#9b79da;
+    --coral-bg:#3a1d12; --coral-ink:#e8a98f; --coral-ln:#d8713f;
+    --gold:#caa032; --gold-ink:#ffe9b0; --gold-edge:#e0b84a;
+    color-scheme:dark;
+  }}
+  :root[data-theme="dark"]{
+    --bg:#15171a; --panel:#1e2024; --panel-2:#23262b; --ink:#e7e8e4; --ink-2:#aab0b8; --ink-3:#7c818b;
+    --line:#2e3238; --line-2:#3a3f46;
+    --blue-bg:#13314e; --blue-ink:#9fc6f2; --blue-ln:#4f93d8;
+    --purple-bg:#2a2555; --purple-ink:#c3bdf2; --purple-ln:#8d85e0;
+    --green-bg:#223616; --green-ink:#bcdd92; --green-ln:#79ad3f;
+    --amber-bg:#3e2c10; --amber-ink:#f3c683; --amber-ln:#c98f33;
+    --teal-bg:#0f352c; --teal-ink:#8fe0c6; --teal-ln:#2fab82;
+    --pink-bg:#3c1b28; --pink-ink:#eda9c0; --pink-ln:#d4679a;
+    --violet-bg:#2c2152; --violet-ink:#cbb8f2; --violet-ln:#9b79da;
+    --coral-bg:#3a1d12; --coral-ink:#e8a98f; --coral-ln:#d8713f;
+    --gold:#caa032; --gold-ink:#ffe9b0; --gold-edge:#e0b84a;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;margin:0}
+  .wrap{max-width:1360px;margin:0 auto;padding-block:28px 56px;
+    padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+  h1{font-family:var(--disp);font-weight:700;font-size:clamp(25px,4.2vw,38px);letter-spacing:-.02em;margin:0;text-wrap:balance}
+  .sub{color:var(--ink-2);margin:6px 0 0;max-width:76ch;font-size:14px}
+  h2{font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin:0}
+  a{color:var(--blue-ln)}
+  code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88em;background:var(--panel-2);padding:1px 5px;border-radius:5px;border:1px solid var(--line)}
+  .ic{width:15px;height:15px;display:inline-block;vertical-align:-2px}
+  .parthd{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:36px 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line-2)}
+  .parthd .note{font-size:12.5px;color:var(--ink-3)}
+
+  .nav{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+  .nav a{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;text-decoration:none;
+    background:var(--panel);border:1px solid var(--line-2);border-radius:999px;padding:6px 13px;color:var(--ink-2)}
+  .nav a:hover{border-color:var(--blue-ln);color:var(--ink)}
+  .nav a.here{background:var(--blue-bg);border-color:var(--blue-ln);color:var(--blue-ink)}
+
+  /* role legend */
+  .rlegend{margin-top:16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:13px 16px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+  .rlegend h3{font-family:var(--disp);font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin:0;width:100%}
+  .rl{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;color:var(--ink-2)}
+  .chip{display:inline-flex;align-items:center;font-size:11px;font-weight:600;border-radius:999px;padding:3px 9px}
+  .c-ampm{background:var(--green-bg);color:var(--green-ink)} .c-sen{background:var(--violet-bg);color:var(--violet-ink)}
+  .c-pic{background:var(--blue-bg);color:var(--blue-ink)} .c-l{background:var(--amber-bg);color:var(--amber-ink)}
+  .c-dev{background:var(--teal-bg);color:var(--teal-ink)} .c-client{background:var(--coral-bg);color:var(--coral-ink)}
+  .rlegend .ml{width:100%;margin-top:4px;padding-top:8px;border-top:1px dashed var(--line);font-size:11px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:10px}
+  .rlegend .ml b{color:var(--ink-2)}
+
+  /* track */
+  .track{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding:16px 2px 10px;scrollbar-width:thin}
+  .start{flex:0 0 auto;align-self:center;font-family:var(--disp);font-weight:600;font-size:12px;color:var(--ink-3);text-align:center;line-height:1.3;padding:0 6px}
+  .arw{flex:0 0 auto;align-self:center;color:var(--line-2);font-size:20px;font-weight:700;padding:0 5px}
+
+  /* stage card */
+  .stage{flex:0 0 274px;background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--ln,var(--ink-3));border-radius:var(--radius);display:flex;flex-direction:column;overflow:hidden}
+  .stage.wide{flex-basis:360px}
+  .edge-blue{--ln:var(--blue-ln)} .edge-purple{--ln:var(--purple-ln)} .edge-green{--ln:var(--green-ln)} .edge-amber{--ln:var(--amber-ln)}
+  .shd{padding:11px 14px 0;display:flex;flex-direction:column;gap:7px}
+  .shd .code{font-family:var(--disp);font-weight:700;font-size:14px;color:var(--ink)}
+  .owners{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+  .owners .ol{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-3)}
+  .sbd{padding:10px 14px 13px;display:flex;flex-direction:column;gap:7px;flex:1}
+  .io{display:grid;grid-template-columns:46px 1fr;gap:8px;font-size:12px}
+  .io .l{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-3);padding-top:2px}
+  .io .v{color:var(--ink-2)}
+  .io .v b{color:var(--ink)}
+  .ok,.nok{display:flex;gap:6px;font-size:11px;border-radius:6px;padding:5px 8px;align-items:flex-start}
+  .ok{color:var(--green-ink);background:var(--green-bg)} .ok .mk{font-weight:700}
+  .nok{color:var(--coral-ink);background:var(--coral-bg)} .nok .mk{font-weight:700}
+  .chklist{display:flex;flex-direction:column;gap:3px;background:var(--panel-2);border:1px solid var(--line);border-radius:7px;padding:8px 10px}
+  .chklist .ct{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-3);margin-bottom:2px}
+  .chk{font-size:11px;color:var(--ink-2);display:flex;gap:6px;align-items:center}
+  .chk .box{width:12px;height:12px;border:1.5px solid var(--line-2);border-radius:3px;flex:0 0 auto}
+  .aih{font-size:10px;font-weight:600;border-radius:6px;padding:3px 7px;display:inline-flex;gap:5px;align-items:center;align-self:flex-start}
+  .aih.on{color:var(--green-ink);background:var(--green-bg);border:1px solid var(--green-ln)}
+  .aih.part{color:var(--amber-ink);background:var(--amber-bg);border:1px solid var(--amber-ln)}
+  .note-tools{font-size:10.5px;color:var(--ink-3);background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:6px 8px}
+
+  /* sub-steps (P04) */
+  .subs{display:flex;flex-wrap:wrap;gap:6px}
+  .sub{background:var(--panel-2);border:1px solid var(--line-2);border-radius:7px;padding:6px 8px;font-size:10.5px;line-height:1.3;flex:1 1 92px;min-width:88px}
+  .sub b{display:block;font-size:11px;color:var(--ink);font-weight:700}
+  .sub.ai{background:var(--green-bg);border-color:var(--green-ln)} .sub.ai b{color:var(--green-ink)}
+  .sub.no{border-style:dashed}
+  .sub span{color:var(--ink-3)}
+  .decrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:4px}
+  .flowbox{background:var(--panel-2);border:1px solid var(--line-2);border-radius:7px;padding:6px 9px;font-size:11px;color:var(--ink-2)}
+  .diamond{background:var(--amber-bg);border:1px solid var(--amber-ln);color:var(--amber-ink);font-weight:600;border-radius:7px;padding:6px 10px;font-size:11px}
+  .ybr{display:flex;flex-direction:column;gap:4px}
+  .yb{display:flex;gap:7px;align-items:center;font-size:11px}
+  .yl{font-size:9px;font-weight:700;border-radius:4px;padding:1px 6px;flex:0 0 auto}
+  .yl.y{background:var(--green-bg);color:var(--green-ink)} .yl.n{background:var(--coral-bg);color:var(--coral-ink)}
+  .yv{color:var(--ink-2)}
+
+  .overall{margin-top:12px;background:var(--amber-bg);border:1px solid var(--gold-edge);border-radius:var(--radius);padding:11px 15px;font-size:13px;color:var(--amber-ink);font-weight:600}
+
+  /* Part B */
+  .pbcard{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--ln,var(--ink-3));border-radius:var(--radius);padding:14px 16px;margin-top:12px}
+  .pbcard .ph{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+  .pbcard .ph .code{font-family:var(--disp);font-weight:700;font-size:15px;color:var(--ink)}
+  .wsgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .ws{background:var(--panel-2);border:1px solid var(--line);border-left:3px solid var(--wl,var(--ink-3));border-radius:var(--r-sm);padding:11px 12px}
+  .ws.w-tech{--wl:var(--purple-ln)} .ws.w-on{--wl:var(--blue-ln)} .ws.w-co{--wl:var(--green-ln)} .ws.w-off{--wl:var(--amber-ln)}
+  .ws h5{margin:0 0 7px;font-family:var(--disp);font-size:12.5px;color:var(--ink);display:flex;align-items:center;justify-content:space-between;gap:6px}
+  .ws .wown{display:flex;gap:3px;flex-wrap:wrap}
+  .ws .chip{font-size:9.5px;padding:1px 6px}
+  .ws ul{margin:0;padding-left:15px} .ws li{font-size:11px;color:var(--ink-2);margin:3px 0}
+  .ws li .d{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;vertical-align:1px}
+  .ws li .d.ai{background:var(--green-ln)} .ws li .d.need{background:var(--amber-ln)}
+
+  .ops{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+  .op{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:10px 12px}
+  .op .on{font-family:var(--disp);font-weight:600;font-size:12px;color:var(--ink)}
+  .op .od{font-size:10.5px;color:var(--ink-3);margin-top:3px}
+  .op .oo{margin-top:6px;display:flex;gap:4px;flex-wrap:wrap}
+
+  .diag{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+  .dcard{background:var(--panel-2);border:1px solid var(--line);border-top:3px solid var(--dc,var(--ink-3));border-radius:var(--r-sm);padding:11px 12px}
+  .dcard.d1{--dc:var(--blue-ln)} .dcard.d2{--dc:var(--purple-ln)} .dcard.d3{--dc:var(--teal-ln)} .dcard.d4{--dc:var(--violet-ln)} .dcard.d5{--dc:var(--coral-ln)}
+  .dcard h4{margin:0;font-size:10.5px;font-family:var(--disp);letter-spacing:.03em;text-transform:uppercase;color:var(--ink-3)}
+  .dcard .meas{font-size:12px;font-weight:700;color:var(--ink);margin:2px 0 8px}
+  .dstep{display:flex;flex-direction:column;gap:5px}
+  .dnode{font-size:10.5px;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:5px 7px;color:var(--ink-2)}
+  .dnode.q{background:var(--amber-bg);border-color:var(--amber-ln);color:var(--amber-ink);font-weight:600}
+  .dnode.out{background:var(--green-bg);border-color:var(--green-ln);color:var(--green-ink)}
+  .dbranch{display:flex;gap:6px;align-items:flex-start;font-size:10px;padding-left:6px}
+  .dbranch .yl{margin-top:1px}
+  .dn-arrow{text-align:center;color:var(--ink-3);font-size:10px;line-height:.6}
+  .measure{margin-top:10px;font-size:11.5px;color:var(--ink-2);background:var(--panel-2);border:1px solid var(--line);border-radius:7px;padding:9px 12px}
+  .measure b{color:var(--ink)}
+
+  .p7{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  .p7 .pc{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px}
+  .p7 .pc h5{margin:0 0 5px;font-family:var(--disp);font-size:13px;color:var(--ink);display:flex;gap:8px;align-items:center}
+  .p7 .pc p{font-size:12px;color:var(--ink-2);margin:0}
+  .loopnote{margin-top:10px;font-size:12px;color:var(--ink-2);background:var(--pink-bg);border:1px solid var(--pink-ln);border-radius:var(--r-sm);padding:10px 13px}
+  .loopnote b{color:var(--pink-ink)}
+
+  /* handover bottom */
+  .handover{margin-top:16px;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--ink-3);border-radius:var(--radius);padding:14px 16px}
+  .handover .ttl{font-family:var(--disp);font-weight:700;font-size:14px;display:flex;flex-direction:column;margin-bottom:9px}
+  .handover .ttl span{font-weight:400;font-size:11.5px;color:var(--ink-3);margin-top:2px}
+  .hsteps{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+  .hstep{background:var(--panel-2);border:1px solid var(--line-2);border-radius:7px;padding:6px 10px;font-size:11.5px;color:var(--ink-2)}
+  .ha{color:var(--ink-3);font-size:12px}
+
+  .foot{margin-top:28px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 17px;display:flex;flex-direction:column;gap:8px}
+  .rule{font-size:12px;color:var(--coral-ln);font-weight:600}
+  .legmini{font-size:11px;color:var(--ink-3);display:flex;gap:14px;flex-wrap:wrap;margin-top:4px}
+  .legmini span{display:inline-flex;align-items:center;gap:6px}
+  .dotc{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .dotc.on{background:var(--green-ln)} .dotc.part{background:var(--amber-ln)}
+
+  @media (max-width:1000px){ .wsgrid{grid-template-columns:1fr 1fr} .ops{grid-template-columns:1fr 1fr} .diag{grid-template-columns:1fr 1fr} .p7{grid-template-columns:1fr} }
+  @media (max-width:620px){ .wsgrid{grid-template-columns:1fr} .ops{grid-template-columns:1fr} .diag{grid-template-columns:1fr} }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd"><path d="M12 0c6.63 0 12 5.276 12 11.79-.001 5.067-3.29 9.567-8.175 11.187-.6.118-.825-.25-.825-.56 0-.398.015-1.665.015-3.242 0-1.105-.375-1.813-.81-2.181 2.67-.295 5.475-1.297 5.475-5.822 0-1.297-.465-2.344-1.23-3.169.12-.295.54-1.503-.12-3.125 0 0-1.005-.324-3.3 1.209a11.32 11.32 0 00-3-.398c-1.02 0-2.04.133-3 .398-2.295-1.518-3.3-1.209-3.3-1.209-.66 1.622-.24 2.83-.12 3.125-.765.825-1.23 1.887-1.23 3.169 0 4.51 2.79 5.527 5.46 5.822-.345.294-.66.81-.765 1.577-.69.31-2.415.81-3.495-.973-.225-.354-.9-1.223-1.845-1.209-1.005.015-.405.56.015.781.51.28 1.095 1.327 1.23 1.666.24.663 1.02 1.93 4.035 1.385 0 .988.015 1.916.015 2.196 0 .31-.225.664-.825.56C3.303 21.374-.003 16.867 0 11.791 0 5.276 5.37 0 12 0z"/></symbol>
+  <symbol id="i-claudecode" viewBox="0 0 24 24" fill="currentColor"><path clip-rule="evenodd" d="M20.998 10.949H24v3.102h-3v3.028h-1.487V20H18v-2.921h-1.487V20H15v-2.921H9V20H7.488v-2.921H6V20H4.487v-2.921H3V14.05H0V10.95h3V5h17.998v5.949zM6 10.949h1.488V8.102H6v2.847zm10.51 0H18V8.102h-1.49v2.847z"/></symbol>
+  <symbol id="i-claude" viewBox="0 0 24 24"><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z" fill="#D97757" fill-rule="nonzero"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 13.5a4 4 0 005.657 0l2.122-2.122a4 4 0 00-5.657-5.657l-1 1"/><path d="M14.5 10.5a4 4 0 00-5.657 0L6.72 12.62a4 4 0 005.657 5.657l1-1"/></symbol>
+  <symbol id="i-flow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.4"/><circle cx="19" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M7.4 6H16.6M5 8.4V11a3 3 0 003 3h1.6M19 8.4V11a3 3 0 01-3 3h-1.6"/></symbol>
+</defs></svg>
+
+<div class="wrap">
+  <header>
+    <h1>SEO/GEO Pipeline · Flowchart</h1>
+    <p class="sub">The detailed flow for Heads On Pillows — every stage with its <b>owner &amp; reviewer</b>, input, output, what <b>"OK" looks like</b> and <b>where it loops if not</b>, the checklists, and the Yes/No decision branches. For the simpler view see <a href="./index.html">Overview</a>; for the capability icons see the <a href="./pipeline-board.html">pipeline board</a>.</p>
+    <nav class="nav">
+      <a href="./index.html"><svg class="ic"><use href="#i-flow"/></svg> Overview</a>
+      <a href="./pipeline-board.html"><svg class="ic"><use href="#i-claudecode"/></svg> SEO/GEO Pipeline</a>
+      <a class="here" href="./pipeline-flow.html"><svg class="ic"><use href="#i-flow"/></svg> Flowchart</a>
+      <a href="./project-setup.html">Project setup</a>
+      <a href="./skill-map.html"><svg class="ic"><use href="#i-plug"/></svg> Skill &amp; Connector map</a>
+    </nav>
+  </header>
+
+  <!-- role legend -->
+  <div class="rlegend">
+    <h3>Role legend</h3>
+    <span class="rl"><span class="chip c-ampm">AM/PM</span> Account / Project Manager</span>
+    <span class="rl"><span class="chip c-sen">SEN</span> SEO Senior (reviews &amp; owns quality)</span>
+    <span class="rl"><span class="chip c-pic">PIC</span> SEO PIC (runs the work)</span>
+    <span class="rl"><span class="chip c-l">L</span> SEO Leader (approves cost)</span>
+    <span class="rl"><span class="chip c-dev">Dev</span> Developer (internal)</span>
+    <span class="rl"><span class="chip c-client">Client</span> Client / client's dev</span>
+    <div class="ml"><span><b>Gate:</b> PIC runs → SEN reviews → AM/PM sends → Client.</span><span><b>L</b> approves backlinks &amp; any project cost.</span><span>Heavy site changes → <b>Dev / Client</b>.</span><span><span class="dotc on"></span> Claude helps well · <span class="dotc part"></span> partial / human</span></div>
+  </div>
+
+  <!-- PART A -->
+  <div class="parthd"><h2>Part A · Onboard → Plan</h2><span class="note">Each card: owner · input · output · OK vs not · checklist.</span></div>
+  <div class="track">
+    <div class="start">New project /<br>new client</div>
+    <span class="arw">→</span>
+
+    <article class="stage edge-blue">
+      <div class="shd">
+        <span class="code">P01 — Onboarding</span>
+        <div class="owners"><span class="ol">Owner</span><span class="chip c-ampm">AM/PM</span><span class="ol">Review</span><span class="chip c-ampm">AM/PM</span><span class="chip c-pic">PIC</span></div>
+      </div>
+      <div class="sbd">
+        <div class="io"><span class="l">In</span><span class="v">Completed client onboarding form</span></div>
+        <div class="io"><span class="l">Out</span><span class="v"><code>config.yaml</code> + <b>Brand Guideline</b> / brand pack</span></div>
+        <div class="ok"><span class="mk">OK</span> Form complete &amp; confirmed by AM/PM; brand pack drafted.</div>
+        <div class="nok"><span class="mk">If not</span> Missing info → stay in P01, contact client via AM/PM.</div>
+        <span class="aih on"><svg class="ic" style="width:11px;height:11px"><use href="#i-claude"/></svg> Claude maps Drive files, drafts config + brand pack</span>
+      </div>
+    </article>
+    <span class="arw">→</span>
+
+    <article class="stage edge-purple">
+      <div class="shd">
+        <span class="code">P02 — Access &amp; Tracking</span>
+        <div class="owners"><span class="ol">Owner</span><span class="chip c-pic">PIC</span><span class="ol">Review</span><span class="chip c-ampm">AM/PM</span><span class="chip c-pic">PIC</span></div>
+      </div>
+      <div class="sbd">
+        <div class="io"><span class="l">In</span><span class="v">Onboarding form (if missing → P01)</span></div>
+        <div class="io"><span class="l">Out</span><span class="v">Access &amp; tracking checked; gaps flagged</span></div>
+        <div class="chklist">
+          <span class="ct">Access checklist</span>
+          <span class="chk"><span class="box"></span>GA4 · GSC</span>
+          <span class="chk"><span class="box"></span>GTM (create if needed)</span>
+          <span class="chk"><span class="box"></span>CMS admin / edit</span>
+          <span class="chk"><span class="box"></span>GBP · Booking engine / PMS</span>
+          <span class="chk"><span class="box"></span>Bing WMT · Merchant Center (e-com)</span>
+        </div>
+        <div class="ok"><span class="mk">OK</span> All trackers firing + historical data recovered; GTM success events logged in a Sheet.</div>
+        <div class="nok"><span class="mk">If not</span> New access = no old data → ask client to share already-tracked assets / PMS.</div>
+        <div class="note-tools">Tools to wire: Agency Analytics · SE Ranking · INGENTICS · SEO Console · Ahrefs · Clarity.</div>
+        <span class="aih on"><svg class="ic" style="width:11px;height:11px"><use href="#i-claude"/></svg> Claude checks each tracker · getting access = human</span>
+      </div>
+    </article>
+    <span class="arw">→</span>
+
+    <article class="stage edge-green">
+      <div class="shd">
+        <span class="code">P03 — Research &amp; Brand</span>
+        <div class="owners"><span class="ol">Owner</span><span class="chip c-pic">PIC</span><span class="ol">Review</span><span class="chip c-sen">SEN</span></div>
+      </div>
+      <div class="sbd">
+        <div class="io"><span class="l">In</span><span class="v">Market &amp; competitor info from onboarding</span></div>
+        <div class="io"><span class="l">Out</span><span class="v">Foundation · competitors · standout <b>attribute</b> (root / rare / unique)</span></div>
+        <div class="ok"><span class="mk">OK</span> Clear read on trends, business &amp; SEO competitors, and the attribute to own.</div>
+        <div class="nok"><span class="mk">If not</span> Anything needs reconfirmation → contact AM/PM.</div>
+        <span class="aih on"><svg class="ic" style="width:11px;height:11px"><use href="#i-claude"/></svg> Claude runs SERP / competitor / attribute analysis</span>
+      </div>
+    </article>
+    <span class="arw">→</span>
+
+    <article class="stage wide edge-amber">
+      <div class="shd">
+        <span class="code">P04 — SEO/GEO Plan · 7 tabs</span>
+        <div class="owners"><span class="ol">Owner</span><span class="chip c-pic">PIC</span><span class="ol">Review</span><span class="chip c-sen">SEN</span><span class="ol">Send</span><span class="chip c-ampm">AM/PM</span></div>
+      </div>
+      <div class="sbd">
+        <div class="subs">
+          <div class="sub ai"><b>P04a</b><span>Problem patterns</span></div>
+          <div class="sub no"><b>P04b</b><span>Keywords + prompts</span></div>
+          <div class="sub no"><b>P04c</b><span>Content plan · 6 mo+</span></div>
+          <div class="sub ai"><b>P04d</b><span>Technical baseline</span></div>
+          <div class="sub ai"><b>P04e</b><span>Offsite</span></div>
+          <div class="sub no"><b>Measure</b><span>Forecast</span></div>
+        </div>
+        <div class="io"><span class="l">AI</span><span class="v">Claude drafts <b>Foundation · Pattern · Technical · Offsite</b>; human owns <b>Tracking · Content Plan · Measurement</b></span></div>
+        <div class="decrow">
+          <span class="flowbox">Send to client <span class="chip c-ampm" style="padding:1px 6px">AM/PM</span></span><span class="ha">→</span>
+          <span class="flowbox">Meeting / feedback</span><span class="ha">→</span>
+          <span class="diamond">◇ Revisions needed?</span>
+        </div>
+        <div class="ybr">
+          <div class="yb"><span class="yl y">YES</span><span class="yv">loop back into P04 and revise</span></div>
+          <div class="yb"><span class="yl n">NO</span><span class="yv">Approved → to Masterfile, start P05</span></div>
+        </div>
+        <div class="overall">Overall P04 output: SEO/GEO plan approved by the client.</div>
+      </div>
+    </article>
+  </div>
+
+  <!-- PART B -->
+  <div class="parthd"><h2>Part B · Execute → Monitor → Convert</h2><span class="note">Runs by P04f Quick-Win priority.</span></div>
+
+  <!-- P05 -->
+  <div class="pbcard edge-green" style="--ln:var(--green-ln)">
+    <div class="ph"><span class="code">P05 — Execution</span><span class="chip c-pic">Owner PIC</span><span class="chip c-sen">Supervisor SEN</span><span class="chip c-l">L · cost</span><span class="chip c-dev">Dev · heavy changes</span></div>
+    <div class="io" style="margin-bottom:10px"><span class="l">In</span><span class="v">Full info from previous steps; if missing, contact AM/PM while progressing what's possible. Workstreams run in parallel, in Quick-Win order.</span></div>
+    <div class="wsgrid">
+      <div class="ws w-tech">
+        <h5>Technical <span class="wown"><span class="chip c-pic">PIC</span><span class="chip c-dev">Dev</span></span></h5>
+        <ul>
+          <li><span class="d ai"></span>Sitemap · robots · llms.txt</li>
+          <li><span class="d ai"></span>Headings · hreflang · schema</li>
+          <li><span class="d ai"></span>Page-speed check</li>
+          <li><span class="d need"></span>Crawl budget · full audit <em>(+GSC / Screaming Frog)</em></li>
+        </ul>
+      </div>
+      <div class="ws w-on">
+        <h5>On-page <span class="wown"><span class="chip c-pic">PIC</span></span></h5>
+        <ul>
+          <li><span class="d ai"></span>Money-page on-page (title·H1·meta·CTA)</li>
+          <li><span class="d ai"></span>Target URL per committed keyword</li>
+          <li><span class="d ai"></span>Cannibalisation guard</li>
+          <li><span class="d ai"></span>Overall internal linking</li>
+        </ul>
+      </div>
+      <div class="ws w-co">
+        <h5>Content <span class="wown"><span class="chip c-pic">PIC</span><span class="chip c-sen">SEN</span></span></h5>
+        <ul>
+          <li><span class="d need"></span>Content Audit (old content)</li>
+          <li><span class="d ai"></span>New content: Draft &amp; review</li>
+          <li><span class="d ai"></span>Publish &amp; log (HTML / WP API)</li>
+        </ul>
+      </div>
+      <div class="ws w-off">
+        <h5>Off-page &amp; Local <span class="wown"><span class="chip c-pic">PIC</span><span class="chip c-l">L</span></span></h5>
+        <ul>
+          <li><span class="d ai"></span>GBP audit &amp; posts (auto)</li>
+          <li><span class="d ai"></span>Entity audit</li>
+          <li><span class="d need"></span>Backlink PR / Social <em>(L approves)</em></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ok" style="margin-top:10px"><span class="mk">OK</span> Shipped per plan · content lint-pass · money pages optimised &amp; indexed.</div>
+    <div class="nok"><span class="mk">If not</span> Blocker or no lift → back to <b>P04f</b> to re-prioritise.</div>
+  </div>
+
+  <!-- P06 -->
+  <div class="pbcard edge-purple" style="--ln:var(--purple-ln)">
+    <div class="ph"><span class="code">P06 — Monitoring, Reporting &amp; Diagnose</span><span class="chip c-pic">Owner PIC</span><span class="chip c-sen">Supervisor SEN</span></div>
+    <div class="ops">
+      <div class="op"><div class="on">P06a · Weekly / Bi-weekly</div><div class="od">Run-rate · tasks · blockers</div><div class="oo"><span class="chip c-pic">PIC</span><span class="chip c-sen">SEN</span></div></div>
+      <div class="op"><div class="on">P06b · Monthly report</div><div class="od">Agency Analytics · for client</div><div class="oo"><span class="chip c-pic">PIC</span><span class="chip c-sen">SEN</span></div></div>
+      <div class="op"><div class="on">P06c · Executive report</div><div class="od">Canva · every 6 / 12 mo</div><div class="oo"><span class="chip c-pic">PIC</span><span class="chip c-sen">SEN</span></div></div>
+      <div class="op"><div class="on">P06d · Client meetings</div><div class="od">Agenda · action items</div><div class="oo"><span class="chip c-ampm">AM/PM</span><span class="chip c-pic">PIC</span></div></div>
+    </div>
+    <div style="font-family:var(--disp);font-weight:600;font-size:12.5px;color:var(--ink-2);margin:4px 0 8px">Performance diagnosis — daily/weekly in SEO Console, against KPI</div>
+    <div class="diag">
+      <div class="dcard d1"><h4>SEO · Path 1</h4><div class="meas">Content underperforming</div>
+        <div class="dstep">
+          <div class="dnode q">◇ Indexed?</div>
+          <div class="dbranch"><span class="yl n">NO</span> fix technical cause</div>
+          <div class="dbranch"><span class="yl y">YES</span> indexed but no value?</div>
+          <div class="dn-arrow">↓</div>
+          <div class="dnode">→ content research · intent? brief on-trend? brand fit?</div>
+          <div class="dn-arrow">↓</div>
+          <div class="dnode out">still weak → return to onboarding analysis</div>
+        </div>
+      </div>
+      <div class="dcard d2"><h4>SEO · Path 2</h4><div class="meas">Fine but weak</div>
+        <div class="dstep">
+          <div class="dnode q">Likely technical</div>
+          <div class="dn-arrow">↓</div>
+          <div class="dnode">Full-site technical audit</div>
+          <div class="dnode out">UX / UI &amp; page speed</div>
+        </div>
+      </div>
+      <div class="dcard d3"><h4>SEO · Path 3</h4><div class="meas">Technical also OK</div>
+        <div class="dstep">
+          <div class="dnode">Check interface &amp; CTA</div>
+          <div class="dn-arrow">↓</div>
+          <div class="dnode out">Conversion optimisation → P07a</div>
+        </div>
+      </div>
+      <div class="dcard d4"><h4>GEO · P06e</h4><div class="meas">Poor GEO / low growth</div>
+        <div class="dstep">
+          <div class="dnode">Find GEO gap vs competitors (P03)</div>
+          <div class="dn-arrow">↓</div>
+          <div class="dnode out">Add missing gaps into content</div>
+        </div>
+      </div>
+      <div class="dcard d5"><h4>GEO · P06f</h4><div class="meas">Wrong / negative AI mentions</div>
+        <div class="dstep">
+          <div class="dnode">Find the source</div>
+          <div class="dn-arrow">↓</div>
+          <div class="dnode">Fix authoritative info on site</div>
+          <div class="dnode out">When stable → P07b</div>
+        </div>
+      </div>
+    </div>
+    <div class="measure"><b>Output measurement —</b> SEO: ranking growth · traffic growth · organic leads. GEO: AI visibility &amp; presence in competitive prompts.</div>
+  </div>
+
+  <!-- P07 -->
+  <div class="pbcard edge-blue" style="--ln:var(--pink-ln)">
+    <div class="ph"><span class="code">P07 — Conversion Optimisation</span><span class="chip c-pic">Owner PIC</span><span class="chip c-sen">Supervisor SEN</span></div>
+    <div class="p7">
+      <div class="pc"><h5>P07a · CRO</h5><p>Optimise booking / organic-leads conversion — interface, CTA, friction. Fed by SEO Path 3.</p></div>
+      <div class="pc"><h5>P07b · AI conversion</h5><p>Expand prompts, optimise the pages AI search cites for the standout attribute. Fed by GEO P06f.</p></div>
+    </div>
+    <div class="loopnote"><b>If any step still isn't working</b>, loop back to the previous relevant step.</div>
+  </div>
+
+  <!-- HANDOVER at bottom -->
+  <div class="parthd" style="margin-top:30px"><h2>Handover</h2><span class="note">Taking over a project — feeds into P01.</span></div>
+  <div class="handover">
+    <div class="ttl">Handover projects (from previous owner)<span>Owner: new PIC · Review: SEN · Accountable: AM/PM</span></div>
+    <div class="hsteps">
+      <span class="hstep">Handover from previous owner</span><span class="ha">→</span>
+      <span class="hstep">Review existing plan</span><span class="ha">→</span>
+      <span class="hstep">Review onboarding form</span><span class="ha">→</span>
+      <span class="hstep">Catch-up meeting with old PIC + AM/PM</span><span class="ha">↦ P01</span>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--disp);font-weight:600;font-size:12.5px;color:var(--ink-2)">
+      <span>PIC runs</span><span class="ha">→</span><span>SEN reviews</span><span class="ha">→</span><span>AM/PM sends</span><span class="ha">→</span><span>Client</span>
+    </div>
+    <span class="rule">Claude never sends anything directly to the client · L approves cost · heavy site changes go to Dev / Client</span>
+    <div class="legmini">
+      <span><span class="dotc on"></span> Claude helps well</span>
+      <span><span class="dotc part"></span> partial — needs data / a human</span>
+      <span>Skills &amp; connectors behind each task → <a href="./skill-map.html">Skill &amp; Connector map</a></span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
