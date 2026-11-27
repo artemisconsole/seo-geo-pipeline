@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>SEO/GEO Pipeline on Claude Code</title>
+<title>SEO/GEO Pipeline · Overview</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="How the Heads On Pillows SEO/GEO pipeline runs on Claude Code: five building blocks — Claude Code, Claude skills, Connectors, GitHub, and the SEO/GEO Pipeline — and how they connect.">
+<meta name="description" content="At-a-glance overview of the Heads On Pillows SEO/GEO pipeline: the four phases on a timeline, the standard each stage should hit, and links to the detailed boards.">
 <link rel="canonical" href="./index.html">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
 <style>
@@ -17,6 +17,7 @@
     --teal-bg:#e1f5ee; --teal-ink:#085041; --teal-ln:#1d9e75;
     --violet-bg:#efeafe; --violet-ink:#4b2e86; --violet-ln:#8b63d4;
     --coral-bg:#faece7; --coral-ink:#712b13; --coral-ln:#d85a30;
+    --gold:#f6c343; --gold-ink:#5a3d00; --gold-edge:#b8860b;
     --radius:14px; --r-sm:8px;
     --sans:"Inter",system-ui,sans-serif; --disp:"Space Grotesk",var(--sans);
   }
@@ -29,6 +30,7 @@
     --teal-bg:#0f352c; --teal-ink:#8fe0c6; --teal-ln:#2fab82;
     --violet-bg:#2c2152; --violet-ink:#cbb8f2; --violet-ln:#9b79da;
     --coral-bg:#3a1d12; --coral-ink:#e8a98f; --coral-ln:#d8713f;
+    --gold:#caa032; --gold-ink:#ffe9b0; --gold-edge:#e0b84a;
     color-scheme:dark;
   }}
   :root[data-theme="dark"]{
@@ -40,54 +42,73 @@
     --teal-bg:#0f352c; --teal-ink:#8fe0c6; --teal-ln:#2fab82;
     --violet-bg:#2c2152; --violet-ink:#cbb8f2; --violet-ln:#9b79da;
     --coral-bg:#3a1d12; --coral-ink:#e8a98f; --coral-ln:#d8713f;
+    --gold:#caa032; --gold-ink:#ffe9b0; --gold-edge:#e0b84a;
     color-scheme:dark;
   }
   *{box-sizing:border-box}
   body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;margin:0}
-  .wrap{max-width:1040px;margin:0 auto;padding:30px max(16px,env(safe-area-inset-left,0px)) 56px}
+  .wrap{max-width:1140px;margin:0 auto;padding:30px max(16px,env(safe-area-inset-left,0px)) 56px}
   h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,4.6vw,42px);letter-spacing:-.02em;margin:0;text-wrap:balance}
-  .sub{color:var(--ink-2);margin:8px 0 0;max-width:70ch;font-size:14.5px}
+  .sub{color:var(--ink-2);margin:8px 0 0;max-width:72ch;font-size:14.5px}
   h2{font-family:var(--disp);font-weight:600;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin:0}
   a{color:var(--blue-ln)}
-  code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88em;background:var(--panel-2);padding:1px 5px;border-radius:5px;border:1px solid var(--line)}
+  code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.87em;background:var(--panel-2);padding:1px 5px;border-radius:5px;border:1px solid var(--line)}
   .ic{width:16px;height:16px;display:inline-block;vertical-align:-3px}
-  .sechd{margin:34px 0 16px;padding-bottom:9px;border-bottom:1px solid var(--line-2);display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .sechd{margin:36px 0 16px;padding-bottom:9px;border-bottom:1px solid var(--line-2);display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
   .sechd .note{font-size:12.5px;color:var(--ink-3)}
 
-  /* system board */
-  .board{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px 20px;margin-top:6px}
-  .tier-top{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:stretch}
-  .blk{border-radius:var(--radius);padding:15px 16px;border:1px solid var(--line-2);background:var(--panel-2);display:flex;flex-direction:column;gap:5px}
-  .blk .bt{font-family:var(--disp);font-weight:700;font-size:15px;color:var(--ink);display:flex;align-items:center;gap:8px}
-  .blk .bd{font-size:12px;color:var(--ink-2)}
-  .blk .ic{width:19px;height:19px}
-  .b-cc{border-color:var(--ink-3);background:linear-gradient(180deg,var(--panel-2),var(--panel))}
-  .b-pipe{border-color:var(--amber-ln);background:var(--amber-bg)}
-  .b-pipe .bt{color:var(--amber-ink)}
-  .b-skill{border-color:var(--coral-ln);background:var(--coral-bg)} .b-skill .bt{color:var(--coral-ink)}
-  .b-conn{border-color:var(--blue-ln);background:var(--blue-bg)} .b-conn .bt{color:var(--blue-ink)}
-  .b-gh{border-color:var(--ink-3)}
-  .conn-h{align-self:center;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--ink-3);font-size:11px;font-weight:600;font-family:var(--disp);letter-spacing:.04em}
-  .conn-h .arrow{font-size:20px;line-height:1}
-  .runs-label{text-align:center;margin:12px 0 6px;font-size:11.5px;color:var(--ink-3);font-weight:600;font-family:var(--disp);letter-spacing:.05em;text-transform:uppercase}
-  .tier-res{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  .rescol{display:flex;flex-direction:column;align-items:center;gap:7px}
-  .up{color:var(--ink-3);font-size:17px;line-height:1}
-  .caption{margin-top:16px;font-size:12.5px;color:var(--ink-2);background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:11px 14px;text-align:center}
-  .caption b{color:var(--ink)}
+  .nav{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+  .nav a{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;text-decoration:none;
+    background:var(--panel);border:1px solid var(--line-2);border-radius:999px;padding:6px 13px;color:var(--ink-2)}
+  .nav a:hover{border-color:var(--blue-ln);color:var(--ink)}
+  .nav a.here{background:var(--blue-bg);border-color:var(--blue-ln);color:var(--blue-ink)}
 
-  /* hub cards */
-  .hub{display:grid;grid-template-columns:1fr 1fr;gap:13px}
-  .hcard{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--ln,var(--ink-3));border-radius:var(--radius);padding:16px 17px;color:inherit}
+  /* timeline / phases */
+  .phases{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .phase{position:relative;background:var(--panel);border:1px solid var(--line);border-top:4px solid var(--pc,var(--ink-3));border-radius:var(--radius);padding:14px 15px;margin-right:26px;display:flex;flex-direction:column;gap:8px}
+  .phase:last-child{margin-right:0}
+  .phase::after{content:"→";position:absolute;right:-19px;top:50%;transform:translateY(-50%);color:var(--ink-3);font-size:17px;font-weight:700}
+  .phase:last-child::after{content:""}
+  .phase.p-setup{--pc:var(--blue-ln)} .phase.p-plan{--pc:var(--amber-ln)} .phase.p-exec{--pc:var(--green-ln)} .phase.p-grow{--pc:var(--violet-ln)}
+  .when{font-family:var(--disp);font-weight:700;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--pc,var(--ink-3));display:inline-flex;align-items:center;gap:6px}
+  .pname{font-family:var(--disp);font-weight:700;font-size:17px;color:var(--ink);margin:-2px 0 0}
+  .psteps{display:flex;flex-wrap:wrap;gap:5px}
+  .pstep{font-size:11px;background:var(--panel-2);border:1px solid var(--line-2);border-radius:6px;padding:3px 7px;color:var(--ink-2)}
+  .pstep.star{background:var(--amber-bg);border-color:var(--gold-edge);color:var(--amber-ink);font-weight:600}
+  .deliver{margin-top:auto;font-size:11.5px;color:var(--ink-2);padding-top:9px;border-top:1px dashed var(--line)}
+  .deliver b{color:var(--ink)}
+  .cadence{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--ink-3);align-items:center}
+  .cadence .tag{background:var(--panel);border:1px solid var(--line-2);border-radius:999px;padding:4px 11px;color:var(--ink-2)}
+  .cadence .tag b{color:var(--ink)}
+
+  /* standards */
+  .std{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .scard{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--sc,var(--teal-ln));border-radius:var(--r-sm);padding:13px 15px}
+  .scard h4{margin:0 0 6px;font-size:13px;font-family:var(--disp);color:var(--ink);display:flex;align-items:center;gap:7px}
+  .scard p{font-size:12px;color:var(--ink-2);margin:0}
+  .scard .ic{width:15px;height:15px;color:var(--sc,var(--teal-ln))}
+  .sc-plan{--sc:var(--amber-ln)} .sc-track{--sc:var(--blue-ln)} .sc-content{--sc:var(--green-ln)} .sc-tech{--sc:var(--purple-ln,#7f77dd)}
+  .sc-kpi{--sc:var(--coral-ln)} .sc-report{--sc:var(--teal-ln)} .sc-gate{--sc:var(--ink-3)} .sc-geo{--sc:var(--violet-ln)}
+
+  /* how it runs compact */
+  .blocks{display:flex;flex-wrap:wrap;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;align-items:center}
+  .blk{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-2);flex:1 1 180px;min-width:150px}
+  .blk b{color:var(--ink);font-weight:600}
+  .blk .ic{width:18px;height:18px;flex:0 0 auto}
+  .blk .ar{color:var(--ink-3)}
+
+  /* hub */
+  .hub{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .hcard{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--ln,var(--ink-3));border-radius:var(--radius);padding:15px 16px;color:inherit}
   .hcard:hover{border-color:var(--blue-ln);box-shadow:0 2px 10px rgba(0,0,0,.05)}
-  .hcard .ht{font-family:var(--disp);font-weight:700;font-size:16px;color:var(--ink);display:flex;align-items:center;gap:8px}
-  .hcard .hd{font-size:12.5px;color:var(--ink-2);margin-top:6px}
-  .hcard .go{font-size:12px;color:var(--blue-ln);font-weight:600;margin-top:9px;display:inline-block}
-  .hcard.c-gen{--ln:var(--amber-ln)} .hcard.c-hosp{--ln:var(--teal-ln)} .hcard.c-setup{--ln:var(--violet-ln)} .hcard.c-map{--ln:var(--blue-ln)}
+  .hcard .ht{font-family:var(--disp);font-weight:700;font-size:15px;color:var(--ink);display:flex;align-items:center;gap:8px}
+  .hcard .hd{font-size:12px;color:var(--ink-2);margin-top:6px}
+  .hcard.c-pipe{--ln:var(--amber-ln)} .hcard.c-setup{--ln:var(--violet-ln)} .hcard.c-map{--ln:var(--blue-ln)}
 
   .foot{margin-top:28px;font-size:12px;color:var(--ink-3);background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:13px 16px;display:flex;gap:9px;align-items:flex-start}
 
-  @media (max-width:760px){ .tier-top{grid-template-columns:1fr} .conn-h{flex-direction:row;transform:rotate(90deg);margin:4px 0} .tier-res{grid-template-columns:1fr} .hub{grid-template-columns:1fr} }
+  @media (max-width:900px){ .phases{grid-template-columns:1fr 1fr} .phase{margin-right:0} .phase::after{content:""} .std{grid-template-columns:1fr 1fr} .hub{grid-template-columns:1fr} }
+  @media (max-width:560px){ .phases{grid-template-columns:1fr} .std{grid-template-columns:1fr} }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -96,82 +117,101 @@
   <symbol id="i-claude" viewBox="0 0 24 24"><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z" fill="#D97757" fill-rule="nonzero"/></symbol>
   <symbol id="i-plug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 13.5a4 4 0 005.657 0l2.122-2.122a4 4 0 00-5.657-5.657l-1 1"/><path d="M14.5 10.5a4 4 0 00-5.657 0L6.72 12.62a4 4 0 005.657 5.657l1-1"/></symbol>
   <symbol id="i-flow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.4"/><circle cx="19" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M7.4 6H16.6M5 8.4V11a3 3 0 003 3h1.6M19 8.4V11a3 3 0 01-3 3h-1.6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></symbol>
 </defs></svg>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>SEO/GEO Pipeline on Claude Code</h1>
-    <p class="sub">Heads On Pillows runs its SEO/GEO process on Claude Code. Five building blocks make it work — and the boards below show the process, the tasks, the inputs, and the skills behind it.</p>
+    <h1>SEO/GEO Pipeline · Overview</h1>
+    <p class="sub">The whole project at a glance for Heads On Pillows — four phases on a timeline, and the standard each stage should hit. Dive into the detailed boards from the cards at the bottom.</p>
+    <nav class="nav">
+      <a class="here" href="./index.html"><svg class="ic"><use href="#i-flow"/></svg> Overview</a>
+      <a href="./pipeline-board.html"><svg class="ic"><use href="#i-claudecode"/></svg> SEO/GEO Pipeline</a>
+      <a href="./project-setup.html">Project setup</a>
+      <a href="./skill-map.html"><svg class="ic"><use href="#i-plug"/></svg> Skill &amp; Connector map</a>
+    </nav>
   </header>
 
-  <!-- SYSTEM BOARD -->
-  <div class="sechd"><h2>How it fits together</h2><span class="note">Five blocks, one engine.</span></div>
-  <div class="board">
-    <div class="tier-top">
-      <div class="blk b-cc">
-        <div class="bt"><svg class="ic"><use href="#i-claudecode"/></svg> Claude Code</div>
-        <div class="bd">The tool that does the work — reads, analyses, writes, audits, reports. The engine everything runs on.</div>
-      </div>
-      <div class="conn-h"><span class="arrow">→</span><span>runs</span></div>
-      <div class="blk b-pipe">
-        <div class="bt"><svg class="ic"><use href="#i-flow"/></svg> SEO/GEO Pipeline</div>
-        <div class="bd">The SEO/GEO process for a project — P01→P07 + Handover. The map of what to do, in order.</div>
-      </div>
+  <!-- TIMELINE / PHASES -->
+  <div class="sechd"><h2>The project, on a timeline</h2><span class="note">Four phases, start to steady-state.</span></div>
+  <div class="phases">
+    <div class="phase p-setup">
+      <span class="when"><svg class="ic" style="width:13px;height:13px"><use href="#i-clock"/></svg> Week 1</span>
+      <div class="pname">Setup</div>
+      <div class="psteps"><span class="pstep">P01 Onboarding</span><span class="pstep">P02 Access &amp; Tracking</span></div>
+      <div class="deliver"><b>Out:</b> config + Brand Guideline, access &amp; tracking live.</div>
     </div>
-
-    <div class="runs-label">drawing on three resources at every step</div>
-
-    <div class="tier-res">
-      <div class="rescol">
-        <span class="up">↑</span>
-        <div class="blk b-skill" style="width:100%">
-          <div class="bt"><svg class="ic"><use href="#i-claude"/></svg> Claude skill</div>
-          <div class="bd">SEO execution skills — the templates, standards and processes Claude follows.</div>
-        </div>
-      </div>
-      <div class="rescol">
-        <span class="up">↑</span>
-        <div class="blk b-conn" style="width:100%">
-          <div class="bt"><svg class="ic"><use href="#i-plug"/></svg> Connector</div>
-          <div class="bd">The bridge to other apps — GA4, Sheets, Docs, SE Ranking, Slack and more.</div>
-        </div>
-      </div>
-      <div class="rescol">
-        <span class="up">↑</span>
-        <div class="blk b-gh" style="width:100%">
-          <div class="bt"><svg class="ic"><use href="#i-github"/></svg> GitHub</div>
-          <div class="bd">Where project context lives — easy to retrieve the brand, the plan and the current status.</div>
-        </div>
-      </div>
+    <div class="phase p-plan">
+      <span class="when"><svg class="ic" style="width:13px;height:13px"><use href="#i-clock"/></svg> Weeks 2–4</span>
+      <div class="pname">Plan</div>
+      <div class="psteps"><span class="pstep">P03 Research &amp; brand</span><span class="pstep">P04 7-tab plan</span><span class="pstep star">★ P04f Quick Win</span></div>
+      <div class="deliver"><b>Out:</b> client-approved SEO/GEO plan + priority order.</div>
     </div>
+    <div class="phase p-exec">
+      <span class="when"><svg class="ic" style="width:13px;height:13px"><use href="#i-clock"/></svg> Month 1 → recurring</span>
+      <div class="pname">Execute</div>
+      <div class="psteps"><span class="pstep">Technical</span><span class="pstep">On-page</span><span class="pstep">Content</span><span class="pstep">Off-page &amp; Local</span></div>
+      <div class="deliver"><b>Out:</b> money pages first, then the monthly content cycle.</div>
+    </div>
+    <div class="phase p-grow">
+      <span class="when"><svg class="ic" style="width:13px;height:13px"><use href="#i-clock"/></svg> Ongoing</span>
+      <div class="pname">Monitor &amp; Grow</div>
+      <div class="psteps"><span class="pstep">P06 Monitor · Report</span><span class="pstep">P07 CRO</span><span class="pstep">AI conversion</span></div>
+      <div class="deliver"><b>Out:</b> KPI on track, bookings &amp; revenue up.</div>
+    </div>
+  </div>
+  <div class="cadence">
+    <span>Steady-state rhythm:</span>
+    <span class="tag"><b>Weekly</b> — content · GBP · monitor · internal report</span>
+    <span class="tag"><b>Monthly</b> — client report · meeting · next-month plan</span>
+    <span class="tag"><b>Every 6 / 12 mo</b> — executive report · quarterly re-audit</span>
+  </div>
 
-    <div class="caption"><b>Claude Code runs the SEO/GEO Pipeline.</b> At each step it uses a <b>Claude skill</b> for the how-to, reaches apps through a <b>Connector</b>, and keeps the project's context in <b>GitHub</b>.</div>
+  <!-- STANDARDS -->
+  <div class="sechd"><h2>The standard we aim for</h2><span class="note">What "good" looks like at each stage — the bar, not the how.</span></div>
+  <div class="std">
+    <div class="scard sc-plan"><h4><svg class="ic"><use href="#i-check"/></svg> Plan</h4><p>All 7 tabs complete and <b>client-approved within ~4 weeks</b>; Quick Win + strategy locked before execution.</p></div>
+    <div class="scard sc-track"><h4><svg class="ic"><use href="#i-check"/></svg> Tracking</h4><p>GA4 · GSC · GBP · booking events all <b>firing, measured &amp; logged</b>; historical data recovered from the client.</p></div>
+    <div class="scard sc-content"><h4><svg class="ic"><use href="#i-check"/></svg> Content</h4><p>Lint-pass (no em-dash / cliché), <b>EEAT-sourced</b>, GEO answer chunks + entities + the standout attribute, internal links + CTA.</p></div>
+    <div class="scard sc-tech"><h4><svg class="ic"><use href="#i-check"/></svg> Technical</h4><p>Sitemap · robots · llms.txt · schema · hreflang clean; <b>good Core Web Vitals</b>; no index blockers on money pages.</p></div>
+    <div class="scard sc-geo"><h4><svg class="ic"><use href="#i-check"/></svg> Brand &amp; GEO</h4><p>The <b>standout attribute</b> (root / rare / unique) is consistent on-site and across the web, and drives the prompt set.</p></div>
+    <div class="scard sc-kpi"><h4><svg class="ic"><use href="#i-check"/></svg> KPI</h4><p>Must-hit: <b>organic + AI traffic ↑ · committed keyword ranking ↑</b>; higher tiers add AI visibility &amp; citation.</p></div>
+    <div class="scard sc-report"><h4><svg class="ic"><use href="#i-check"/></svg> Reporting</h4><p>Weekly internal (Asana) · monthly client (Agency Analytics) · executive 6/12-month (Canva) — on time.</p></div>
+    <div class="scard sc-gate"><h4><svg class="ic"><use href="#i-check"/></svg> Gate</h4><p><b>PIC → SEN → AM/PM → client.</b> Claude never sends to the client; L approves cost; Dev / Client make heavy site changes.</p></div>
+  </div>
+
+  <!-- HOW IT RUNS (compact) -->
+  <div class="sechd"><h2>How it runs</h2><span class="note">Five blocks, one engine.</span></div>
+  <div class="blocks">
+    <div class="blk"><svg class="ic"><use href="#i-claudecode"/></svg><span><b>Claude Code</b> runs the work</span><span class="ar">→</span></div>
+    <div class="blk"><svg class="ic"><use href="#i-flow"/></svg><span>drives the <b>SEO/GEO Pipeline</b></span></div>
+    <div class="blk"><svg class="ic"><use href="#i-claude"/></svg><span>using <b>Claude skills</b></span></div>
+    <div class="blk"><svg class="ic"><use href="#i-plug"/></svg><span><b>Connectors</b> to apps</span></div>
+    <div class="blk"><svg class="ic"><use href="#i-github"/></svg><span><b>GitHub</b> keeps context</span></div>
   </div>
 
   <!-- HUB -->
-  <div class="sechd"><h2>Explore the boards</h2><span class="note">Four views of the same system.</span></div>
+  <div class="sechd"><h2>Go deeper</h2><span class="note">The detailed boards.</span></div>
   <div class="hub">
-    <a class="hcard c-gen" href="./pipeline-board.html">
+    <a class="hcard c-pipe" href="./pipeline-board.html">
       <div class="ht"><svg class="ic"><use href="#i-claudecode"/></svg> SEO/GEO Pipeline</div>
-      <div class="hd">The full P01→P07 process for any project. Each stage shows what it needs and where Claude helps well vs where a human owns it.</div>
-      <span class="go">Open →</span>
+      <div class="hd">The full P01→P07 board — every stage, what it needs, and where Claude helps well vs a human owns it.</div>
     </a>
     <a class="hcard c-setup" href="./project-setup.html">
       <div class="ht"><svg class="ic"><use href="#i-claude"/></svg> Project setup</div>
-      <div class="hd">The three inputs at project start — tier, automation, brand strength — and how they set the KPI, effort, what AI can do and the quick wins. Goal vs KPI vs Observe.</div>
-      <span class="go">Open →</span>
+      <div class="hd">Tier · automation · brand strength → the KPI, effort and quick wins. Goal vs KPI vs Observe.</div>
     </a>
     <a class="hcard c-map" href="./skill-map.html">
-      <div class="ht"><svg class="ic"><use href="#i-plug"/></svg> Skill &amp; Connector map</div>
-      <div class="hd">The detail behind the icons: which skill + connector each task uses, what is built vs planned, and how they coordinate.</div>
-      <span class="go">Open →</span>
+      <div class="ht"><svg class="ic"><use href="#i-plug"/></svg> Skill, Connector &amp; Template map</div>
+      <div class="hd">Which skill + connector each task uses, what's built vs planned, and the templates to standardize.</div>
     </a>
   </div>
 
   <div class="foot">
     <span><svg class="ic"><use href="#i-github"/></svg></span>
-    <span>This is the <b style="color:var(--ink-2)">template</b> for Heads On Pillows. Each client is a private repo made from it; shared <code>core/</code> + skills sync down via a GitHub Action, project learnings flow back up. See <a href="./pipeline.md">pipeline.md</a> and <a href="./implementation-plan.md">implementation-plan.md</a>.</span>
+    <span>This is the <b style="color:var(--ink-2)">template</b> for Heads On Pillows. Each client is a private repo made from it; shared <code>core/</code> + skills sync down, project learnings flow back up.</span>
   </div>
 </div>
 </body>
