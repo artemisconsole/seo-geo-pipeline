@@ -166,14 +166,14 @@
   .lane-hd{font-family:var(--disp);font-weight:600;font-size:14px;color:var(--ink);display:flex;flex-direction:column;gap:5px}
   .lane-hd .mut{font-weight:400;font-size:11px;color:var(--ink-3)}
   .lane-hd .own{display:flex;gap:4px;flex-wrap:wrap;margin-top:3px}
-  .chk{display:flex;flex-wrap:wrap;gap:6px}
-  .ci{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;background:var(--panel-2);border:1px solid var(--line-2);border-radius:7px;padding:5px 9px;color:var(--ink-2)}
-  .ci .t{font-size:8.5px;font-weight:700;letter-spacing:.03em;border-radius:4px;padding:1px 5px}
-  .ci.ai{background:var(--green-bg);border-color:var(--green-ln);color:var(--green-ink)}
-  .ci.ai .t{background:var(--green-ln);color:#fff}
-  .ci.part{background:var(--amber-bg);border-color:var(--amber-ln);color:var(--amber-ink)}
-  .ci.part .t{background:var(--amber-ln);color:#fff}
-  .ci.hum .t{background:var(--ink-3);color:#fff}
+  .lane-right{display:flex;flex-direction:column;gap:6px;min-width:0}
+  .lane-steps{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+  .lane-steps .sstep{flex-direction:row;align-items:center;gap:6px;padding:5px 9px;font-size:11.5px;color:var(--ink-2)}
+  .lane-steps .sstep .d{width:7px;height:7px;border-radius:50%;background:var(--line-2);flex:0 0 auto}
+  .lane-steps .sstep .d.ai{background:var(--green-ln)}
+  .lane-steps .sstep .d.need{background:var(--amber-ln)}
+  .lane-steps .sstep em{font-style:normal;font-size:9px;color:var(--ink-3);font-weight:600}
+  .lane-note{font-size:11px;color:var(--ink-3)}
 
   /* tracking stack */
   .tstack{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
@@ -321,6 +321,7 @@
           <li>Clients often create <b>brand-new</b> access → no historical data. Claude flags this and asks the client to share the <b>already-tracked assets</b> (GA4/GSC/GBP) for past data.</li>
           <li>Ask to share <b>Booking Engine / PMS</b> if possible.</li>
           <li>For GTM events, <b>record how each success event is measured</b> in a Google Sheet to keep &amp; share with the client.</li>
+          <li><b>Tracking tools to wire up:</b> Agency Analytics · SE Ranking · INGENTICS · SEO Console · Bing WMT · Ahrefs Audit · MS Clarity · Google Merchant Center (e-com) · GTM.</li>
         </ul>
         <div class="divline"></div>
         <div class="caps">
@@ -437,66 +438,61 @@
   </div>
 
   <!-- P05 lanes -->
-  <div class="seclabel">P05 · Execution — four lanes <span>· green = Claude does it well · dashed = needs data / a human</span></div>
+  <div class="seclabel">P05 · Execution — four lanes <span>· <span style="color:var(--green-ln)">●</span> Claude does it well · <span style="color:var(--amber-ln)">●</span> needs data / a human</span></div>
   <div class="lanes">
     <div class="lane l-tech">
-      <div class="lane-hd">Technical<span class="mut">basic checklist — template in the Plan file</span><div class="own"><span class="chip c-pic">PIC</span><span class="chip c-dev">Dev</span></div></div>
-      <div class="chk">
-        <span class="ci ai"><span class="t">AI</span>Sitemap.xml</span>
-        <span class="ci ai"><span class="t">AI</span>Robots.txt</span>
-        <span class="ci ai"><span class="t">AI</span>llms.txt</span>
-        <span class="ci ai"><span class="t">AI</span>Headings</span>
-        <span class="ci ai"><span class="t">AI</span>Hreflang</span>
-        <span class="ci ai"><span class="t">AI</span>Page-speed check</span>
-        <span class="ci part"><span class="t">+GSC/SF</span>Crawl budget</span>
-        <span class="ci part"><span class="t">part</span>UI-UX check</span>
-        <span class="ci part"><span class="t">+SF+GSC</span>Full site audit</span>
+      <div class="lane-hd">Technical<span class="mut">basic checklist · template in Plan file</span><div class="own"><span class="chip c-pic">PIC</span><span class="chip c-dev">Dev</span></div></div>
+      <div class="lane-right">
+        <div class="lane-steps">
+          <span class="sstep"><i class="d ai"></i>Sitemap.xml</span>
+          <span class="sstep"><i class="d ai"></i>Robots.txt</span>
+          <span class="sstep"><i class="d ai"></i>llms.txt</span>
+          <span class="sstep"><i class="d ai"></i>Headings</span>
+          <span class="sstep"><i class="d ai"></i>Hreflang</span>
+          <span class="sstep"><i class="d ai"></i>Page-speed</span>
+          <span class="sstep"><i class="d need"></i>Crawl budget <em>+GSC</em></span>
+          <span class="sstep"><i class="d need"></i>UI-UX check</span>
+          <span class="sstep"><i class="d need"></i>Full site audit <em>+SF·GSC</em></span>
+        </div>
       </div>
     </div>
     <div class="lane l-onpage">
       <div class="lane-hd">On-page<span class="mut">money pages &amp; committed keywords</span><div class="own"><span class="chip c-pic">PIC</span></div></div>
-      <div class="chk">
-        <span class="ci ai"><span class="t">AI</span>Money-page on-page (title·H1·meta·schema·CTA)</span>
-        <span class="ci ai"><span class="t">AI</span>Target URL per committed keyword</span>
-        <span class="ci ai"><span class="t">AI</span>Cannibalisation guard</span>
-        <span class="ci ai"><span class="t">AI</span>Website schema</span>
-        <span class="ci ai"><span class="t">AI</span>Overall internal linking</span>
+      <div class="lane-right">
+        <div class="lane-steps">
+          <span class="sstep"><i class="d ai"></i>Money-page on-page (title·H1·meta·schema·CTA)</span>
+          <span class="sstep"><i class="d ai"></i>Target URL per keyword</span>
+          <span class="sstep"><i class="d ai"></i>Cannibalisation guard</span>
+          <span class="sstep"><i class="d ai"></i>Website schema</span>
+          <span class="sstep"><i class="d ai"></i>Overall internal linking</span>
+        </div>
       </div>
     </div>
     <div class="lane l-content">
       <div class="lane-hd">Content<span class="mut">old + new</span><div class="own"><span class="chip c-pic">PIC</span><span class="chip c-sen">SEN</span></div></div>
-      <div class="chk">
-        <span class="ci part"><span class="t">+crawl</span>Content Audit (old content &amp; URLs)</span>
-        <span class="ci ai"><span class="t">AI</span>New content — research → write → translate</span>
-        <span class="ci ai"><span class="t">AI</span>Publish via HTML file</span>
-        <span class="ci ai"><span class="t">AI</span>Auto-publish via WordPress API</span>
+      <div class="lane-right">
+        <div class="lane-steps">
+          <span class="sstep"><i class="d need"></i>Content Audit — old content <em>+crawl</em></span>
+          <span class="mini-arrow" style="opacity:.55">new →</span>
+          <span class="sstep"><i class="d ai"></i>Draft &amp; review</span><span class="mini-arrow">→</span>
+          <span class="sstep"><i class="d ai"></i>Publish &amp; log</span>
+        </div>
+        <div class="lane-note">Publish via HTML file or auto via WordPress API.</div>
       </div>
     </div>
     <div class="lane l-off">
       <div class="lane-hd">Off-page &amp; Local<span class="mut">entity, GBP, authority</span><div class="own"><span class="chip c-pic">PIC</span><span class="chip c-l">L cost</span></div></div>
-      <div class="chk">
-        <span class="ci ai"><span class="t">AI</span>GBP audit &amp; optimise</span>
-        <span class="ci ai"><span class="t">AI</span>GBP posts (auto via Google Sheet tool)</span>
-        <span class="ci ai"><span class="t">AI</span>Entity audit</span>
-        <span class="ci part"><span class="t">L + manual</span>Backlink PR / Social (new sites)</span>
-        <span class="ci part"><span class="t">+SF+GSC</span>Website audit data</span>
+      <div class="lane-right">
+        <div class="lane-steps">
+          <span class="sstep"><i class="d ai"></i>GBP audit &amp; optimise</span>
+          <span class="sstep"><i class="d ai"></i>GBP posts (auto via Sheet)</span>
+          <span class="sstep"><i class="d ai"></i>Entity audit</span>
+          <span class="sstep"><i class="d need"></i>Backlink PR / Social <em>L · manual</em></span>
+          <span class="sstep"><i class="d need"></i>Website audit data <em>+SF·GSC</em></span>
+        </div>
       </div>
     </div>
   </div>
-
-  <!-- Tracking stack now inside P05 -->
-  <div class="seclabel" style="margin-top:18px">P05 · Tracking stack <span>· wire these up after the plan is approved, so every report &amp; KPI has a source</span></div>
-  <div class="tstack">
-    <div class="tcard conn"><div class="tn">Agency Analytics</div><div class="tr">GA4 / GSC + monthly client report.</div><span class="tt">Connector</span></div>
-    <div class="tcard conn"><div class="tn">SE Ranking</div><div class="tr">Keyword ranking + audit.</div><span class="tt">Connector</span></div>
-    <div class="tcard ext"><div class="tn">INGENTICS</div><div class="tr">Prompt tracking &amp; AI Visibility.</div><span class="tt">External</span></div>
-    <div class="tcard ext"><div class="tn">SEO Console</div><div class="tr">Combined numbers, tasks &amp; insight.</div><span class="tt">External</span></div>
-    <div class="tcard ext"><div class="tn">Bing Webmaster Tools</div><div class="tr">Bing index &amp; search data.</div><span class="tt">External</span></div>
-    <div class="tcard ext"><div class="tn">Ahrefs Audit</div><div class="tr">Technical audit &amp; alerts.</div><span class="tt">External</span></div>
-    <div class="tcard ext"><div class="tn">Microsoft Clarity</div><div class="tr">UX recordings &amp; heatmaps.</div><span class="tt">External</span></div>
-    <div class="tcard ext"><div class="tn">Google Merchant Center</div><div class="tr">E-commerce sites only.</div><span class="tt">External · e-com</span></div>
-  </div>
-  <p style="font-size:11.5px;color:var(--ink-3);margin:8px 2px 0">GTM has no connector — Claude builds the merge-JSON and records how each success event is measured in a Google Sheet; a human imports &amp; publishes the container.</p>
 
   <!-- P06 monitor -->
   <div class="seclabel" style="margin-top:20px">P06 · Monitor, report &amp; diagnose <span>· daily &amp; weekly in SEO Console, against project KPI</span></div>
